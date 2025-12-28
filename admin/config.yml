@@ -2,26 +2,20 @@ backend:
   name: github
   repo: anderslura/hjelpeportalen-nettside
   branch: main
+  site_id: d4e68a46-ea32-4653-b7c2-822254a93227
 
-  # Netlify OAuth (bruker OAUTH_CLIENT_ID / OAUTH_CLIENT_SECRET du la inn)
-  base_url: https://api.netlify.com
-  auth_endpoint: auth
-  site_id: extraordinary-dasik-edfc62   # <- VIKTIG: uten ".netlify.app"
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
 
-site_url: "https://hjelpeportalen.no"
-display_url: "https://hjelpeportalen.no"
-
-media_folder: "static/uploads"
-public_folder: "/uploads"
+publish_mode: editorial_workflow
 
 collections:
   - name: "pages"
     label: "Sider"
     files:
-      - file: "content/home.md"
-        name: "home"
+      - name: "home"
         label: "Forside"
+        file: "content/home.md"
         fields:
           - { label: "Tittel", name: "title", widget: "string" }
-          - { label: "Ingress", name: "lead", widget: "text", required: false }
           - { label: "Innhold", name: "body", widget: "markdown" }
