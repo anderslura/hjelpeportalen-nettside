@@ -1,0 +1,17 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "pages"
+    label: "Sider"
+    files:
+      - label: "Forside"
+        name: "home"
+        file: "index.html"
+        fields:
+          - { label: "Tittel", name: "title", widget: "string" }
+          - { label: "Innhold", name: "body", widget: "text" }
