@@ -2,10 +2,9 @@ backend:
   name: github
   repo: anderslura/hjelpeportalen-nettside
   branch: main
-  site_id: d4e68a46-ea32-4653-b7c2-822254a93227
 
-media_folder: "images/uploads"
-public_folder: "/images/uploads"
+media_folder: "content/uploads"
+public_folder: "/content/uploads"
 
 publish_mode: editorial_workflow
 
@@ -13,9 +12,10 @@ collections:
   - name: "pages"
     label: "Sider"
     files:
-      - name: "home"
+      - file: "content/home.md"
         label: "Forside"
-        file: "content/home.md"
+        name: "home"
         fields:
           - { label: "Tittel", name: "title", widget: "string" }
+          - { label: "Ingress", name: "intro", widget: "text" }
           - { label: "Innhold", name: "body", widget: "markdown" }
