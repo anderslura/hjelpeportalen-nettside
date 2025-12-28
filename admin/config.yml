@@ -4,20 +4,20 @@ backend:
 
 publish_mode: editorial_workflow
 
-media_folder: "content/uploads"
-public_folder: "/content/uploads"
+media_folder: "static/uploads"
+public_folder: "/uploads"
 
-site_url: https://hjelpeportalen.no
-display_url: https://hjelpeportalen.no
+locale: "nb"
 
 collections:
   - name: "pages"
     label: "Sider"
     files:
-      - file: "content/home.md"
+      - name: "home"
         label: "Forside"
-        name: "home"
+        file: "content/home.json"
+        format: "json"
         fields:
           - { label: "Tittel", name: "title", widget: "string" }
-          - { label: "Ingress", name: "intro", widget: "text" }
+          - { label: "Ingress", name: "ingress", widget: "string" }
           - { label: "Innhold", name: "body", widget: "markdown" }
