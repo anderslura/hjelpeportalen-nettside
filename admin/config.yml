@@ -3,6 +3,11 @@ backend:
   repo: anderslura/hjelpeportalen-nettside
   branch: main
 
+  # Netlify OAuth (bruker OAUTH_CLIENT_ID / OAUTH_CLIENT_SECRET du la inn)
+  base_url: https://api.netlify.com
+  auth_endpoint: auth
+  site_id: extraordinary-dasik-edfc62   # <- VIKTIG: uten ".netlify.app"
+
 site_url: "https://hjelpeportalen.no"
 display_url: "https://hjelpeportalen.no"
 
