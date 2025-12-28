@@ -1,6 +1,8 @@
 backend:
   name: git-gateway
   branch: main
+  roles:
+    - admin
 
 media_folder: "content/uploads"
 public_folder: "/content/uploads"
@@ -15,6 +17,14 @@ collections:
         label: "Forside"
         name: "home"
         fields:
-          - { label: "Tittel", name: "title", widget: "string" }
-          - { label: "Ingress", name: "intro", widget: "text" }
-          - { label: "Innhold", name: "body", widget: "markdown" }
+          - label: "Tittel"
+            name: "title"
+            widget: "string"
+
+          - label: "Ingress"
+            name: "intro"
+            widget: "text"
+
+          - label: "Innhold"
+            name: "body"
+            widget: "markdown"
