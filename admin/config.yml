@@ -15,9 +15,17 @@ collections:
     files:
       - name: "home"
         label: "Forside"
-        file: "content/home.json"
-        format: "json"
+        file: "content/home.md"
+        format: "frontmatter"
         fields:
-          - { label: "Tittel", name: "title", widget: "string" }
-          - { label: "Ingress", name: "ingress", widget: "string" }
-          - { label: "Innhold", name: "body", widget: "markdown" }
+          - label: "Tittel"
+            name: "title"
+            widget: "string"
+
+          - label: "Ingress"
+            name: "ingress"
+            widget: "string"
+
+          - label: "Innhold"
+            name: "body"
+            widget: "markdown"
