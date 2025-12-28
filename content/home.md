@@ -1,6 +1,17 @@
 ---
-title: "Hjelpeportalen"
-lead: "Trygg, enkel hverdagshjelp – bestill på minutter."
+title: Hjelpeportalen
+lead: Trygg, enkel hverdagshjelp – bestill på minutter.
+intro: Praktisk hjelp i hjemmet, ærender og små oppgaver – utført av trygge,
+  lokale hjelpere.
 ---
+Vi hjelper deg med praktiske oppgaver i hverdagen – hjemme og ute.
 
-Velkommen! Dette innholdet skal du kunne endre fra /admin.
+
+
+✔ Handling og ærender  
+
+✔ Enkel hjelp i hjemmet  
+
+✔ Følge og bistand  
+
+✔ Små oppdrag – stor verdi
