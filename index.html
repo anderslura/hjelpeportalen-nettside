@@ -1,51 +1,115 @@
-<!DOCTYPE html>
-<html lang="no">
+<!doctype html>
+<html lang="nb">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Hjelpeportalen</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <style>
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      max-width: 720px;
-      margin: 3rem auto;
-      padding: 0 1rem;
-      line-height: 1.6;
-    }
-    h1 { margin-bottom: 0.5rem; }
-    .ingress { font-size: 1.1rem; color: #555; margin-bottom: 1.5rem; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; margin: 0; background: #fff; color:#111; }
+    .wrap { max-width: 860px; margin: 0 auto; padding: 48px 20px; }
+    h1 { font-size: 44px; margin: 0 0 14px; letter-spacing: -0.5px; }
+    .ingress { font-size: 18px; line-height: 1.5; color: #333; margin: 0 0 26px; }
+    .content { font-size: 17px; line-height: 1.7; color:#111; }
+    .content h2 { margin: 26px 0 10px; }
+    .content h3 { margin: 20px 0 8px; }
+    .pill { display:inline-block; padding: 6px 10px; border-radius: 999px; background:#f3f4f6; font-size: 13px; color:#111; margin-bottom: 18px; }
+    .okline { margin: 10px 0; }
+    .footer { margin-top: 40px; font-size: 13px; color:#666; }
   </style>
 </head>
-<body>
 
-  <h1 id="title">Laster…</h1>
-  <p class="ingress" id="ingress"></p>
-  <div id="content"></div>
+<body>
+  <div class="wrap">
+    <div class="pill">Hjelpeportalen.no</div>
+    <h1 id="title">Laster…</h1>
+    <p class="ingress" id="ingress"></p>
+    <div class="content" id="content"></div>
+
+    <div class="footer">
+      <span id="status"></span>
+    </div>
+  </div>
 
   <script>
-    fetch("/content/home.md")
-      .then(res => res.text())
+    function parseFrontmatter(md) {
+      // Forventer:
+      // ---
+      // key: value
+      // ---
+      // body...
+      const parts = md.split('---');
+
+      // Ingen frontmatter
+      if (parts.length < 3) {
+        return { frontmatter: {}, body: md.trim() };
+      }
+
+      const fmRaw = parts[1].trim();
+      const body = parts.slice(2).join('---').trim();
+
+      const frontmatter = {};
+      fmRaw.split('\n').forEach(line => {
+        const trimmed = line.trim();
+        if (!trimmed || trimmed.startsWith('#')) return;
+        const idx = trimmed.indexOf(':');
+        if (idx === -1) return;
+        const key = trimmed.slice(0, idx).trim();
+        const value = trimmed.slice(idx + 1).trim();
+        frontmatter[key] = value;
+      });
+
+      return { frontmatter, body };
+    }
+
+    function simpleMarkdownToHtml(text) {
+      // veldig enkel “markdown” til html: headings + linjeskift + ✔-linjer
+      let html = text;
+
+      // headings
+      html = html.replace(/^###\s+(.*)$/gim, '<h3>$1</h3>');
+      html = html.replace(/^##\s+(.*)$/gim, '<h2>$1</h2>');
+      html = html.replace(/^#\s+(.*)$/gim, '<h1>$1</h1>');
+
+      // ✔ lines -> "okline"
+      html = html.replace(/^\s*✔\s*(.*)$/gim, '<div class="okline">✔ $1</div>');
+
+      // paragrafer/linjeskift
+      html = html.replace(/\n{2,}/g, '<br><br>');
+      html = html.replace(/\n/g, '<br>');
+
+      return html;
+    }
+
+    fetch("/content/home.md", { cache: "no-store" })
+      .then(res => {
+        if (!res.ok) throw new Error("Kunne ikke hente /content/home.md");
+        return res.text();
+      })
       .then(md => {
-        const lines = md.split("\n");
-        let bodyIndex = lines.findIndex(l => l.trim() === "---" && lines.indexOf(l) > 0);
+        const { frontmatter, body } = parseFrontmatter(md);
 
-        const frontmatter = {};
-        for (let i = 1; i < bodyIndex; i++) {
-          const [key, ...rest] = lines[i].split(":");
-          frontmatter[key.trim()] = rest.join(":").trim();
-        }
+        document.getElementById("title").innerText =
+          frontmatter.title || "Hjelpeportalen";
 
-        document.getElementById("title").innerText = frontmatter.title || "Hjelpeportalen";
-        document.getElementById("ingress").innerText = frontmatter.ingress || "";
+        document.getElementById("ingress").innerText =
+          frontmatter.ingress || frontmatter.lead || frontmatter.intro || "";
 
-        const body = lines.slice(bodyIndex + 1).join("\n");
-        document.getElementById("content").innerHTML = body
-          .replace(/^### (.*$)/gim, "<h3>$1</h3>")
-          .replace(/^## (.*$)/gim, "<h2>$1</h2>")
-          .replace(/^# (.*$)/gim, "<h1>$1</h1>")
-          .replace(/\n/g, "<br>");
+        document.getElementById("content").innerHTML =
+          simpleMarkdownToHtml(body);
+
+        document.getElementById("status").innerText =
+          "Innhold lastet fra /content/home.md";
+      })
+      .catch(err => {
+        document.getElementById("title").innerText = "Feil";
+        document.getElementById("ingress").innerText =
+          "Klarte ikke å laste innhold.";
+        document.getElementById("content").innerText =
+          String(err && err.message ? err.message : err);
+        document.getElementById("status").innerText =
+          "Sjekk at /content/home.md finnes i repo og at deploy er ferdig.";
       });
   </script>
-
 </body>
 </html>
