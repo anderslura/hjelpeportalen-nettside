@@ -1,23 +1,28 @@
 <!doctype html>
 <html lang="no">
-  <head>
-    <meta charset="utf-8" />
-    <title>Reset passord – Hjelpeportalen</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+<head>
+  <meta charset="utf-8" />
+  <title>Sett nytt passord – Hjelpeportalen</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!-- Netlify Identity -->
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-  </head>
-  <body style="font-family: system-ui; padding: 2rem;">
-    <h1>Sett nytt passord</h1>
-    <p>Denne siden brukes kun ved passord-reset.</p>
+  <!-- Netlify Identity -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+</head>
 
-    <script>
-      if (window.netlifyIdentity) {
-        window.netlifyIdentity.on("init", () => {
-          window.netlifyIdentity.open("recovery");
-        });
-      }
-    </script>
-  </body>
+<body style="font-family: system-ui; padding: 2rem;">
+  <h1>Sett nytt passord</h1>
+  <p>Denne siden brukes kun ved passord-reset.</p>
+
+  <script>
+    if (window.netlifyIdentity) {
+      // Init Identity
+      window.netlifyIdentity.init();
+
+      // Vent litt slik at recovery_token i URL er tilgjengelig
+      setTimeout(() => {
+        window.netlifyIdentity.open("recovery");
+      }, 500);
+    }
+  </script>
+</body>
 </html>
