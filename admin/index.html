@@ -2,23 +2,21 @@
 <html lang="no">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Hjelpeportalen – Admin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hjelpeportalen Admin</title>
 
-    <!-- Netlify Identity (må være med når backend: git-gateway) -->
+    <!-- Netlify Identity (login + token til Git Gateway) -->
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-
-    <!-- Decap CMS (Netlify CMS) -->
-    <script src="https://unpkg.com/decap-cms@latest/dist/decap-cms.js"></script>
   </head>
 
   <body>
-    <p style="font-family: system-ui; padding: 16px;">
-      Laster admin… (hvis dette blir stående, sjekk Netlify Identity/Git Gateway)
-    </p>
+    <div id="nc-root"></div>
+
+    <!-- Decap CMS -->
+    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 
     <script>
-      // Praktisk: etter innlogging, send tilbake til /admin/
+      // Hvis du logger inn via widget, send deg tilbake til /admin/
       if (window.netlifyIdentity) {
         window.netlifyIdentity.on("init", (user) => {
           if (!user) {
