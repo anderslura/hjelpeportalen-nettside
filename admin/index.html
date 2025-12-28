@@ -2,12 +2,32 @@
 <html lang="no">
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Hjelpeportalen – Admin</title>
 
-    <!-- Decap (Netlify) CMS -->
+    <!-- Netlify Identity (må være med når backend: git-gateway) -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
+    <!-- Decap CMS (Netlify CMS) -->
     <script src="https://unpkg.com/decap-cms@latest/dist/decap-cms.js"></script>
   </head>
+
   <body>
-    <!-- CMS laster her -->
+    <p style="font-family: system-ui; padding: 16px;">
+      Laster admin… (hvis dette blir stående, sjekk Netlify Identity/Git Gateway)
+    </p>
+
+    <script>
+      // Praktisk: etter innlogging, send tilbake til /admin/
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on("init", (user) => {
+          if (!user) {
+            window.netlifyIdentity.on("login", () => {
+              document.location.href = "/admin/";
+            });
+          }
+        });
+      }
+    </script>
   </body>
 </html>
