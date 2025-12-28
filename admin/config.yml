@@ -1,13 +1,10 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: anderslura/hjelpeportalen-nettside
   branch: main
 
 site_url: "https://hjelpeportalen.no"
 display_url: "https://hjelpeportalen.no"
-
-# Tving riktige endpoints (custom domain)
-identity_url: "https://hjelpeportalen.no/.netlify/identity"
-gateway_url: "https://hjelpeportalen.no/.netlify/git"
 
 media_folder: "static/uploads"
 public_folder: "/uploads"
