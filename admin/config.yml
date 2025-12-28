@@ -1,13 +1,14 @@
 backend:
   name: git-gateway
   branch: main
-  roles:
-    - admin
+
+publish_mode: editorial_workflow
 
 media_folder: "content/uploads"
 public_folder: "/content/uploads"
 
-publish_mode: editorial_workflow
+site_url: https://hjelpeportalen.no
+display_url: https://hjelpeportalen.no
 
 collections:
   - name: "pages"
@@ -17,14 +18,6 @@ collections:
         label: "Forside"
         name: "home"
         fields:
-          - label: "Tittel"
-            name: "title"
-            widget: "string"
-
-          - label: "Ingress"
-            name: "intro"
-            widget: "text"
-
-          - label: "Innhold"
-            name: "body"
-            widget: "markdown"
+          - { label: "Tittel", name: "title", widget: "string" }
+          - { label: "Ingress", name: "intro", widget: "text" }
+          - { label: "Innhold", name: "body", widget: "markdown" }
