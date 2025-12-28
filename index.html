@@ -1,11 +1,51 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="no">
-  <head>
-    <meta charset="utf-8">
-    <title>Hjelpeportalen</title>
-  </head>
-  <body>
-    <h1>Hjelpeportalen</h1>
-    <p>Siden er live 🎉</p>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <title>Hjelpeportalen</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      max-width: 720px;
+      margin: 3rem auto;
+      padding: 0 1rem;
+      line-height: 1.6;
+    }
+    h1 { margin-bottom: 0.5rem; }
+    .ingress { font-size: 1.1rem; color: #555; margin-bottom: 1.5rem; }
+  </style>
+</head>
+<body>
+
+  <h1 id="title">Laster…</h1>
+  <p class="ingress" id="ingress"></p>
+  <div id="content"></div>
+
+  <script>
+    fetch("/content/home.md")
+      .then(res => res.text())
+      .then(md => {
+        const lines = md.split("\n");
+        let bodyIndex = lines.findIndex(l => l.trim() === "---" && lines.indexOf(l) > 0);
+
+        const frontmatter = {};
+        for (let i = 1; i < bodyIndex; i++) {
+          const [key, ...rest] = lines[i].split(":");
+          frontmatter[key.trim()] = rest.join(":").trim();
+        }
+
+        document.getElementById("title").innerText = frontmatter.title || "Hjelpeportalen";
+        document.getElementById("ingress").innerText = frontmatter.ingress || "";
+
+        const body = lines.slice(bodyIndex + 1).join("\n");
+        document.getElementById("content").innerHTML = body
+          .replace(/^### (.*$)/gim, "<h3>$1</h3>")
+          .replace(/^## (.*$)/gim, "<h2>$1</h2>")
+          .replace(/^# (.*$)/gim, "<h1>$1</h1>")
+          .replace(/\n/g, "<br>");
+      });
+  </script>
+
+</body>
 </html>
