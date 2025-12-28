@@ -3,6 +3,7 @@ title: Hjelpeportalen
 lead: Trygg, enkel hverdagshjelp – bestill på minutter.
 intro: Praktisk hjelp i hjemmet, ærender og små oppgaver – utført av trygge,
   lokale hjelpere.
+ingress: ingress
 ---
 Vi hjelper deg med praktiske oppgaver i hverdagen – hjemme og ute.
 
