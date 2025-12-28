@@ -2,34 +2,10 @@ backend:
   name: git-gateway
   branch: main
 
-media_folder: "static/uploads"
-public_folder: "/uploads"
-
 site_url: "https://hjelpeportalen.no"
 display_url: "https://hjelpeportalen.no"
 
-collections:
-  - name: "pages"
-    label: "Sider"
-    files:
-      - file: "content/home.md"
-        name: "home"
-        label: "Forside"
-        fields:
-          - { label: "Tittel", name: "title", widget: "string" }
-          - { label: "Ingress", name: "lead", widget: "text", required: false }
-          - { label: "Innhold", name: "body", widget: "markdown" }
-backend:
-  name: git-gateway
-  branch: main
-
-# Viktig for custom domain / riktig identity-endpoint
-local_backend: false
-
-site_url: "https://hjelpeportalen.no"
-display_url: "https://hjelpeportalen.no"
-
-# Tving Decap til å bruke riktig Identity endpoint
+# Tving riktige endpoints (custom domain)
 identity_url: "https://hjelpeportalen.no/.netlify/identity"
 gateway_url: "https://hjelpeportalen.no/.netlify/git"
 
