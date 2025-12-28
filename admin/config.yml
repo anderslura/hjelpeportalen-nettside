@@ -2,16 +2,20 @@ backend:
   name: git-gateway
   branch: main
 
-media_folder: "images/uploads"
-public_folder: "/images/uploads"
+media_folder: "static/uploads"
+public_folder: "/uploads"
+
+site_url: "https://hjelpeportalen.no"
+display_url: "https://hjelpeportalen.no"
 
 collections:
   - name: "pages"
     label: "Sider"
     files:
-      - label: "Forside"
+      - file: "content/home.md"
         name: "home"
-        file: "index.html"
+        label: "Forside"
         fields:
           - { label: "Tittel", name: "title", widget: "string" }
-          - { label: "Innhold", name: "body", widget: "text" }
+          - { label: "Ingress", name: "lead", widget: "text", required: false }
+          - { label: "Innhold", name: "body", widget: "markdown" }
