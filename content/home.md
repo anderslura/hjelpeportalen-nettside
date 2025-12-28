@@ -1,4 +1,6 @@
 ---
 title: "Hjelpeportalen"
-body: "Dette er forsiden, redigerbar via CMS."
+lead: "Trygg, enkel hverdagshjelp – bestill på minutter."
 ---
+
+Velkommen! Dette innholdet skal du kunne endre fra /admin.
