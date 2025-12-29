@@ -21,7 +21,7 @@
       padding: 28px 22px;
     }
 
-    /* ---------- TOPPBAR (desktop) ---------- */
+    /* ---------- TOPPBAR ---------- */
     .topbar {
       display: flex;
       align-items: center;
@@ -34,22 +34,24 @@
     .brand {
       display: flex;
       align-items: center;
-      gap: 4px; /* ✅ enda nærmere logo */
+      gap: 2px; /* ✅ mye nærmere */
       text-decoration: none;
       color: inherit;
       line-height: 1;
     }
 
+    /* ✅ Desktop: større logo */
     .brand-logo {
-      width: 110px;
-      height: 110px;
+      width: 150px;
+      height: 150px;
       object-fit: contain;
       flex: 0 0 auto;
     }
 
+    /* ✅ Desktop: navn litt mindre */
     .brand-name {
       font-weight: 800;
-      font-size: 18px;
+      font-size: 16px;
       letter-spacing: -0.3px;
       color: var(--brand-color);
       white-space: nowrap;
@@ -80,18 +82,19 @@
     }
     .nav-cta:hover { opacity: 0.9; }
 
-    /* ---------- MOBIL: Komplett-stil topplinje ---------- */
+    /* ---------- MOBIL: Komplett-stil ---------- */
     .menu-btn {
       display: none;
       border: 0;
-      background: transparent;
+      background: #f3f4f6;
       font-size: 22px;
       line-height: 1;
       cursor: pointer;
-      padding: 10px 10px;
-      border-radius: 12px;
+      padding: 12px 12px;
+      border-radius: 14px;
     }
-    .menu-btn:hover { background: #f3f4f6; }
+
+    .menu-btn:hover { filter: brightness(0.98); }
 
     .mobile-cta {
       display: none;
@@ -135,27 +138,24 @@
     /* ---------- RESPONSIVE ---------- */
     @media (max-width: 760px) {
       .wrap { padding: 16px 14px; }
-      .topbar { padding: 10px 0 18px; }
+      .topbar { padding: 12px 0 18px; }
 
-      /* Skjul desktop nav */
       .nav { display: none; }
-
-      /* Mobil: venstre/høyre knapper synlige */
       .menu-btn { display: inline-flex; align-items:center; justify-content:center; }
       .mobile-cta { display: inline-flex; align-items:center; justify-content:center; }
 
-      /* Mobil: sentrert logo + navn som Komplett */
+      /* Mobil: sentrer brand */
       .brand {
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
-        gap: 6px;
+        gap: 1px; /* ✅ mobil: enda nærmere */
       }
 
-      .brand-logo { width: 42px; height: 42px; }  /* mobil-logo kompakt som Komplett */
-      .brand-name { font-size: 18px; }            /* “butikk-navn” tydelig på mobil */
+      /* Mobil: kompakt logo + litt mindre tekst */
+      .brand-logo { width: 46px; height: 46px; }
+      .brand-name { font-size: 16px; }
 
-      /* Mobil: topbar plasserer venstre/høyre “rails” */
       .topbar-left { display:flex; align-items:center; }
       .topbar-right { display:flex; align-items:center; }
     }
@@ -195,7 +195,6 @@
 <body>
   <div class="wrap">
 
-    <!-- TOPPBAR -->
     <header class="topbar">
       <div class="topbar-left">
         <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menuPanel" aria-label="Åpne meny">
@@ -212,7 +211,6 @@
         <a class="mobile-cta" href="#kontakt">Bestill</a>
       </div>
 
-      <!-- Desktop nav -->
       <nav class="nav" aria-label="Hovedmeny">
         <a class="nav-link" href="#tjenester">Tjenester</a>
         <a class="nav-link" href="#om">Om oss</a>
@@ -222,7 +220,6 @@
       </nav>
     </header>
 
-    <!-- Mobil meny panel -->
     <div class="menu-panel" id="menuPanel">
       <a href="#tjenester">Tjenester</a>
       <a href="#om">Om oss</a>
@@ -231,7 +228,6 @@
       <a class="menu-cta" href="#kontakt">Bestill hjelp</a>
     </div>
 
-    <!-- HOVEDINNHOLD -->
     <h1 id="title">Laster…</h1>
     <p class="ingress" id="ingress"></p>
     <div class="content" id="content"></div>
@@ -242,7 +238,6 @@
   </div>
 
   <script>
-    // Mobilmeny toggle
     (function () {
       const btn = document.getElementById("menuBtn");
       const panel = document.getElementById("menuPanel");
@@ -254,7 +249,6 @@
         btn.setAttribute("aria-expanded", open ? "false" : "true");
       });
 
-      // Lukk etter klikk
       panel.querySelectorAll("a").forEach(a => {
         a.addEventListener("click", () => {
           panel.style.display = "none";
@@ -263,7 +257,6 @@
       });
     })();
 
-    // CMS-innhold
     function parseFrontmatter(md) {
       const parts = md.split('---');
       if (parts.length < 3) return { frontmatter: {}, body: md.trim() };
