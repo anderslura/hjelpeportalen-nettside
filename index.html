@@ -21,19 +21,20 @@
       padding: 28px 22px;
     }
 
-    /* ---------- TOPPBAR ---------- */
+    /* ---------- TOPPBAR (desktop) ---------- */
     .topbar {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 24px;
       padding: 20px 0 48px;
+      position: relative; /* for mobil-sentrering */
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 6px; /* ✅ enda nærmere (Fiken-ish) */
+      gap: 4px; /* ✅ enda nærmere logo */
       text-decoration: none;
       color: inherit;
       line-height: 1;
@@ -79,19 +80,29 @@
     }
     .nav-cta:hover { opacity: 0.9; }
 
-    /* ---------- MOBIL MENY ---------- */
+    /* ---------- MOBIL: Komplett-stil topplinje ---------- */
     .menu-btn {
-      display: none; /* desktop: skjult */
-      border: 1px solid #e5e7eb;
-      background: #fff;
-      color: #111;
-      padding: 10px 12px;
-      border-radius: 12px;
-      font-size: 14px;
+      display: none;
+      border: 0;
+      background: transparent;
+      font-size: 22px;
+      line-height: 1;
       cursor: pointer;
+      padding: 10px 10px;
+      border-radius: 12px;
     }
+    .menu-btn:hover { background: #f3f4f6; }
 
-    .menu-btn:active { transform: translateY(1px); }
+    .mobile-cta {
+      display: none;
+      text-decoration: none;
+      color: #fff;
+      background: #111;
+      font-size: 13px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
 
     .menu-panel {
       display: none;
@@ -111,7 +122,6 @@
       color: #111;
       font-size: 15px;
     }
-
     .menu-panel a:hover { background: #f3f4f6; }
 
     .menu-panel .menu-cta {
@@ -124,16 +134,30 @@
 
     /* ---------- RESPONSIVE ---------- */
     @media (max-width: 760px) {
-      .wrap { padding: 18px 16px; }
-      .topbar { padding: 10px 0 24px; }
+      .wrap { padding: 16px 14px; }
+      .topbar { padding: 10px 0 18px; }
 
-      .brand-logo { width: 72px; height: 72px; }
-      .brand { gap: 6px; }
-      .brand-name { font-size: 17px; }
+      /* Skjul desktop nav */
+      .nav { display: none; }
 
-      .nav { display: none; }      /* ✅ skjul desktop-meny */
-      .menu-btn { display: inline-flex; align-items:center; gap:8px; } /* ✅ vis mobil-knapp */
-      .menu-panel { display: none; } /* styres av JS */
+      /* Mobil: venstre/høyre knapper synlige */
+      .menu-btn { display: inline-flex; align-items:center; justify-content:center; }
+      .mobile-cta { display: inline-flex; align-items:center; justify-content:center; }
+
+      /* Mobil: sentrert logo + navn som Komplett */
+      .brand {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        gap: 6px;
+      }
+
+      .brand-logo { width: 42px; height: 42px; }  /* mobil-logo kompakt som Komplett */
+      .brand-name { font-size: 18px; }            /* “butikk-navn” tydelig på mobil */
+
+      /* Mobil: topbar plasserer venstre/høyre “rails” */
+      .topbar-left { display:flex; align-items:center; }
+      .topbar-right { display:flex; align-items:center; }
     }
 
     /* ---------- INNHOLD ---------- */
@@ -173,10 +197,20 @@
 
     <!-- TOPPBAR -->
     <header class="topbar">
+      <div class="topbar-left">
+        <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menuPanel" aria-label="Åpne meny">
+          ☰
+        </button>
+      </div>
+
       <a class="brand" href="/" aria-label="Hjelpeportalen">
         <img class="brand-logo" src="/images/logo.png" alt="Hjelpeportalen logo" />
         <span class="brand-name">Hjelpeportalen</span>
       </a>
+
+      <div class="topbar-right">
+        <a class="mobile-cta" href="#kontakt">Bestill</a>
+      </div>
 
       <!-- Desktop nav -->
       <nav class="nav" aria-label="Hovedmeny">
@@ -186,14 +220,9 @@
         <a class="nav-link" href="#priser">Priser</a>
         <a class="nav-cta" href="#kontakt">Bestill hjelp</a>
       </nav>
-
-      <!-- Mobil menu button -->
-      <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menuPanel">
-        ☰ Meny
-      </button>
     </header>
 
-    <!-- Mobil menu panel -->
+    <!-- Mobil meny panel -->
     <div class="menu-panel" id="menuPanel">
       <a href="#tjenester">Tjenester</a>
       <a href="#om">Om oss</a>
@@ -225,7 +254,7 @@
         btn.setAttribute("aria-expanded", open ? "false" : "true");
       });
 
-      // Lukk meny etter klikk på link
+      // Lukk etter klikk
       panel.querySelectorAll("a").forEach(a => {
         a.addEventListener("click", () => {
           panel.style.display = "none";
