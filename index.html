@@ -13,21 +13,18 @@
       --bg:#ffffff;
       --btn:#0b0b0b;
       --btnText:#ffffff;
-      --max: 1100px;
+      --max:1100px;
     }
     *{box-sizing:border-box}
     body{
       margin:0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
       color:var(--text);
       background:var(--bg);
     }
 
     /* Header */
-    header{
-      border-bottom:1px solid var(--line);
-      background:#fff;
-    }
+    header{border-bottom:1px solid var(--line)}
     .nav{
       max-width:var(--max);
       margin:0 auto;
@@ -44,22 +41,14 @@
       text-decoration:none;
       color:inherit;
       font-weight:700;
-      flex: 1 1 auto;
-      min-width: 0;
     }
-    .brand img{
-      width:44px;
-      height:44px;
-      display:block;
-    }
+    .brand img{width:44px;height:44px}
 
-    /* Desktop links */
     .links{
       display:flex;
       align-items:center;
       gap:22px;
       font-size:14px;
-      flex: 0 0 auto;
     }
     .links a{
       text-decoration:none;
@@ -68,27 +57,17 @@
     }
     .links a:hover{opacity:1}
 
-    /* CTA button (shared) */
     .cta{
+      margin-left:12px;
       padding:10px 14px;
       border-radius:999px;
       background:var(--btn);
-      color:var(--btnText) !important;
+      color:var(--btnText);
       font-weight:700;
       text-decoration:none;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      white-space:nowrap;
     }
 
-    /* Mobile top controls */
-    .controls{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      flex: 0 0 auto;
-    }
+    /* Mobile */
     .burger{
       display:none;
       border:1px solid var(--line);
@@ -96,10 +75,7 @@
       border-radius:10px;
       padding:10px 12px;
       font-weight:700;
-      cursor:pointer;
     }
-
-    /* Mobile menu panel */
     .mobileMenu{
       display:none;
       border-top:1px solid var(--line);
@@ -115,26 +91,17 @@
       border-bottom:1px dashed #f1f5f9;
     }
     .mobileMenu a:last-child{border-bottom:none}
-    .mobileMenu .cta{
-      display:inline-flex;
-      margin-top:12px;
-      width:max-content;
-    }
 
-    /* Show mobile CTA + burger, hide desktop links */
-    .ctaMobile{ display:none; }
-
-    @media (max-width: 860px){
+    @media (max-width:860px){
       .links{display:none}
       .burger{display:inline-flex}
-      .ctaMobile{display:inline-flex}
     }
 
     /* Main */
     main{
       max-width:var(--max);
       margin:0 auto;
-      padding:70px 20px 90px;
+      padding:80px 20px 90px;
     }
     .hero{text-align:center}
     h1{
@@ -144,13 +111,11 @@
       line-height:1.05;
     }
     .lead{
-      margin:16px auto 0;
+      margin:18px auto 0;
       font-size:22px;
       font-weight:800;
       max-width:780px;
     }
-
-    /* Spacing between lead and body */
     .body{
       margin:34px auto 0;
       max-width:780px;
@@ -159,9 +124,8 @@
       line-height:1.5;
     }
 
-    /* Markdown list styling */
     .body ul{
-      margin:28px auto 0;
+      margin:22px auto 0;
       padding:0;
       max-width:640px;
       list-style:none;
@@ -173,7 +137,6 @@
       position:relative;
       color:var(--text);
       font-size:18px;
-      line-height:1.4;
     }
     .body li::before{
       content:"✓";
@@ -185,14 +148,9 @@
     }
 
     @media (max-width:520px){
-      main{padding:46px 18px 70px}
       h1{font-size:46px}
       .lead,.body{font-size:18px}
       .body li{font-size:16px}
-      .nav{padding:14px 16px;}
-      .brand img{width:40px;height:40px;}
-      .cta{padding:9px 12px;}
-      .burger{padding:9px 10px;}
     }
   </style>
 </head>
@@ -205,8 +163,7 @@
       <span>Hjelpeportalen</span>
     </a>
 
-    <!-- Desktop menu -->
-    <nav class="links" aria-label="Hovedmeny">
+    <nav class="links">
       <a href="#tjenester">Tjenester</a>
       <a href="#omoss">Om oss</a>
       <a href="#kontakt">Kontakt</a>
@@ -214,11 +171,7 @@
       <a class="cta" href="#bestill">Bestill hjelp</a>
     </nav>
 
-    <!-- Mobile controls (CTA + burger) -->
-    <div class="controls">
-      <a class="cta ctaMobile" href="#bestill">Bestill hjelp</a>
-      <button class="burger" id="burger" aria-expanded="false" aria-controls="mobileMenu">☰</button>
-    </div>
+    <button class="burger" id="burger" aria-expanded="false">☰ Meny</button>
   </div>
 
   <div class="mobileMenu" id="mobileMenu">
@@ -226,59 +179,61 @@
     <a href="#omoss">Om oss</a>
     <a href="#kontakt">Kontakt</a>
     <a href="#priser">Priser</a>
-    <a class="cta" href="#bestill">Bestill hjelp</a>
   </div>
 </header>
 
 <main>
   <section class="hero">
     <h1 id="pageTitle">Laster…</h1>
-    <div class="lead" id="pageLead" style="display:none;"></div>
+    <div class="lead" id="pageLead" style="display:none"></div>
     <div class="body" id="pageBody"></div>
   </section>
 </main>
 
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
 <script>
-  // Mobile menu toggle
   const burger = document.getElementById("burger");
   const mobileMenu = document.getElementById("mobileMenu");
-  burger?.addEventListener("click", () => {
+
+  burger.addEventListener("click", () => {
     const open = mobileMenu.style.display === "block";
     mobileMenu.style.display = open ? "none" : "block";
     burger.setAttribute("aria-expanded", String(!open));
   });
 
-  // Frontmatter parser
+  // 🔒 LUKK MENY VED KLIKK (NY)
+  mobileMenu.querySelectorAll("a").forEach(link=>{
+    link.addEventListener("click", ()=>{
+      mobileMenu.style.display="none";
+      burger.setAttribute("aria-expanded","false");
+    });
+  });
+
   function parseFrontmatter(md){
-    if(!md.startsWith("---")) return {data:{}, body:md};
+    if(!md.startsWith("---")) return {data:{},body:md};
     const end = md.indexOf("\n---",3);
-    if(end === -1) return {data:{}, body:md};
     const raw = md.slice(3,end).trim();
-    const body = md.slice(end+4).trim();
-    const data = {};
+    const body = md.slice(end+4);
+    const data={};
     raw.split("\n").forEach(l=>{
       const i=l.indexOf(":");
-      if(i>-1) data[l.slice(0,i).trim()] = l.slice(i+1).trim();
+      if(i>-1)data[l.slice(0,i).trim()]=l.slice(i+1).trim();
     });
-    return {data, body};
+    return {data,body};
   }
 
-  // Load content/home.md
   fetch("/content/home.md",{cache:"no-store"})
     .then(r=>r.text())
     .then(md=>{
       const p=parseFrontmatter(md);
-      document.getElementById("pageTitle").textContent = p.data.title || "Hjelpeportalen";
-      const leadEl = document.getElementById("pageLead");
+      document.getElementById("pageTitle").textContent=p.data.title||"Hjelpeportalen";
       if(p.data.lead){
-        leadEl.style.display="block";
-        leadEl.textContent=p.data.lead;
-      }else{
-        leadEl.style.display="none";
-        leadEl.textContent="";
+        const l=document.getElementById("pageLead");
+        l.textContent=p.data.lead;
+        l.style.display="block";
       }
-      document.getElementById("pageBody").innerHTML = marked.parse(p.body || "");
+      document.getElementById("pageBody").innerHTML=marked.parse(p.body||"");
     });
 </script>
 </body>
