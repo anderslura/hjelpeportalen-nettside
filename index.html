@@ -1,204 +1,223 @@
-<!doctype html>
-<html lang="nb">
+<!DOCTYPE html>
+<html lang="no">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Hjelpeportalen</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hjelpeportalen</title>
 
-<style>
-:root {
-  --brand:#1f5fbf;
-}
+  <style>
+    :root {
+      --max-width: 1120px;
+      --blue: #1f4fd8;
+    }
 
-/* RESET */
-* { box-sizing:border-box; }
-body {
-  margin:0;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
-  color:#111;
-  background:#fff;
-}
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-/* GLOBAL WRAP */
-.page {
-  max-width: 760px;               /* 🔑 ÉN sannhet */
-  margin: 0 auto;
-  padding: 24px 18px;
-}
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #111;
+      background: #fff;
+    }
 
-/* ================= HEADER ================= */
+    /* ====== LAYOUT CONTAINER ====== */
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
 
-.header {
-  padding-top: 8px;
-  padding-bottom: 42px;
-}
+    /* ====== HEADER ====== */
+    header {
+      border-bottom: 1px solid #eee;
+    }
 
-.header-row {
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-}
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 88px;
+    }
 
-/* LOGO + TEKST */
-.brand {
-  display:flex;
-  align-items:center;
-  text-decoration:none;
-  color:inherit;
-}
+    /* Logo + navn */
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px; /* TETT */
+      text-decoration: none;
+    }
 
-/* LOGO */
-.brand img {
-  width:150px;
-  height:150px;
-  object-fit:contain;
-  display:block;
-}
+    .brand img {
+      height: 56px; /* STOR LOGO */
+      width: auto;
+      display: block;
+    }
 
-/* NAVN – HARD KONTROLL */
-.brand span {
-  font-weight:800;
-  font-size:16px;
-  color:var(--brand);
-  letter-spacing:-0.4px;
+    .brand span {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--blue);
+      white-space: nowrap;
+    }
 
-  /* 🔥 dette er nøkkelen */
-  margin-left:-14px;              /* TETT mot logo */
-  transform: translateY(1px);     /* optisk justering */
-  white-space:nowrap;
-}
+    /* Desktop nav */
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
 
-/* NAV */
-.nav {
-  display:flex;
-  gap:14px;
-  align-items:center;
-}
+    nav a {
+      text-decoration: none;
+      color: #111;
+      font-size: 15px;
+    }
 
-.nav a {
-  font-size:14px;
-  color:#111;
-  text-decoration:none;
-  padding:8px 10px;
-  border-radius:10px;
-}
+    .cta {
+      background: #000;
+      color: #fff;
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-size: 14px;
+      text-decoration: none;
+    }
 
-.nav a:hover {
-  background:#f3f4f6;
-}
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      font-size: 26px;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
 
-.nav .cta {
-  background:#111;
-  color:#fff;
-  padding:10px 18px;
-  border-radius:999px;
-}
+    /* ====== HERO ====== */
+    main {
+      padding: 72px 0;
+    }
 
-/* ================= HERO ================= */
+    h1 {
+      font-size: 48px;
+      margin-bottom: 12px;
+    }
 
-h1 {
-  font-size:44px;
-  margin:0 0 14px;
-  letter-spacing:-0.6px;
-}
+    .subtitle {
+      font-size: 18px;
+      color: #333;
+      margin-bottom: 32px;
+    }
 
-.ingress {
-  font-size:18px;
-  line-height:1.5;
-  color:#333;
-  margin-bottom:26px;
-}
+    ul {
+      list-style: none;
+    }
 
-.list {
-  font-size:17px;
-  line-height:1.7;
-}
+    li {
+      font-size: 16px;
+      margin-bottom: 14px;
+    }
 
-.item {
-  margin:10px 0;
-}
+    li::before {
+      content: "✔ ";
+      margin-right: 6px;
+    }
 
-/* ================= FOOTER ================= */
-.footer {
-  margin-top:52px;
-  font-size:13px;
-  color:#666;
-}
+    .source {
+      margin-top: 40px;
+      font-size: 13px;
+      color: #777;
+    }
 
-/* ================= MOBIL ================= */
-@media (max-width: 760px) {
+    /* ====== MOBIL ====== */
+    @media (max-width: 900px) {
+      .header-inner {
+        height: 72px;
+      }
 
-  .header-row {
-    position:relative;
-  }
+      nav {
+        display: none;
+        position: absolute;
+        top: 72px;
+        left: 0;
+        right: 0;
+        background: #fff;
+        flex-direction: column;
+        gap: 16px;
+        padding: 20px;
+        border-bottom: 1px solid #eee;
+      }
 
-  .nav {
-    display:none;
-  }
+      nav.open {
+        display: flex;
+      }
 
-  .brand {
-    position:absolute;
-    left:50%;
-    transform:translateX(-50%);
-  }
+      .hamburger {
+        display: block;
+      }
 
-  .brand img {
-    width:46px;
-    height:46px;
-  }
+      .brand img {
+        height: 44px;
+      }
 
-  .brand span {
-    font-size:16px;
-    margin-left:-10px;
-  }
-}
-</style>
+      .brand span {
+        font-size: 16px;
+      }
+
+      h1 {
+        font-size: 36px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="page">
-
   <!-- HEADER -->
-  <header class="header">
-    <div class="header-row">
-
-      <a class="brand" href="/">
-        <img src="/images/logo.png" alt="Hjelpeportalen">
+  <header>
+    <div class="container header-inner">
+      <a href="/" class="brand">
+        <img src="/images/logo.png" alt="Hjelpeportalen logo">
         <span>Hjelpeportalen</span>
       </a>
 
-      <nav class="nav">
-        <a href="#">Tjenester</a>
-        <a href="#">Om oss</a>
-        <a href="#">Kontakt</a>
-        <a href="#">Priser</a>
-        <a class="cta" href="#">Bestill hjelp</a>
-      </nav>
+      <button class="hamburger" onclick="toggleMenu()">☰</button>
 
+      <nav id="nav">
+        <a href="#tjenester">Tjenester</a>
+        <a href="#om">Om oss</a>
+        <a href="#kontakt">Kontakt</a>
+        <a href="#priser">Priser</a>
+        <a href="#bestill" class="cta">Bestill hjelp</a>
+      </nav>
     </div>
   </header>
 
-  <!-- HERO -->
-  <main>
+  <!-- MAIN -->
+  <main class="container">
     <h1>Hjelpeportalen</h1>
-    <p class="ingress">
+    <p class="subtitle">
       Vi hjelper deg med praktiske oppgaver i hverdagen – hjemme og ute.
     </p>
 
-    <div class="list">
-      <div class="item">✔ Handling og ærender</div>
-      <div class="item">✔ Enkel hjelp i hjemmet</div>
-      <div class="item">✔ Følge og bistand</div>
-      <div class="item">✔ Små oppdrag – stor verdi</div>
+    <ul>
+      <li>Handling og ærender</li>
+      <li>Enkel hjelp i hjemmet</li>
+      <li>Følge og bistand</li>
+      <li>Små oppdrag – stor verdi</li>
+    </ul>
+
+    <div class="source">
+      Innhold lastet fra /content/home.md
     </div>
   </main>
 
-  <div class="footer">
-    Innhold lastet fra /content/home.md
-  </div>
-
-</div>
+  <script>
+    function toggleMenu() {
+      document.getElementById("nav").classList.toggle("open");
+    }
+  </script>
 
 </body>
 </html>
