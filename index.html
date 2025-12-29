@@ -13,18 +13,21 @@
       --bg:#ffffff;
       --btn:#0b0b0b;
       --btnText:#ffffff;
-      --max:1100px;
+      --max: 1100px;
     }
     *{box-sizing:border-box}
     body{
       margin:0;
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
       color:var(--text);
       background:var(--bg);
     }
 
-    /* Header */
-    header{border-bottom:1px solid var(--line)}
+    /* Header / Nav */
+    header{
+      border-bottom:1px solid var(--line);
+      background:#fff;
+    }
     .nav{
       max-width:var(--max);
       margin:0 auto;
@@ -42,7 +45,10 @@
       color:inherit;
       font-weight:700;
     }
-    .brand img{width:44px;height:44px}
+    .brand img{
+      width:44px; height:44px;
+      display:block;
+    }
 
     .links{
       display:flex;
@@ -62,12 +68,31 @@
       padding:10px 14px;
       border-radius:999px;
       background:var(--btn);
-      color:var(--btnText);
+      color:var(--btnText) !important;
       font-weight:700;
       text-decoration:none;
+      display:inline-block;
     }
 
-    /* Mobile */
+    /* Mobile controls (CTA + burger) */
+    .right{
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .ctaMobile{
+      display:none; /* vises kun på mobil */
+      padding:10px 14px;
+      border-radius:999px;
+      background:var(--btn);
+      color:var(--btnText) !important;
+      font-weight:700;
+      text-decoration:none;
+      line-height:1;
+      white-space:nowrap;
+    }
+
+    /* Mobile menu */
     .burger{
       display:none;
       border:1px solid var(--line);
@@ -75,11 +100,13 @@
       border-radius:10px;
       padding:10px 12px;
       font-weight:700;
+      line-height:1;
+      white-space:nowrap;
     }
     .mobileMenu{
       display:none;
       border-top:1px solid var(--line);
-      padding:10px 20px 18px;
+      padding:10px 20px 18px 20px;
       max-width:var(--max);
       margin:0 auto;
     }
@@ -92,18 +119,22 @@
     }
     .mobileMenu a:last-child{border-bottom:none}
 
-    @media (max-width:860px){
+    @media (max-width: 860px){
       .links{display:none}
-      .burger{display:inline-flex}
+      .burger{display:inline-flex; align-items:center; gap:8px}
+      .ctaMobile{display:inline-block}
+      .brand span{font-size:16px}
     }
 
-    /* Main */
+    /* Main hero */
     main{
       max-width:var(--max);
       margin:0 auto;
-      padding:80px 20px 90px;
+      padding:70px 20px 90px 20px;
     }
-    .hero{text-align:center}
+    .hero{
+      text-align:center;
+    }
     h1{
       margin:0;
       font-size:64px;
@@ -111,24 +142,27 @@
       line-height:1.05;
     }
     .lead{
-      margin:18px auto 0;
+      margin:14px auto 0 auto;
       font-size:22px;
       font-weight:800;
+      color:var(--text);
       max-width:780px;
     }
     .body{
-      margin:34px auto 0;
+      margin:22px auto 0 auto; /* litt mer luft ned til body/lista */
       max-width:780px;
       color:var(--muted);
       font-size:22px;
       line-height:1.5;
     }
 
+    /* Markdown content styling */
+    .body p{margin:0 0 14px 0}
     .body ul{
-      margin:22px auto 0;
+      margin:18px auto 0 auto;
       padding:0;
       max-width:640px;
-      list-style:none;
+      list-style:none; /* vi lager egne ✓ */
       text-align:left;
     }
     .body li{
@@ -137,104 +171,158 @@
       position:relative;
       color:var(--text);
       font-size:18px;
+      line-height:1.4;
     }
     .body li::before{
       content:"✓";
       position:absolute;
       left:0;
       top:0;
-      color:#111;
+      color:#111;     /* svart ✓ */
       font-weight:900;
     }
 
-    @media (max-width:520px){
+    /* Smaller on mobile */
+    @media (max-width: 520px){
+      main{padding:46px 18px 70px 18px}
       h1{font-size:46px}
       .lead,.body{font-size:18px}
       .body li{font-size:16px}
+    }
+
+    /* Error */
+    .error{
+      margin-top:18px;
+      color:#b91c1c;
+      font-weight:700;
     }
   </style>
 </head>
 
 <body>
-<header>
-  <div class="nav">
-    <a class="brand" href="/">
-      <img src="/images/logo.png" alt="Hjelpeportalen logo">
-      <span>Hjelpeportalen</span>
-    </a>
+  <header>
+    <div class="nav">
+      <a class="brand" href="/">
+        <img src="/images/logo.png" alt="Hjelpeportalen logo" />
+        <span>Hjelpeportalen</span>
+      </a>
 
-    <nav class="links">
+      <!-- Desktop nav -->
+      <nav class="links" aria-label="Hovedmeny">
+        <a href="#tjenester">Tjenester</a>
+        <a href="#omoss">Om oss</a>
+        <a href="#kontakt">Kontakt</a>
+        <a href="#priser">Priser</a>
+        <a class="cta" href="#bestill">Bestill hjelp</a>
+      </nav>
+
+      <!-- Mobile controls -->
+      <div class="right">
+        <a class="ctaMobile" href="#bestill">Bestill hjelp</a>
+        <button class="burger" id="burger" aria-expanded="false" aria-controls="mobileMenu">
+          ☰ Meny
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile dropdown (uten Bestill-knapp for å unngå duplikat) -->
+    <div class="mobileMenu" id="mobileMenu">
       <a href="#tjenester">Tjenester</a>
       <a href="#omoss">Om oss</a>
       <a href="#kontakt">Kontakt</a>
       <a href="#priser">Priser</a>
-      <a class="cta" href="#bestill">Bestill hjelp</a>
-    </nav>
+    </div>
+  </header>
 
-    <button class="burger" id="burger" aria-expanded="false">☰ Meny</button>
-  </div>
+  <main>
+    <section class="hero">
+      <h1 id="pageTitle">Laster…</h1>
+      <div class="lead" id="pageLead" style="display:none;"></div>
+      <div class="body" id="pageBody"></div>
+      <div class="error" id="err" style="display:none;"></div>
+    </section>
+  </main>
 
-  <div class="mobileMenu" id="mobileMenu">
-    <a href="#tjenester">Tjenester</a>
-    <a href="#omoss">Om oss</a>
-    <a href="#kontakt">Kontakt</a>
-    <a href="#priser">Priser</a>
-  </div>
-</header>
+  <!-- Marked for markdown -> HTML -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
-<main>
-  <section class="hero">
-    <h1 id="pageTitle">Laster…</h1>
-    <div class="lead" id="pageLead" style="display:none"></div>
-    <div class="body" id="pageBody"></div>
-  </section>
-</main>
-
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-
-<script>
-  const burger = document.getElementById("burger");
-  const mobileMenu = document.getElementById("mobileMenu");
-
-  burger.addEventListener("click", () => {
-    const open = mobileMenu.style.display === "block";
-    mobileMenu.style.display = open ? "none" : "block";
-    burger.setAttribute("aria-expanded", String(!open));
-  });
-
-  // 🔒 LUKK MENY VED KLIKK (NY)
-  mobileMenu.querySelectorAll("a").forEach(link=>{
-    link.addEventListener("click", ()=>{
-      mobileMenu.style.display="none";
-      burger.setAttribute("aria-expanded","false");
+  <script>
+    // Mobile menu toggle
+    const burger = document.getElementById("burger");
+    const mobileMenu = document.getElementById("mobileMenu");
+    burger?.addEventListener("click", () => {
+      const open = mobileMenu.style.display === "block";
+      mobileMenu.style.display = open ? "none" : "block";
+      burger.setAttribute("aria-expanded", String(!open));
     });
-  });
 
-  function parseFrontmatter(md){
-    if(!md.startsWith("---")) return {data:{},body:md};
-    const end = md.indexOf("\n---",3);
-    const raw = md.slice(3,end).trim();
-    const body = md.slice(end+4);
-    const data={};
-    raw.split("\n").forEach(l=>{
-      const i=l.indexOf(":");
-      if(i>-1)data[l.slice(0,i).trim()]=l.slice(i+1).trim();
-    });
-    return {data,body};
-  }
+    // Very small frontmatter parser: expects --- ... --- at top
+    function parseFrontmatter(md){
+      const trimmed = md.replace(/^\uFEFF/, "");
+      if(!trimmed.startsWith("---")) return { data:{}, body: trimmed };
 
-  fetch("/content/home.md",{cache:"no-store"})
-    .then(r=>r.text())
-    .then(md=>{
-      const p=parseFrontmatter(md);
-      document.getElementById("pageTitle").textContent=p.data.title||"Hjelpeportalen";
-      if(p.data.lead){
-        const l=document.getElementById("pageLead");
-        l.textContent=p.data.lead;
-        l.style.display="block";
+      const end = trimmed.indexOf("\n---", 3);
+      if(end === -1) return { data:{}, body: trimmed };
+
+      const fmRaw = trimmed.slice(3, end).trim();
+      const body = trimmed.slice(end + 4).replace(/^\s+/, "");
+
+      const data = {};
+      fmRaw.split("\n").forEach(line => {
+        const idx = line.indexOf(":");
+        if(idx === -1) return;
+        const key = line.slice(0, idx).trim();
+        let val = line.slice(idx+1).trim();
+        val = val.replace(/^"(.*)"$/,"$1").replace(/^'(.*)'$/,"$1");
+        data[key] = val;
+      });
+
+      return { data, body };
+    }
+
+    async function loadHome(){
+      const titleEl = document.getElementById("pageTitle");
+      const leadEl = document.getElementById("pageLead");
+      const bodyEl = document.getElementById("pageBody");
+      const errEl  = document.getElementById("err");
+
+      try{
+        const res = await fetch("/content/home.md", { cache: "no-store" });
+        if(!res.ok) throw new Error("Fant ikke /content/home.md (status " + res.status + ")");
+
+        const md = await res.text();
+        const parsed = parseFrontmatter(md);
+
+        const title = parsed.data.title || "Hjelpeportalen";
+        const lead  = parsed.data.lead || "";
+
+        titleEl.textContent = title;
+
+        if(lead && lead.trim().length){
+          leadEl.style.display = "block";
+          leadEl.textContent = lead;
+        }else{
+          leadEl.style.display = "none";
+          leadEl.textContent = "";
+        }
+
+        // Render markdown body -> HTML
+        const html = marked.parse(parsed.body || "");
+        bodyEl.innerHTML = html;
+
+        // Fjern evt. emoji-ikoner hvis de er limt inn i punktene (✅ osv)
+        bodyEl.querySelectorAll("li").forEach(li => {
+          li.innerHTML = li.innerHTML.replace(/^(✅|☑️|✔️)\s*/,"");
+        });
+
+      }catch(e){
+        titleEl.textContent = "Kunne ikke laste inn innhold";
+        errEl.style.display = "block";
+        errEl.textContent = "Feil: " + (e?.message || e);
       }
-      document.getElementById("pageBody").innerHTML=marked.parse(p.body||"");
-    });
-</script>
+    }
+
+    loadHome();
+  </script>
 </body>
 </html>
