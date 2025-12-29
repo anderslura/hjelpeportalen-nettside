@@ -18,12 +18,12 @@
     *{box-sizing:border-box}
     body{
       margin:0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
       color:var(--text);
       background:var(--bg);
     }
 
-    /* Header / Nav */
+    /* Header */
     header{
       border-bottom:1px solid var(--line);
       background:#fff;
@@ -44,16 +44,22 @@
       text-decoration:none;
       color:inherit;
       font-weight:700;
+      flex: 1 1 auto;
+      min-width: 0;
     }
     .brand img{
-      width:44px; height:44px;
+      width:44px;
+      height:44px;
       display:block;
     }
+
+    /* Desktop links */
     .links{
       display:flex;
       align-items:center;
       gap:22px;
       font-size:14px;
+      flex: 0 0 auto;
     }
     .links a{
       text-decoration:none;
@@ -61,16 +67,28 @@
       opacity:.9;
     }
     .links a:hover{opacity:1}
+
+    /* CTA button (shared) */
     .cta{
-      margin-left:12px;
       padding:10px 14px;
       border-radius:999px;
       background:var(--btn);
       color:var(--btnText) !important;
       font-weight:700;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      white-space:nowrap;
     }
 
-    /* Mobile menu */
+    /* Mobile top controls */
+    .controls{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex: 0 0 auto;
+    }
     .burger{
       display:none;
       border:1px solid var(--line);
@@ -78,11 +96,14 @@
       border-radius:10px;
       padding:10px 12px;
       font-weight:700;
+      cursor:pointer;
     }
+
+    /* Mobile menu panel */
     .mobileMenu{
       display:none;
       border-top:1px solid var(--line);
-      padding:10px 20px 18px 20px;
+      padding:10px 20px 18px;
       max-width:var(--max);
       margin:0 auto;
     }
@@ -95,26 +116,27 @@
     }
     .mobileMenu a:last-child{border-bottom:none}
     .mobileMenu .cta{
-      display:inline-block;
-      margin-top:10px;
+      display:inline-flex;
+      margin-top:12px;
       width:max-content;
     }
 
+    /* Show mobile CTA + burger, hide desktop links */
+    .ctaMobile{ display:none; }
+
     @media (max-width: 860px){
       .links{display:none}
-      .burger{display:inline-flex; align-items:center; gap:8px}
-      .brand span{font-size:16px}
+      .burger{display:inline-flex}
+      .ctaMobile{display:inline-flex}
     }
 
-    /* Main hero */
+    /* Main */
     main{
       max-width:var(--max);
       margin:0 auto;
-      padding:70px 20px 90px 20px;
+      padding:70px 20px 90px;
     }
-    .hero{
-      text-align:center;
-    }
+    .hero{text-align:center}
     h1{
       margin:0;
       font-size:64px;
@@ -122,27 +144,27 @@
       line-height:1.05;
     }
     .lead{
-      margin:14px auto 0 auto;
+      margin:16px auto 0;
       font-size:22px;
       font-weight:800;
-      color:var(--text);
       max-width:780px;
     }
+
+    /* Spacing between lead and body */
     .body{
-      margin:10px auto 0 auto;
+      margin:34px auto 0;
       max-width:780px;
       color:var(--muted);
       font-size:22px;
       line-height:1.5;
     }
 
-    /* Markdown content styling */
-    .body p{margin:0 0 14px 0}
+    /* Markdown list styling */
     .body ul{
-      margin:18px auto 0 auto;
+      margin:28px auto 0;
       padding:0;
       max-width:640px;
-      list-style:none; /* vi lager egne ✓ */
+      list-style:none;
       text-align:left;
     }
     .body li{
@@ -158,157 +180,106 @@
       position:absolute;
       left:0;
       top:0;
-      color:#111;     /* svart ✓ */
+      color:#111;
       font-weight:900;
     }
 
-    /* Smaller on mobile */
-    @media (max-width: 520px){
-      main{padding:46px 18px 70px 18px}
+    @media (max-width:520px){
+      main{padding:46px 18px 70px}
       h1{font-size:46px}
       .lead,.body{font-size:18px}
       .body li{font-size:16px}
-    }
-
-    /* Error */
-    .error{
-      margin-top:18px;
-      color:#b91c1c;
-      font-weight:700;
+      .nav{padding:14px 16px;}
+      .brand img{width:40px;height:40px;}
+      .cta{padding:9px 12px;}
+      .burger{padding:9px 10px;}
     }
   </style>
 </head>
 
 <body>
-  <header>
-    <div class="nav">
-      <a class="brand" href="/">
-        <img src="/images/logo.png" alt="Hjelpeportalen logo" />
-        <span>Hjelpeportalen</span>
-      </a>
+<header>
+  <div class="nav">
+    <a class="brand" href="/">
+      <img src="/images/logo.png" alt="Hjelpeportalen logo">
+      <span>Hjelpeportalen</span>
+    </a>
 
-      <nav class="links" aria-label="Hovedmeny">
-        <a href="#tjenester">Tjenester</a>
-        <a href="#omoss">Om oss</a>
-        <a href="#kontakt">Kontakt</a>
-        <a href="#priser">Priser</a>
-        <a class="cta" href="#bestill">Bestill hjelp</a>
-      </nav>
-
-      <button class="burger" id="burger" aria-expanded="false" aria-controls="mobileMenu">
-        ☰ Meny
-      </button>
-    </div>
-
-    <div class="mobileMenu" id="mobileMenu">
+    <!-- Desktop menu -->
+    <nav class="links" aria-label="Hovedmeny">
       <a href="#tjenester">Tjenester</a>
       <a href="#omoss">Om oss</a>
       <a href="#kontakt">Kontakt</a>
       <a href="#priser">Priser</a>
       <a class="cta" href="#bestill">Bestill hjelp</a>
+    </nav>
+
+    <!-- Mobile controls (CTA + burger) -->
+    <div class="controls">
+      <a class="cta ctaMobile" href="#bestill">Bestill hjelp</a>
+      <button class="burger" id="burger" aria-expanded="false" aria-controls="mobileMenu">☰</button>
     </div>
-  </header>
+  </div>
 
-  <main>
-    <section class="hero">
-      <h1 id="pageTitle">Laster…</h1>
-      <div class="lead" id="pageLead" style="display:none;"></div>
-      <div class="body" id="pageBody"></div>
-      <div class="error" id="err" style="display:none;"></div>
-    </section>
-  </main>
+  <div class="mobileMenu" id="mobileMenu">
+    <a href="#tjenester">Tjenester</a>
+    <a href="#omoss">Om oss</a>
+    <a href="#kontakt">Kontakt</a>
+    <a href="#priser">Priser</a>
+    <a class="cta" href="#bestill">Bestill hjelp</a>
+  </div>
+</header>
 
-  <!-- Marked for markdown -> HTML -->
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<main>
+  <section class="hero">
+    <h1 id="pageTitle">Laster…</h1>
+    <div class="lead" id="pageLead" style="display:none;"></div>
+    <div class="body" id="pageBody"></div>
+  </section>
+</main>
 
-  <script>
-    // Mobile menu toggle
-    const burger = document.getElementById("burger");
-    const mobileMenu = document.getElementById("mobileMenu");
-    burger?.addEventListener("click", () => {
-      const open = mobileMenu.style.display === "block";
-      mobileMenu.style.display = open ? "none" : "block";
-      burger.setAttribute("aria-expanded", String(!open));
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+  // Mobile menu toggle
+  const burger = document.getElementById("burger");
+  const mobileMenu = document.getElementById("mobileMenu");
+  burger?.addEventListener("click", () => {
+    const open = mobileMenu.style.display === "block";
+    mobileMenu.style.display = open ? "none" : "block";
+    burger.setAttribute("aria-expanded", String(!open));
+  });
+
+  // Frontmatter parser
+  function parseFrontmatter(md){
+    if(!md.startsWith("---")) return {data:{}, body:md};
+    const end = md.indexOf("\n---",3);
+    if(end === -1) return {data:{}, body:md};
+    const raw = md.slice(3,end).trim();
+    const body = md.slice(end+4).trim();
+    const data = {};
+    raw.split("\n").forEach(l=>{
+      const i=l.indexOf(":");
+      if(i>-1) data[l.slice(0,i).trim()] = l.slice(i+1).trim();
     });
+    return {data, body};
+  }
 
-    function escapeHtml(str){
-      return String(str)
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;")
-        .replaceAll("'","&#039;");
-    }
-
-    // Very small frontmatter parser: expects --- ... --- at top
-    function parseFrontmatter(md){
-      const trimmed = md.replace(/^\uFEFF/, "");
-      if(!trimmed.startsWith("---")) return { data:{}, body: trimmed };
-
-      const end = trimmed.indexOf("\n---", 3);
-      if(end === -1) return { data:{}, body: trimmed };
-
-      const fmRaw = trimmed.slice(3, end).trim();
-      const body = trimmed.slice(end + 4).replace(/^\s+/, "");
-
-      const data = {};
-      fmRaw.split("\n").forEach(line => {
-        const idx = line.indexOf(":");
-        if(idx === -1) return;
-        const key = line.slice(0, idx).trim();
-        let val = line.slice(idx+1).trim();
-        // remove optional quotes
-        val = val.replace(/^"(.*)"$/,"$1").replace(/^'(.*)'$/,"$1");
-        data[key] = val;
-      });
-
-      return { data, body };
-    }
-
-    async function loadHome(){
-      const titleEl = document.getElementById("pageTitle");
+  // Load content/home.md
+  fetch("/content/home.md",{cache:"no-store"})
+    .then(r=>r.text())
+    .then(md=>{
+      const p=parseFrontmatter(md);
+      document.getElementById("pageTitle").textContent = p.data.title || "Hjelpeportalen";
       const leadEl = document.getElementById("pageLead");
-      const bodyEl = document.getElementById("pageBody");
-      const errEl  = document.getElementById("err");
-
-      try{
-        const res = await fetch("/content/home.md", { cache: "no-store" });
-        if(!res.ok) throw new Error("Fant ikke /content/home.md (status " + res.status + ")");
-
-        const md = await res.text();
-        const parsed = parseFrontmatter(md);
-
-        const title = parsed.data.title || "Hjelpeportalen";
-        const lead  = parsed.data.lead || "";
-
-        titleEl.textContent = title;
-
-        if(lead && lead.trim().length){
-          leadEl.style.display = "block";
-          leadEl.textContent = lead;
-        }else{
-          leadEl.style.display = "none";
-          leadEl.textContent = "";
-        }
-
-        // Render markdown body -> HTML
-        const html = marked.parse(parsed.body || "");
-        bodyEl.innerHTML = html;
-
-        // Optional: remove big checkbox emoji if someone pasted ✅ in editor.
-        // Replace leading ✅/☑️ with nothing in list items (keeps our CSS ✓).
-        bodyEl.querySelectorAll("li").forEach(li => {
-          li.innerHTML = li.innerHTML.replace(/^(✅|☑️|✔️)\s*/,"");
-        });
-
-      }catch(e){
-        titleEl.textContent = "Kunne ikke laste inn innhold";
-        errEl.style.display = "block";
-        errEl.textContent = "Feil: " + (e?.message || e);
+      if(p.data.lead){
+        leadEl.style.display="block";
+        leadEl.textContent=p.data.lead;
+      }else{
+        leadEl.style.display="none";
+        leadEl.textContent="";
       }
-    }
-
-    loadHome();
-  </script>
+      document.getElementById("pageBody").innerHTML = marked.parse(p.body || "");
+    });
+</script>
 </body>
 </html>
