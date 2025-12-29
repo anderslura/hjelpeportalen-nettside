@@ -4,296 +4,363 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Hjelpeportalen</title>
-  <meta name="description" content="Vi hjelper deg med praktiske oppgaver i hverdagen – hjemme og ute." />
-
   <style>
     :root{
-      --max: 1120px;
+      --max: 1100px;
       --pad: 24px;
-      --blue: #1d4ed8;
-      --text: #111;
-      --muted: #6b7280;
-      --border: rgba(17,17,17,.08);
-      --btn: #111;
-      --bg: #fff;
+      --brand: #1f57ff;
+      --text: #0f172a;
+      --muted: #475569;
+      --line: rgba(15, 23, 42, 0.08);
+      --btn: #0b0b0b;
+      --btnText: #fff;
       --radius: 999px;
     }
-
-    *{ box-sizing: border-box; }
-    html{ scroll-behavior: smooth; }
+    *{box-sizing:border-box}
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-      color: var(--text);
-      background: var(--bg);
+      color:var(--text);
+      background:#fff;
     }
 
-    /* ---------- Header / Nav ---------- */
+    /* TOP BAR */
     header{
-      border-bottom: 1px solid var(--border);
-      background: var(--bg);
+      border-bottom: 1px solid var(--line);
+      background:#fff;
+      position: sticky;
+      top: 0;
+      z-index: 20;
     }
-
-    .bar{
+    .wrap{
       max-width: var(--max);
       margin: 0 auto;
-      padding: 16px var(--pad);
+      padding: 0 var(--pad);
+    }
+    .top{
+      height: 76px;
       display:flex;
       align-items:center;
-      justify-content: space-between;
-      gap: 16px;
+      justify-content:space-between;
+      gap: 18px;
     }
-
     .brand{
       display:flex;
       align-items:center;
       gap: 10px; /* tett på logo */
-      text-decoration:none;
-      color: inherit;
-      min-width: 220px;
+      min-width: 240px;
     }
-
     .brand img{
-      width: 44px;   /* logo-størrelse web */
-      height: 44px;
+      width: 56px;
+      height: 56px;
+      object-fit: contain;
       display:block;
     }
-
-    .brand span{
+    .brand .name{
+      color: var(--brand);
       font-weight: 700;
-      color: var(--blue);
-      font-size: 18px;
+      letter-spacing: 0.2px;
       line-height: 1;
+      font-size: 18px; /* litt mindre enn logoen */
       white-space: nowrap;
     }
 
     nav{
       display:flex;
       align-items:center;
-      gap: 18px;
+      gap: 16px;
     }
-
     nav a{
       text-decoration:none;
-      color: var(--text);
+      color:#111;
       font-size: 14px;
-      padding: 8px 10px;
+      padding: 10px 8px;
       border-radius: 10px;
     }
-    nav a:hover{
-      background: rgba(0,0,0,.04);
-    }
+    nav a:hover{ background: rgba(15,23,42,0.04); }
 
     .cta{
-      background: var(--btn);
-      color: #fff !important;
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      min-width: 160px;
+      justify-content: flex-end;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
       padding: 10px 16px;
       border-radius: var(--radius);
-      font-weight: 600;
+      background: var(--btn);
+      color: var(--btnText);
+      text-decoration:none;
+      font-weight: 700;
+      font-size: 14px;
     }
-    .cta:hover{ background:#000; }
 
-    /* Hamburger button */
-    .burger{
+    /* MOBILE */
+    .hamburger{
       display:none;
-      border: 0;
-      background: transparent;
-      padding: 8px 10px;
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background:#fff;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+    }
+    .hamburger span{
+      width: 18px;
+      height: 2px;
+      background: var(--brand);
+      display:block;
+      position: relative;
+    }
+    .hamburger span::before,
+    .hamburger span::after{
+      content:"";
+      position:absolute;
+      left:0;
+      width: 18px;
+      height: 2px;
+      background: var(--brand);
+    }
+    .hamburger span::before{ top:-6px; }
+    .hamburger span::after{ top:6px; }
+
+    .mobileMenu{
+      display:none;
+      border-top: 1px solid var(--line);
+      padding: 10px 0 14px;
+    }
+    .mobileMenu a{
+      display:block;
+      padding: 10px 6px;
+      text-decoration:none;
+      color:#111;
       border-radius: 10px;
-      cursor: pointer;
-      font-size: 20px;
-      line-height: 1;
-      color: var(--blue);
+      font-size: 15px;
     }
-    .burger:hover{ background: rgba(0,0,0,.04); }
+    .mobileMenu a:hover{ background: rgba(15,23,42,0.04); }
 
-    /* ---------- Main / Hero ---------- */
+    /* HERO */
     main{
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 0 var(--pad);
+      padding: 44px 0 80px;
     }
-
-    /* Dette er “løftet” under toppmenyen + midtstilling på web */
     .hero{
-      max-width: 760px;
+      text-align:center;
+      max-width: 900px;
       margin: 0 auto;
-      padding-top: 56px;    /* 👈 mer luft under header */
-      padding-bottom: 40px;
-      text-align: center;   /* 👈 midtstilling på web */
     }
-
     .hero h1{
-      font-size: 56px;
+      margin: 0 0 10px;
+      font-size: clamp(40px, 6vw, 64px);
       letter-spacing: -0.02em;
-      margin: 0 0 14px 0;
     }
-
     .hero p{
+      margin: 0 auto 22px;
+      max-width: 720px;
       font-size: 18px;
-      color: var(--text);
-      margin: 0 0 24px 0;
-      line-height: 1.55;
+      color: var(--muted);
+      line-height: 1.6;
     }
-
-    .hero ul{
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: grid;
-      gap: 14px;
-      justify-content: center;
-    }
-
-    .hero li{
-      display:flex;
-      align-items:flex-start;
-      gap: 10px;
-      text-align: left; /* bevisst: bedre lesbarhet på bullets */
+    .bullets{
+      display:inline-block;
+      text-align:left;
+      margin: 14px auto 0;
+      padding:0;
+      list-style:none;
       font-size: 16px;
     }
-
+    .bullets li{
+      display:flex;
+      gap: 10px;
+      align-items:flex-start;
+      padding: 6px 0;
+    }
     .check{
       font-weight: 900;
-      transform: translateY(1px);
+      margin-top: 1px;
     }
-
     .note{
-      margin-top: 28px;
-      color: var(--muted);
+      margin-top: 26px;
       font-size: 13px;
-      text-align: left; /* gjør den “admin-linja” roligere */
+      color: rgba(15,23,42,0.55);
     }
 
-    /* ---------- Mobile ---------- */
-    @media (max-width: 900px){
-      .brand{ min-width: auto; }
-      nav a{ padding: 8px 8px; }
-    }
-
-    @media (max-width: 768px){
-      .burger{ display:inline-flex; align-items:center; justify-content:center; }
-
-      /* skjul vanlig meny på mobil */
-      nav{
-        display:none;
-        position: absolute;
-        top: 64px;
-        right: 16px;
-        left: 16px;
-        background: var(--bg);
-        border: 1px solid var(--border);
-        border-radius: 16px;
-        padding: 10px;
-        flex-direction: column;
-        gap: 6px;
-        box-shadow: 0 10px 30px rgba(0,0,0,.08);
-      }
-      nav.open{ display:flex; }
-
-      nav a{
-        width:100%;
-        padding: 12px 12px;
-        font-size: 16px;
-      }
-
-      /* mobil: logo + tekst fortsatt tight */
-      .brand img{
-        width: 40px;
-        height: 40px;
-      }
-      .brand span{
-        font-size: 18px;
-      }
-
-      /* mobil: hero mer lesbart venstre, litt mindre topp-padding */
-      .hero{
-        padding-top: 26px;
-        text-align: left;
-      }
-      .hero h1{
-        font-size: 44px;
-      }
-      .hero ul{
-        justify-content: start;
-      }
+    @media (max-width: 840px){
+      nav{ display:none; }
+      .hamburger{ display:inline-flex; }
+      .cta{ min-width: auto; }
+      .top{ height: 72px; }
+      .brand img{ width: 52px; height: 52px; }
+      .brand{ min-width:auto; }
     }
   </style>
 </head>
 
 <body>
   <header>
-    <div class="bar">
-      <a class="brand" href="#top">
-        <img src="images/logo.png" alt="Hjelpeportalen logo" />
-        <span>Hjelpeportalen</span>
-      </a>
+    <div class="wrap">
+      <div class="top">
+        <div class="brand">
+          <img src="/images/logo.png" alt="Hjelpeportalen logo" />
+          <div class="name">Hjelpeportalen</div>
+        </div>
 
-      <button class="burger" id="burger" aria-label="Åpne meny" aria-expanded="false">
-        ☰
-      </button>
+        <nav aria-label="Hovedmeny">
+          <a href="#tjenester">Tjenester</a>
+          <a href="#omoss">Om oss</a>
+          <a href="#kontakt">Kontakt</a>
+          <a href="#priser">Priser</a>
+        </nav>
 
-      <nav id="nav">
+        <div class="cta">
+          <a class="btn" href="#bestill">Bestill hjelp</a>
+          <button class="hamburger" id="hamburger" aria-label="Åpne meny" aria-expanded="false">
+            <span></span>
+          </button>
+        </div>
+      </div>
+
+      <div class="mobileMenu" id="mobileMenu">
         <a href="#tjenester">Tjenester</a>
         <a href="#omoss">Om oss</a>
         <a href="#kontakt">Kontakt</a>
         <a href="#priser">Priser</a>
-        <a class="cta" href="#bestill">Bestill hjelp</a>
-      </nav>
+        <a href="#bestill"><strong>Bestill hjelp</strong></a>
+      </div>
     </div>
   </header>
 
-  <main id="top">
-    <section class="hero" id="home">
-      <h1>Hjelpeportalen</h1>
-      <p>Vi hjelper deg med praktiske oppgaver i hverdagen – hjemme og ute.</p>
+  <main>
+    <div class="wrap">
+      <section class="hero" id="home">
+        <h1 id="pageTitle">Hjelpeportalen</h1>
+        <p id="pageIngress">Vi hjelper deg med praktiske oppgaver i hverdagen – hjemme og ute.</p>
 
-      <ul>
-        <li><span class="check">✓</span><span>Handling og ærender</span></li>
-        <li><span class="check">✓</span><span>Enkel hjelp i hjemmet</span></li>
-        <li><span class="check">✓</span><span>Følge og bistand</span></li>
-        <li><span class="check">✓</span><span>Små oppdrag – stor verdi</span></li>
-      </ul>
+        <ul class="bullets" id="bulletList">
+          <!-- fylles fra markdown -->
+        </ul>
 
-      <div class="note">Innhold lastet fra /content/home.md</div>
-    </section>
-
-    <!-- Seksjoner kan fylles senere (menylenkene peker hit) -->
-    <section id="tjenester"></section>
-    <section id="omoss"></section>
-    <section id="kontakt"></section>
-    <section id="priser"></section>
-    <section id="bestill"></section>
+        <div class="note" id="contentNote">Innhold lastet fra /content/home.md</div>
+      </section>
+    </div>
   </main>
 
   <script>
-    (function () {
-      const burger = document.getElementById('burger');
-      const nav = document.getElementById('nav');
+    // Mobilmeny toggle
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger?.addEventListener('click', () => {
+      const open = mobileMenu.style.display === 'block';
+      mobileMenu.style.display = open ? 'none' : 'block';
+      hamburger.setAttribute('aria-expanded', open ? 'false' : 'true');
+    });
 
-      function closeNav() {
-        nav.classList.remove('open');
-        burger.setAttribute('aria-expanded', 'false');
+    // --- Content loader ---
+    const titleEl = document.getElementById('pageTitle');
+    const ingressEl = document.getElementById('pageIngress');
+    const listEl = document.getElementById('bulletList');
+
+    function escapeHtml(s){
+      return s.replace(/[&<>"']/g, m => ({
+        '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+      }[m]));
+    }
+
+    function parseMarkdownTableMeta(md){
+      // Ser etter en tabell med header: | title | lead | intro | ingress |
+      // og leser første datarad.
+      const lines = md.split('\n').map(l => l.trim());
+      let headerIdx = -1;
+
+      for (let i=0; i<Math.min(lines.length, 30); i++){
+        const l = lines[i].toLowerCase();
+        if (l.startsWith('|') && l.includes('title') && l.includes('ingress')) {
+          headerIdx = i;
+          break;
+        }
       }
+      if (headerIdx === -1) return null;
 
-      burger.addEventListener('click', () => {
-        const isOpen = nav.classList.toggle('open');
-        burger.setAttribute('aria-expanded', String(isOpen));
-      });
+      // Finn separator-linje og datalinje
+      const sep = lines[headerIdx + 1] || '';
+      const row = lines[headerIdx + 2] || '';
+      if (!sep.includes('---') || !row.startsWith('|')) return null;
 
-      // Lukk meny etter klikk på mobil
-      nav.addEventListener('click', (e) => {
-        const a = e.target.closest('a');
-        if (!a) return;
-        closeNav();
-      });
+      const headers = lines[headerIdx].split('|').map(x => x.trim()).filter(Boolean);
+      const values  = row.split('|').map(x => x.trim()).filter(Boolean);
+      const obj = {};
+      headers.forEach((h, idx) => obj[h.toLowerCase()] = values[idx] ?? '');
 
-      // Lukk om man klikker utenfor
-      document.addEventListener('click', (e) => {
-        const inside = e.target.closest('#nav') || e.target.closest('#burger');
-        if (!inside) closeNav();
-      });
-    })();
+      return obj;
+    }
+
+    function extractBullets(md){
+      // plukker ut linjer som ser ut som punktliste (starter med - eller ✓)
+      const out = [];
+      const lines = md.split('\n');
+
+      for (const raw of lines){
+        const line = raw.trim();
+        if (!line) continue;
+
+        // Skip tabell-linjer
+        if (line.startsWith('|') && line.endsWith('|')) continue;
+
+        // ✓ eller "- "
+        if (line.startsWith('✓') || line.startsWith('✔')){
+          out.push(line.replace(/^([✓✔]\s*)/, '').trim());
+        } else if (line.startsWith('- ')) {
+          // Ikke ta med “- - -” etc
+          if (line.replace(/-/g,'').trim() === '') continue;
+          out.push(line.slice(2).trim());
+        }
+      }
+      return out;
+    }
+
+    async function loadHome(){
+      try{
+        const res = await fetch('/content/home.md', { cache: 'no-store' });
+        if (!res.ok) throw new Error('Kunne ikke laste home.md');
+        const md = await res.text();
+
+        // 1) Hvis tabell-meta finnes, bruk det
+        const meta = parseMarkdownTableMeta(md);
+        if (meta){
+          if (meta.title) titleEl.textContent = meta.title;
+          // Bruk ingress først, ellers lead/intro som fallback
+          const ingress = meta.ingress || meta.lead || meta.intro;
+          if (ingress) ingressEl.textContent = ingress;
+        } else {
+          // 2) fallback: prøv å finne første H1 og første avsnitt
+          const h1 = md.match(/^\s*#\s+(.+)\s*$/m);
+          if (h1?.[1]) titleEl.textContent = h1[1].trim();
+
+          const afterH1 = md.split('\n').slice(0, 30).join('\n');
+          const p = afterH1
+            .split('\n')
+            .map(l => l.trim())
+            .filter(l => l && !l.startsWith('#') && !l.startsWith('|') && !l.startsWith('-') && !l.startsWith('✓') && !l.startsWith('✔'))[0];
+          if (p) ingressEl.textContent = p;
+        }
+
+        // bullets
+        const bullets = extractBullets(md).slice(0, 10);
+        listEl.innerHTML = bullets.map(t => `
+          <li><span class="check">✓</span><span>${escapeHtml(t)}</span></li>
+        `).join('');
+
+      } catch (e){
+        console.warn(e);
+      }
+    }
+
+    loadHome();
   </script>
 </body>
 </html>
