@@ -1,223 +1,299 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="no">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Hjelpeportalen</title>
+  <meta name="description" content="Vi hjelper deg med praktiske oppgaver i hverdagen – hjemme og ute." />
 
   <style>
-    :root {
-      --max-width: 1120px;
-      --blue: #1f4fd8;
+    :root{
+      --max: 1120px;
+      --pad: 24px;
+      --blue: #1d4ed8;
+      --text: #111;
+      --muted: #6b7280;
+      --border: rgba(17,17,17,.08);
+      --btn: #111;
+      --bg: #fff;
+      --radius: 999px;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    *{ box-sizing: border-box; }
+    html{ scroll-behavior: smooth; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      color: var(--text);
+      background: var(--bg);
     }
 
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      color: #111;
-      background: #fff;
+    /* ---------- Header / Nav ---------- */
+    header{
+      border-bottom: 1px solid var(--border);
+      background: var(--bg);
     }
 
-    /* ====== LAYOUT CONTAINER ====== */
-    .container {
-      max-width: var(--max-width);
+    .bar{
+      max-width: var(--max);
       margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    /* ====== HEADER ====== */
-    header {
-      border-bottom: 1px solid #eee;
-    }
-
-    .header-inner {
-      display: flex;
-      align-items: center;
+      padding: 16px var(--pad);
+      display:flex;
+      align-items:center;
       justify-content: space-between;
-      height: 88px;
+      gap: 16px;
     }
 
-    /* Logo + navn */
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px; /* TETT */
-      text-decoration: none;
+    .brand{
+      display:flex;
+      align-items:center;
+      gap: 10px; /* tett på logo */
+      text-decoration:none;
+      color: inherit;
+      min-width: 220px;
     }
 
-    .brand img {
-      height: 56px; /* STOR LOGO */
-      width: auto;
-      display: block;
+    .brand img{
+      width: 44px;   /* logo-størrelse web */
+      height: 44px;
+      display:block;
     }
 
-    .brand span {
-      font-size: 18px;
-      font-weight: 600;
+    .brand span{
+      font-weight: 700;
       color: var(--blue);
+      font-size: 18px;
+      line-height: 1;
       white-space: nowrap;
     }
 
-    /* Desktop nav */
-    nav {
-      display: flex;
-      align-items: center;
-      gap: 28px;
+    nav{
+      display:flex;
+      align-items:center;
+      gap: 18px;
     }
 
-    nav a {
-      text-decoration: none;
-      color: #111;
-      font-size: 15px;
-    }
-
-    .cta {
-      background: #000;
-      color: #fff;
-      padding: 10px 18px;
-      border-radius: 999px;
+    nav a{
+      text-decoration:none;
+      color: var(--text);
       font-size: 14px;
-      text-decoration: none;
+      padding: 8px 10px;
+      border-radius: 10px;
+    }
+    nav a:hover{
+      background: rgba(0,0,0,.04);
     }
 
-    /* Hamburger */
-    .hamburger {
-      display: none;
-      font-size: 26px;
-      background: none;
-      border: none;
+    .cta{
+      background: var(--btn);
+      color: #fff !important;
+      padding: 10px 16px;
+      border-radius: var(--radius);
+      font-weight: 600;
+    }
+    .cta:hover{ background:#000; }
+
+    /* Hamburger button */
+    .burger{
+      display:none;
+      border: 0;
+      background: transparent;
+      padding: 8px 10px;
+      border-radius: 10px;
       cursor: pointer;
+      font-size: 20px;
+      line-height: 1;
+      color: var(--blue);
+    }
+    .burger:hover{ background: rgba(0,0,0,.04); }
+
+    /* ---------- Main / Hero ---------- */
+    main{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 var(--pad);
     }
 
-    /* ====== HERO ====== */
-    main {
-      padding: 72px 0;
+    /* Dette er “løftet” under toppmenyen + midtstilling på web */
+    .hero{
+      max-width: 760px;
+      margin: 0 auto;
+      padding-top: 56px;    /* 👈 mer luft under header */
+      padding-bottom: 40px;
+      text-align: center;   /* 👈 midtstilling på web */
     }
 
-    h1 {
-      font-size: 48px;
-      margin-bottom: 12px;
+    .hero h1{
+      font-size: 56px;
+      letter-spacing: -0.02em;
+      margin: 0 0 14px 0;
     }
 
-    .subtitle {
+    .hero p{
       font-size: 18px;
-      color: #333;
-      margin-bottom: 32px;
+      color: var(--text);
+      margin: 0 0 24px 0;
+      line-height: 1.55;
     }
 
-    ul {
+    .hero ul{
       list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 14px;
+      justify-content: center;
     }
 
-    li {
+    .hero li{
+      display:flex;
+      align-items:flex-start;
+      gap: 10px;
+      text-align: left; /* bevisst: bedre lesbarhet på bullets */
       font-size: 16px;
-      margin-bottom: 14px;
     }
 
-    li::before {
-      content: "✔ ";
-      margin-right: 6px;
+    .check{
+      font-weight: 900;
+      transform: translateY(1px);
     }
 
-    .source {
-      margin-top: 40px;
+    .note{
+      margin-top: 28px;
+      color: var(--muted);
       font-size: 13px;
-      color: #777;
+      text-align: left; /* gjør den “admin-linja” roligere */
     }
 
-    /* ====== MOBIL ====== */
-    @media (max-width: 900px) {
-      .header-inner {
-        height: 72px;
-      }
+    /* ---------- Mobile ---------- */
+    @media (max-width: 900px){
+      .brand{ min-width: auto; }
+      nav a{ padding: 8px 8px; }
+    }
 
-      nav {
-        display: none;
+    @media (max-width: 768px){
+      .burger{ display:inline-flex; align-items:center; justify-content:center; }
+
+      /* skjul vanlig meny på mobil */
+      nav{
+        display:none;
         position: absolute;
-        top: 72px;
-        left: 0;
-        right: 0;
-        background: #fff;
+        top: 64px;
+        right: 16px;
+        left: 16px;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 10px;
         flex-direction: column;
-        gap: 16px;
-        padding: 20px;
-        border-bottom: 1px solid #eee;
+        gap: 6px;
+        box-shadow: 0 10px 30px rgba(0,0,0,.08);
       }
+      nav.open{ display:flex; }
 
-      nav.open {
-        display: flex;
-      }
-
-      .hamburger {
-        display: block;
-      }
-
-      .brand img {
-        height: 44px;
-      }
-
-      .brand span {
+      nav a{
+        width:100%;
+        padding: 12px 12px;
         font-size: 16px;
       }
 
-      h1 {
-        font-size: 36px;
+      /* mobil: logo + tekst fortsatt tight */
+      .brand img{
+        width: 40px;
+        height: 40px;
+      }
+      .brand span{
+        font-size: 18px;
+      }
+
+      /* mobil: hero mer lesbart venstre, litt mindre topp-padding */
+      .hero{
+        padding-top: 26px;
+        text-align: left;
+      }
+      .hero h1{
+        font-size: 44px;
+      }
+      .hero ul{
+        justify-content: start;
       }
     }
   </style>
 </head>
 
 <body>
-
-  <!-- HEADER -->
   <header>
-    <div class="container header-inner">
-      <a href="/" class="brand">
-        <img src="/images/logo.png" alt="Hjelpeportalen logo">
+    <div class="bar">
+      <a class="brand" href="#top">
+        <img src="images/logo.png" alt="Hjelpeportalen logo" />
         <span>Hjelpeportalen</span>
       </a>
 
-      <button class="hamburger" onclick="toggleMenu()">☰</button>
+      <button class="burger" id="burger" aria-label="Åpne meny" aria-expanded="false">
+        ☰
+      </button>
 
       <nav id="nav">
         <a href="#tjenester">Tjenester</a>
-        <a href="#om">Om oss</a>
+        <a href="#omoss">Om oss</a>
         <a href="#kontakt">Kontakt</a>
         <a href="#priser">Priser</a>
-        <a href="#bestill" class="cta">Bestill hjelp</a>
+        <a class="cta" href="#bestill">Bestill hjelp</a>
       </nav>
     </div>
   </header>
 
-  <!-- MAIN -->
-  <main class="container">
-    <h1>Hjelpeportalen</h1>
-    <p class="subtitle">
-      Vi hjelper deg med praktiske oppgaver i hverdagen – hjemme og ute.
-    </p>
+  <main id="top">
+    <section class="hero" id="home">
+      <h1>Hjelpeportalen</h1>
+      <p>Vi hjelper deg med praktiske oppgaver i hverdagen – hjemme og ute.</p>
 
-    <ul>
-      <li>Handling og ærender</li>
-      <li>Enkel hjelp i hjemmet</li>
-      <li>Følge og bistand</li>
-      <li>Små oppdrag – stor verdi</li>
-    </ul>
+      <ul>
+        <li><span class="check">✓</span><span>Handling og ærender</span></li>
+        <li><span class="check">✓</span><span>Enkel hjelp i hjemmet</span></li>
+        <li><span class="check">✓</span><span>Følge og bistand</span></li>
+        <li><span class="check">✓</span><span>Små oppdrag – stor verdi</span></li>
+      </ul>
 
-    <div class="source">
-      Innhold lastet fra /content/home.md
-    </div>
+      <div class="note">Innhold lastet fra /content/home.md</div>
+    </section>
+
+    <!-- Seksjoner kan fylles senere (menylenkene peker hit) -->
+    <section id="tjenester"></section>
+    <section id="omoss"></section>
+    <section id="kontakt"></section>
+    <section id="priser"></section>
+    <section id="bestill"></section>
   </main>
 
   <script>
-    function toggleMenu() {
-      document.getElementById("nav").classList.toggle("open");
-    }
-  </script>
+    (function () {
+      const burger = document.getElementById('burger');
+      const nav = document.getElementById('nav');
 
+      function closeNav() {
+        nav.classList.remove('open');
+        burger.setAttribute('aria-expanded', 'false');
+      }
+
+      burger.addEventListener('click', () => {
+        const isOpen = nav.classList.toggle('open');
+        burger.setAttribute('aria-expanded', String(isOpen));
+      });
+
+      // Lukk meny etter klikk på mobil
+      nav.addEventListener('click', (e) => {
+        const a = e.target.closest('a');
+        if (!a) return;
+        closeNav();
+      });
+
+      // Lukk om man klikker utenfor
+      document.addEventListener('click', (e) => {
+        const inside = e.target.closest('#nav') || e.target.closest('#burger');
+        if (!inside) closeNav();
+      });
+    })();
+  </script>
 </body>
 </html>
