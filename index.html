@@ -1,354 +1,363 @@
 <!doctype html>
-<html lang="no">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hjelpeportalen</title>
+<html lang="nb">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Hjelpeportalen</title>
 
-    <style>
-      :root{
-        --max: 1100px;
-        --pad: 28px;
-        --text: #0f172a;
-        --muted: #475569;
-        --line: rgba(15,23,42,.08);
-        --brand: #1d4ed8;
-        --cta: #0b0b0b;
-      }
+  <style>
+    :root{
+      --text:#0f172a;
+      --muted:#475569;
+      --border:#e5e7eb;
+      --brand:#1d4ed8;
+      --bg:#ffffff;
+      --btn:#0b0b0c;
+      --btnText:#ffffff;
+      --container: 1100px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text);
+      background:var(--bg);
+    }
+    a{color:inherit; text-decoration:none}
+    .container{
+      width:100%;
+      max-width:var(--container);
+      margin:0 auto;
+      padding:0 24px;
+    }
 
-      *{box-sizing:border-box}
-      body{
-        margin:0;
-        font-family: system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
-        color:var(--text);
-        background:#fff;
-      }
-      a{color:inherit; text-decoration:none}
-      .container{max-width:var(--max); margin:0 auto; padding:0 var(--pad);}
+    /* Header */
+    .header{
+      border-bottom:1px solid var(--border);
+      background:rgba(255,255,255,.92);
+      backdrop-filter:saturate(180%) blur(6px);
+      position:sticky;
+      top:0;
+      z-index:50;
+    }
+    .headerRow{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      height:74px;
+      gap:16px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px; /* <-- tett på logo */
+      min-width: 220px;
+    }
+    .brand img{
+      width:44px;
+      height:44px;
+      display:block;
+    }
+    .brandName{
+      font-weight:700;
+      color:var(--brand);
+      letter-spacing:-0.2px;
+      font-size:18px;
+      line-height:1;
+    }
 
-      /* TOP BAR */
-      .topbar{
-        border-bottom:1px solid var(--line);
-        background:#fff;
-      }
-      .topbar-inner{
-        height:86px;
-        display:flex;
-        align-items:center;
-        justify-content:space-between;
-        gap:20px;
-      }
+    .nav{
+      display:flex;
+      align-items:center;
+      gap:18px;
+      font-size:14px;
+      color:#0b1220;
+    }
+    .nav a{
+      padding:10px 8px;
+      border-radius:10px;
+    }
+    .nav a:hover{
+      background:#f3f4f6;
+    }
 
-      .brand{
-        display:flex;
-        align-items:center;
-        gap:10px; /* tett mellom logo og tekst */
-        min-width: 220px;
-      }
-      .brand img{
-        height:52px; /* desktop logo */
-        width:auto;
-        display:block;
-      }
-      .brand span{
-        font-weight:700;
-        color:var(--brand);
-        font-size:18px; /* litt mindre “Hjelpeportalen” ved logo */
-        letter-spacing:.2px;
-      }
+    .actions{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-width: 220px;
+      justify-content:flex-end;
+    }
+    .cta{
+      background:var(--btn);
+      color:var(--btnText);
+      border:none;
+      padding:10px 14px;
+      border-radius:999px;
+      font-weight:700;
+      cursor:pointer;
+      font-size:14px;
+    }
+    .cta:hover{opacity:.92}
 
-      .nav{
-        display:flex;
-        align-items:center;
-        gap:28px;
-      }
-      .nav a{
-        font-size:14px;
-        color:#111;
-        opacity:.9;
-      }
-      .nav a:hover{opacity:1}
+    .hamburger{
+      display:none;
+      width:44px;
+      height:44px;
+      border-radius:12px;
+      border:1px solid var(--border);
+      background:#fff;
+      cursor:pointer;
+      align-items:center;
+      justify-content:center;
+    }
+    .hamburger:active{transform:scale(.98)}
+    .hamburger svg{width:22px;height:22px}
 
-      .cta{
-        display:inline-flex;
-        align-items:center;
-        justify-content:center;
-        padding:10px 16px;
-        border-radius:999px;
-        background:var(--cta);
-        color:#fff;
-        font-weight:700;
-        font-size:14px;
-        white-space:nowrap;
-      }
+    /* Mobile dropdown */
+    .mobileMenu{
+      display:none;
+      border-top:1px solid var(--border);
+      padding:10px 0 14px;
+      background:#fff;
+    }
+    .mobileMenu a{
+      display:block;
+      padding:12px 6px;
+      border-radius:10px;
+      font-size:15px;
+    }
+    .mobileMenu a:hover{background:#f3f4f6}
 
-      /* MOBILE BUTTONS */
-      .hamburger{
-        display:none;
-        width:44px;
-        height:44px;
-        border-radius:12px;
-        border:1px solid var(--line);
-        background:#fff;
-        align-items:center;
-        justify-content:center;
-        cursor:pointer;
-      }
-      .hamburger svg{width:22px; height:22px}
+    /* Hero */
+    main{padding:44px 0 70px}
+    .hero{
+      text-align:center;
+      padding-top:24px;
+    }
+    h1{
+      margin:0;
+      font-size:56px;
+      line-height:1.05;
+      letter-spacing:-1px;
+    }
+    .lead{
+      margin:14px auto 6px;
+      font-size:18px;
+      font-weight:700;
+      color:var(--text);
+      max-width: 720px;
+    }
+    .ingress{
+      margin:8px auto 0;
+      font-size:18px;
+      color:var(--muted);
+      max-width: 720px;
+    }
+    .body{
+      margin:22px auto 0;
+      max-width: 760px;
+      text-align:left;
+      color:var(--text);
+    }
+    .body ul{margin:14px 0 0; padding-left:22px}
+    .body li{margin:10px 0; font-size:18px}
+    .debugNote{
+      margin-top:28px;
+      font-size:13px;
+      color:#94a3b8;
+      text-align:center;
+      display:none; /* settes til block hvis feil */
+    }
 
-      /* Mobile menu panel */
-      .mobile-panel{
-        display:none;
-        border-top:1px solid var(--line);
-        background:#fff;
-      }
-      .mobile-panel .container{
-        padding-top:12px;
-        padding-bottom:16px;
-        display:flex;
-        flex-direction:column;
-        gap:10px;
-      }
-      .mobile-panel a{
-        padding:10px 8px;
-        border-radius:10px;
-      }
-      .mobile-panel a:hover{background:rgba(15,23,42,.04)}
-      .mobile-panel .cta{width:max-content}
+    /* Responsive */
+    @media (max-width: 900px){
+      h1{font-size:44px}
+      .nav{display:none}
+      .hamburger{display:flex}
+      .actions{min-width:auto}
+      .brand{min-width:auto}
+    }
+    @media (max-width: 420px){
+      h1{font-size:38px}
+      .brandName{font-size:17px}
+      .brand img{width:40px;height:40px}
+      .cta{padding:10px 12px}
+    }
+  </style>
+</head>
 
-      /* HERO */
-      main{padding:46px 0 70px}
-      .hero{
-        text-align:center;
-      }
-      .hero h1{
-        margin:0 0 10px;
-        font-size:64px;
-        line-height:1.02;
-        letter-spacing:-1px;
-      }
-      .hero .ingress{
-        margin:0 auto 26px;
-        max-width:740px;
-        font-size:18px;
-        color:var(--muted);
-      }
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="headerRow">
+        <a class="brand" href="/">
+          <img src="/images/logo.png" alt="Hjelpeportalen logo">
+          <div class="brandName">Hjelpeportalen</div>
+        </a>
 
-      /* CONTENT FROM CMS */
-      .content{
-        max-width:720px;
-        margin:0 auto;
-        text-align:left;
-      }
-
-      /* Dette er “trikset” som gjør at punktene blir UNDER hverandre */
-      .features{
-        margin:18px 0 10px;
-      }
-      .features ul{
-        margin:0;
-        padding:0;
-        list-style:none;
-      }
-      .features li{
-        display:flex;
-        align-items:flex-start;
-        gap:10px;
-        margin:12px 0;
-        line-height:1.35;
-        font-size:16px;
-        color: #111;
-      }
-      .features li::before{
-        content:"✓";
-        font-weight:900;
-        margin-top:1px;
-      }
-
-      .debug{
-        margin-top:28px;
-        color:#64748b;
-        font-size:13px;
-        text-align:center;
-      }
-
-      /* RESPONSIVE */
-      @media (max-width: 900px){
-        .hero h1{font-size:54px}
-      }
-
-      /* Mobile layout: hamburger VENSTRE, logo+navn MIDT, bestill HØYRE */
-      @media (max-width: 768px){
-        :root{--pad:18px}
-
-        .topbar-inner{
-          height:74px;
-          display:grid;
-          grid-template-columns: 52px 1fr auto;
-          align-items:center;
-        }
-
-        .hamburger{display:inline-flex}
-        .nav{display:none} /* skjul desktop meny */
-
-        .brand{
-          justify-content:center; /* midtstill */
-          min-width: 0;
-        }
-        .brand img{height:46px}
-        .brand span{font-size:17px}
-
-        .cta{
-          padding:10px 14px;
-          font-size:13px;
-        }
-
-        .hero{
-          text-align:left;
-        }
-        .hero h1{font-size:50px}
-        .hero .ingress{margin-left:0; margin-right:0}
-        .content{max-width:100%}
-      }
-
-      @media (max-width: 420px){
-        .hero h1{font-size:44px}
-        .brand img{height:44px}
-      }
-    </style>
-  </head>
-
-  <body>
-    <header class="topbar">
-      <div class="container">
-        <div class="topbar-inner">
-          <!-- Hamburger (mobile) -->
-          <button class="hamburger" id="hamburger" aria-label="Meny" aria-expanded="false" aria-controls="mobilePanel">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-              <path d="M4 6h16M4 12h16M4 18h16"></path>
-            </svg>
-          </button>
-
-          <!-- Brand -->
-          <a class="brand" href="/">
-            <img src="/images/logo.png" alt="Hjelpeportalen logo" />
-            <span>Hjelpeportalen</span>
-          </a>
-
-          <!-- Desktop nav + CTA -->
-          <nav class="nav" aria-label="Hovedmeny">
-            <a href="#tjenester">Tjenester</a>
-            <a href="#om-oss">Om oss</a>
-            <a href="#kontakt">Kontakt</a>
-            <a href="#priser">Priser</a>
-          </nav>
-
-          <!-- CTA (alltid synlig, også på mobil) -->
-          <a class="cta" href="#bestill" id="ctaBtn">Bestill hjelp</a>
-        </div>
-      </div>
-
-      <!-- Mobile dropdown panel -->
-      <div class="mobile-panel" id="mobilePanel">
-        <div class="container">
+        <nav class="nav" aria-label="Hovedmeny">
           <a href="#tjenester">Tjenester</a>
-          <a href="#om-oss">Om oss</a>
+          <a href="#omoss">Om oss</a>
           <a href="#kontakt">Kontakt</a>
           <a href="#priser">Priser</a>
-          <a class="cta" href="#bestill">Bestill hjelp</a>
+        </nav>
+
+        <div class="actions">
+          <!-- CTA synlig både desktop og mobil -->
+          <button class="cta" type="button" onclick="location.href='#bestill'">Bestill hjelp</button>
+
+          <button class="hamburger" type="button" aria-label="Åpne meny" aria-expanded="false" id="hamburgerBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 6h16"></path>
+              <path d="M4 12h16"></path>
+              <path d="M4 18h16"></path>
+            </svg>
+          </button>
         </div>
       </div>
-    </header>
 
-    <main>
-      <div class="container">
-        <section class="hero">
-          <h1 id="pageTitle">Laster…</h1>
-          <p class="ingress" id="pageIngress"></p>
-
-          <div class="content">
-            <div class="features" id="features"></div>
-            <div class="debug">Innhold lastet fra <code>/content/home.md</code></div>
-          </div>
-        </section>
+      <div class="mobileMenu" id="mobileMenu">
+        <a href="#tjenester">Tjenester</a>
+        <a href="#omoss">Om oss</a>
+        <a href="#kontakt">Kontakt</a>
+        <a href="#priser">Priser</a>
+        <a href="#bestill">Bestill hjelp</a>
       </div>
-    </main>
+    </div>
+  </header>
 
-    <script>
-      // Mobile menu toggle
-      const hamburger = document.getElementById("hamburger");
-      const mobilePanel = document.getElementById("mobilePanel");
-      hamburger?.addEventListener("click", () => {
-        const open = mobilePanel.style.display === "block";
-        mobilePanel.style.display = open ? "none" : "block";
-        hamburger.setAttribute("aria-expanded", String(!open));
+  <main>
+    <div class="container">
+      <section class="hero">
+        <h1 id="homeTitle">Hjelpeportalen</h1>
+        <div class="lead" id="homeLead" style="display:none;"></div>
+        <div class="ingress" id="homeIngress" style="display:none;"></div>
+
+        <div class="body" id="homeBody"></div>
+
+        <div class="debugNote" id="debugNote"></div>
+      </section>
+
+      <!-- Placeholder-seksjoner (kan bygges ut senere i ferien) -->
+      <section id="tjenester" style="padding-top:60px;"></section>
+      <section id="priser" style="padding-top:60px;"></section>
+      <section id="omoss" style="padding-top:60px;"></section>
+      <section id="kontakt" style="padding-top:60px;"></section>
+      <section id="bestill" style="padding-top:60px;"></section>
+    </div>
+  </main>
+
+  <!-- Markdown renderer -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+  <script>
+    // Enkel frontmatter-parser (YAML-ish: key: value)
+    function parseFrontmatter(mdText){
+      const text = mdText.replace(/\r\n/g, "\n");
+      if (!text.startsWith("---\n")) {
+        return { data: {}, body: text };
+      }
+
+      const end = text.indexOf("\n---\n", 4);
+      if (end === -1) {
+        return { data: {}, body: text };
+      }
+
+      const fm = text.slice(4, end).trim();
+      const body = text.slice(end + 5);
+
+      const data = {};
+      const lines = fm.split("\n");
+
+      for (const line of lines) {
+        const trimmed = line.trim();
+        if (!trimmed || trimmed.startsWith("#")) continue;
+
+        const idx = trimmed.indexOf(":");
+        if (idx === -1) continue;
+
+        const key = trimmed.slice(0, idx).trim();
+        let val = trimmed.slice(idx + 1).trim();
+
+        // Fjern anførselstegn hvis de finnes
+        if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
+          val = val.slice(1, -1);
+        }
+
+        data[key] = val;
+      }
+
+      return { data, body };
+    }
+
+    function setText(id, value){
+      const el = document.getElementById(id);
+      if (!el) return;
+      const v = (value || "").trim();
+      if (!v) {
+        el.style.display = "none";
+        el.textContent = "";
+        return;
+      }
+      el.style.display = "";
+      el.textContent = v;
+    }
+
+    async function loadHome(){
+      const debug = document.getElementById("debugNote");
+
+      try{
+        const res = await fetch("/content/home.md", { cache: "no-store" });
+        if (!res.ok) throw new Error("Kunne ikke hente /content/home.md (" + res.status + ")");
+
+        const md = await res.text();
+        const { data, body } = parseFrontmatter(md);
+
+        // Felter fra admin (frontmatter)
+        setText("homeTitle", data.title || "Hjelpeportalen");
+        setText("homeLead", data.lead || "");
+        setText("homeIngress", data.ingress || "");
+
+        // Body markdown
+        const html = marked.parse(body || "");
+        document.getElementById("homeBody").innerHTML = html;
+
+        debug.style.display = "none";
+        debug.textContent = "";
+
+      }catch(err){
+        debug.style.display = "block";
+        debug.textContent = "Innhold lastet fra /content/home.md (feil): " + err.message;
+      }
+    }
+
+    // Mobilmeny
+    (function(){
+      const btn = document.getElementById("hamburgerBtn");
+      const menu = document.getElementById("mobileMenu");
+
+      function closeMenu(){
+        menu.style.display = "none";
+        btn.setAttribute("aria-expanded", "false");
+      }
+      function toggleMenu(){
+        const isOpen = menu.style.display === "block";
+        menu.style.display = isOpen ? "none" : "block";
+        btn.setAttribute("aria-expanded", String(!isOpen));
+      }
+
+      btn.addEventListener("click", toggleMenu);
+      menu.addEventListener("click", (e) => {
+        if (e.target && e.target.tagName === "A") closeMenu();
       });
+      window.addEventListener("resize", () => {
+        if (window.innerWidth > 900) closeMenu();
+      });
+    })();
 
-      // Fetch + parse /content/home.md (frontmatter + “innhold”)
-      (async function () {
-        const titleEl = document.getElementById("pageTitle");
-        const ingressEl = document.getElementById("pageIngress");
-        const featuresEl = document.getElementById("features");
-
-        try {
-          const res = await fetch("/content/home.md", { cache: "no-store" });
-          if (!res.ok) throw new Error("Kunne ikke laste /content/home.md");
-          const raw = await res.text();
-
-          const { frontmatter, body } = parseFrontmatter(raw);
-
-          // Sett tittel + ingress fra admin
-          titleEl.textContent = frontmatter.title || "Hjelpeportalen";
-          ingressEl.textContent = frontmatter.ingress || "";
-
-          // Bygg liste av linjene i “Innhold”
-          // Vi støtter både "✓ ..." og "✅ ..." og "- ..." osv.
-          const lines = body
-            .split("\n")
-            .map(s => s.trim())
-            .filter(Boolean);
-
-          const items = lines
-            .map(line => line.replace(/^[-*]\s+/, "").replace(/^[✓✅✔]\s*/, ""))
-            .filter(Boolean);
-
-          // Render: ALLTID én og én linje
-          const ul = document.createElement("ul");
-          items.forEach(text => {
-            const li = document.createElement("li");
-            li.textContent = text;
-            ul.appendChild(li);
-          });
-          featuresEl.innerHTML = "";
-          featuresEl.appendChild(ul);
-
-        } catch (e) {
-          titleEl.textContent = "Hverdagshjelp";
-          ingressEl.textContent = "Praktisk hjelp i hverdagen – enkelt, trygt og tilgjengelig.";
-          featuresEl.innerHTML = "<ul><li>Handling og ærender</li><li>Enkel hjelp i hjemmet</li><li>Følge og bistand</li><li>Små oppdrag – stor verdi</li></ul>";
-          console.warn(e);
-        }
-
-        function parseFrontmatter(text) {
-          const fm = {};
-          if (text.startsWith("---")) {
-            const end = text.indexOf("\n---", 3);
-            if (end !== -1) {
-              const fmBlock = text.slice(3, end).trim();
-              const body = text.slice(end + 4).replace(/^\s*\n/, "");
-              fmBlock.split("\n").forEach(line => {
-                const idx = line.indexOf(":");
-                if (idx === -1) return;
-                const key = line.slice(0, idx).trim();
-                const value = line.slice(idx + 1).trim().replace(/^"|"$/g, "");
-                fm[key] = value;
-              });
-              return { frontmatter: fm, body };
-            }
-          }
-          return { frontmatter: fm, body: text };
-        }
-      })();
-    </script>
-  </body>
+    loadHome();
+  </script>
+</body>
 </html>
