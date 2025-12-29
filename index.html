@@ -14,24 +14,82 @@
     }
 
     .wrap {
-      max-width: 860px;
+      max-width: 960px;
       margin: 0 auto;
-      padding: 48px 20px;
-      text-align: center; /* gir et ryddig “hero”-uttrykk */
+      padding: 20px;
     }
 
-    /* logo */
-    .logo {
-      display: block;
-      max-width: 180px;
-      height: auto;
-      margin: 0 auto 14px;
+    /* ---------- TOPPBAR ---------- */
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 12px 0 32px;
     }
 
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .brand-logo {
+      width: 42px;
+      height: 42px;
+      object-fit: contain;
+    }
+
+    .brand-name {
+      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: -0.3px;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      color: #111;
+      font-size: 14px;
+      padding: 8px 10px;
+      border-radius: 10px;
+    }
+
+    .nav-link:hover {
+      background: #f3f4f6;
+    }
+
+    .nav-cta {
+      text-decoration: none;
+      color: #fff;
+      background: #111;
+      font-size: 14px;
+      padding: 9px 14px;
+      border-radius: 12px;
+    }
+
+    .nav-cta:hover {
+      opacity: 0.9;
+    }
+
+    @media (max-width: 760px) {
+      .nav {
+        display: none;
+      }
+    }
+
+    /* ---------- INNHOLD ---------- */
     h1 {
       font-size: 44px;
       margin: 0 0 14px;
-      letter-spacing: -0.5px;
+      letter-spacing: -0.6px;
     }
 
     .ingress {
@@ -39,52 +97,50 @@
       line-height: 1.5;
       color: #333;
       margin: 0 0 26px;
+      max-width: 720px;
     }
 
     .content {
       font-size: 17px;
       line-height: 1.7;
       color:#111;
-      text-align: left;       /* innholdet leses best venstrestilt */
-      display: inline-block;  /* samtidig sentrert på siden */
       max-width: 720px;
-      width: 100%;
     }
 
     .content h2 { margin: 26px 0 10px; }
     .content h3 { margin: 20px 0 8px; }
 
-    .pill {
-      display:inline-block;
-      padding: 6px 10px;
-      border-radius: 999px;
-      background:#f3f4f6;
-      font-size: 13px;
-      color:#111;
-      margin-bottom: 14px;
-    }
-
     .okline { margin: 10px 0; }
 
     .footer {
-      margin-top: 40px;
+      margin-top: 48px;
       font-size: 13px;
       color:#666;
-      text-align: center;
     }
   </style>
 </head>
 
 <body>
   <div class="wrap">
-    <div class="pill">Hjelpeportalen.no</div>
 
-    <!-- LOGO (ligger i repo: /images/logo.png) -->
-    <img class="logo" src="/images/logo.png" alt="Hjelpeportalen logo" />
+    <!-- TOPPBAR -->
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="Hjelpeportalen">
+        <img class="brand-logo" src="/images/logo.png" alt="Hjelpeportalen logo" />
+        <span class="brand-name">Hjelpeportalen</span>
+      </a>
 
+      <nav class="nav">
+        <a class="nav-link" href="#tjenester">Tjenester</a>
+        <a class="nav-link" href="#om">Om oss</a>
+        <a class="nav-link" href="#kontakt">Kontakt</a>
+        <a class="nav-cta" href="#kontakt">Bestill hjelp</a>
+      </nav>
+    </header>
+
+    <!-- HOVEDINNHOLD -->
     <h1 id="title">Laster…</h1>
     <p class="ingress" id="ingress"></p>
-
     <div class="content" id="content"></div>
 
     <div class="footer">
@@ -94,14 +150,7 @@
 
   <script>
     function parseFrontmatter(md) {
-      // Forventer:
-      // ---
-      // key: value
-      // ---
-      // body...
       const parts = md.split('---');
-
-      // Ingen frontmatter
       if (parts.length < 3) {
         return { frontmatter: {}, body: md.trim() };
       }
@@ -112,7 +161,7 @@
       const frontmatter = {};
       fmRaw.split('\n').forEach(line => {
         const trimmed = line.trim();
-        if (!trimmed || trimmed.startsWith('#')) return;
+        if (!trimmed) return;
         const idx = trimmed.indexOf(':');
         if (idx === -1) return;
         const key = trimmed.slice(0, idx).trim();
@@ -124,18 +173,13 @@
     }
 
     function simpleMarkdownToHtml(text) {
-      // veldig enkel “markdown” til html: headings + linjeskift + ✔-linjer
       let html = text;
 
-      // headings
       html = html.replace(/^###\s+(.*)$/gim, '<h3>$1</h3>');
       html = html.replace(/^##\s+(.*)$/gim, '<h2>$1</h2>');
       html = html.replace(/^#\s+(.*)$/gim, '<h1>$1</h1>');
 
-      // ✔ lines -> "okline"
       html = html.replace(/^\s*✔\s*(.*)$/gim, '<div class="okline">✔ $1</div>');
-
-      // paragrafer/linjeskift
       html = html.replace(/\n{2,}/g, '<br><br>');
       html = html.replace(/\n/g, '<br>');
 
@@ -143,10 +187,7 @@
     }
 
     fetch("/content/home.md", { cache: "no-store" })
-      .then(res => {
-        if (!res.ok) throw new Error("Kunne ikke hente /content/home.md");
-        return res.text();
-      })
+      .then(res => res.text())
       .then(md => {
         const { frontmatter, body } = parseFrontmatter(md);
 
@@ -154,7 +195,7 @@
           frontmatter.title || "Hjelpeportalen";
 
         document.getElementById("ingress").innerText =
-          frontmatter.ingress || frontmatter.lead || frontmatter.intro || "";
+          frontmatter.ingress || "";
 
         document.getElementById("content").innerHTML =
           simpleMarkdownToHtml(body);
@@ -164,12 +205,8 @@
       })
       .catch(err => {
         document.getElementById("title").innerText = "Feil";
-        document.getElementById("ingress").innerText =
-          "Klarte ikke å laste innhold.";
-        document.getElementById("content").innerText =
-          String(err && err.message ? err.message : err);
-        document.getElementById("status").innerText =
-          "Sjekk at /content/home.md finnes i repo og at deploy er ferdig.";
+        document.getElementById("ingress").innerText = "Kunne ikke laste innhold.";
+        document.getElementById("content").innerText = err.toString();
       });
   </script>
 </body>
