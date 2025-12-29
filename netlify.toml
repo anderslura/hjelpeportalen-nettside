@@ -1,1 +1,16 @@
+[[redirects]]
+  from = "/admin"
+  to = "/admin/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/admin/*"
+  to = "/admin/index.html"
+  status = 200
+
+# Hvis du har en SPA-fallback, behold den, MEN under admin-reglene:
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
 
