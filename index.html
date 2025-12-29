@@ -7,7 +7,7 @@
 
   <style>
     :root {
-      /* Brand-farge – juster én gang, påvirker logo-tekst mm. */
+      /* Brand-farge – juster én gang */
       --brand-color: #1f5fbf;
     }
 
@@ -30,7 +30,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 16px;
-      padding: 12px 0 32px;
+      padding: 10px 0 32px;
     }
 
     .brand {
@@ -39,19 +39,25 @@
       gap: 12px;
       text-decoration: none;
       color: inherit;
+      line-height: 1;
     }
 
+    /* LOGO større enn teksten */
     .brand-logo {
-      width: 52px;   /* ⬅️ logo litt større */
-      height: 52px;
+      width: 64px;
+      height: 64px;
       object-fit: contain;
+      flex: 0 0 auto;
     }
 
+    /* Tekst litt mindre enn logoen */
     .brand-name {
       font-weight: 800;
-      font-size: 20px;
-      letter-spacing: -0.4px;
-      color: var(--brand-color); /* ⬅️ samme farge som logo */
+      font-size: 18px;
+      letter-spacing: -0.3px;
+      color: var(--brand-color);
+      margin-top: 1px; /* mikro-justering for optisk linjering */
+      white-space: nowrap;
     }
 
     .nav {
@@ -86,9 +92,9 @@
     }
 
     @media (max-width: 760px) {
-      .nav {
-        display: none;
-      }
+      .nav { display: none; }
+      .brand-logo { width: 56px; height: 56px; }
+      .brand-name { font-size: 17px; }
     }
 
     /* ---------- INNHOLD ---------- */
