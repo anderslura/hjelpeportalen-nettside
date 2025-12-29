@@ -22,6 +22,11 @@ collections:
             name: "title"
             widget: "string"
 
+          - label: "Lead (kort hovedbudskap)"
+            name: "lead"
+            widget: "string"
+            required: false
+
           - label: "Ingress"
             name: "ingress"
             widget: "string"
