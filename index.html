@@ -2,361 +2,414 @@
 <html lang="no">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Hjelpeportalen</title>
+
   <style>
     :root{
       --max: 1100px;
       --pad: 24px;
-      --brand: #1f57ff;
       --text: #0f172a;
-      --muted: #475569;
-      --line: rgba(15, 23, 42, 0.08);
-      --btn: #0b0b0b;
-      --btnText: #fff;
-      --radius: 999px;
+      --muted:#475569;
+      --border: rgba(15,23,42,.08);
+      --brand:#1d4ed8;
+      --btn:#0b0b0b;
+      --bg:#ffffff;
     }
+
     *{box-sizing:border-box}
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
       color:var(--text);
-      background:#fff;
+      background:var(--bg);
     }
+    a{color:inherit;text-decoration:none}
 
-    /* TOP BAR */
-    header{
-      border-bottom: 1px solid var(--line);
-      background:#fff;
-      position: sticky;
-      top: 0;
-      z-index: 20;
-    }
-    .wrap{
+    /* layout */
+    .container{
       max-width: var(--max);
       margin: 0 auto;
       padding: 0 var(--pad);
     }
-    .top{
-      height: 76px;
+
+    /* topbar */
+    header{
+      border-bottom: 1px solid var(--border);
+      background: #fff;
+    }
+    .topbar{
       display:flex;
       align-items:center;
       justify-content:space-between;
+      height: 84px;
       gap: 18px;
     }
+
     .brand{
       display:flex;
       align-items:center;
-      gap: 10px; /* tett på logo */
-      min-width: 240px;
+      gap: 10px; /* gjør teksten nær logo */
+      min-width: 220px;
     }
     .brand img{
-      width: 56px;
-      height: 56px;
+      width: 54px;
+      height: 54px;
       object-fit: contain;
       display:block;
     }
-    .brand .name{
+    .brand span{
+      font-weight:700;
       color: var(--brand);
-      font-weight: 700;
-      letter-spacing: 0.2px;
+      font-size: 18px;
       line-height: 1;
-      font-size: 18px; /* litt mindre enn logoen */
-      white-space: nowrap;
+      white-space:nowrap;
     }
 
-    nav{
+    nav.desktop{
       display:flex;
       align-items:center;
-      gap: 16px;
-    }
-    nav a{
-      text-decoration:none;
-      color:#111;
+      gap: 22px;
       font-size: 14px;
-      padding: 10px 8px;
+      color:#0b1220;
+    }
+    nav.desktop a{
+      padding: 8px 6px;
       border-radius: 10px;
     }
-    nav a:hover{ background: rgba(15,23,42,0.04); }
+    nav.desktop a:hover{background: rgba(2,6,23,.04)}
 
     .cta{
       display:flex;
       align-items:center;
-      gap: 10px;
-      min-width: 160px;
-      justify-content: flex-end;
+      gap: 12px;
     }
     .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      padding: 10px 16px;
-      border-radius: var(--radius);
       background: var(--btn);
-      color: var(--btnText);
-      text-decoration:none;
+      color: #fff;
+      border: 0;
+      padding: 11px 18px;
+      border-radius: 999px;
       font-weight: 700;
-      font-size: 14px;
-    }
-
-    /* MOBILE */
-    .hamburger{
-      display:none;
-      width: 40px;
-      height: 40px;
-      border-radius: 12px;
-      border: 1px solid var(--line);
-      background:#fff;
-      align-items:center;
-      justify-content:center;
       cursor:pointer;
     }
-    .hamburger span{
-      width: 18px;
-      height: 2px;
-      background: var(--brand);
-      display:block;
-      position: relative;
-    }
-    .hamburger span::before,
-    .hamburger span::after{
-      content:"";
-      position:absolute;
-      left:0;
-      width: 18px;
-      height: 2px;
-      background: var(--brand);
-    }
-    .hamburger span::before{ top:-6px; }
-    .hamburger span::after{ top:6px; }
 
-    .mobileMenu{
+    /* mobile */
+    .mobile-right{
       display:none;
-      border-top: 1px solid var(--line);
-      padding: 10px 0 14px;
+      align-items:center;
+      gap:12px;
     }
-    .mobileMenu a{
-      display:block;
-      padding: 10px 6px;
-      text-decoration:none;
-      color:#111;
-      border-radius: 10px;
-      font-size: 15px;
+    .burger{
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #fff;
+      display:grid;
+      place-items:center;
+      cursor:pointer;
     }
-    .mobileMenu a:hover{ background: rgba(15,23,42,0.04); }
+    .burger svg{width:22px;height:22px}
 
-    /* HERO */
-    main{
-      padding: 44px 0 80px;
+    .drawer{
+      display:none;
+      border-top: 1px solid var(--border);
+      padding: 14px 0 18px;
     }
+    .drawer a{
+      display:block;
+      padding: 10px 0;
+      color:#0b1220;
+      font-weight: 600;
+    }
+
+    /* hero */
+    main{padding: 34px 0 70px;}
     .hero{
-      text-align:center;
-      max-width: 900px;
+      max-width: 760px;
       margin: 0 auto;
+      text-align:center;
     }
     .hero h1{
       margin: 0 0 10px;
-      font-size: clamp(40px, 6vw, 64px);
+      font-size: clamp(38px, 4.6vw, 56px);
       letter-spacing: -0.02em;
     }
     .hero p{
-      margin: 0 auto 22px;
-      max-width: 720px;
-      font-size: 18px;
+      margin: 0 0 22px;
       color: var(--muted);
+      font-size: 18px;
+      line-height: 1.45;
+    }
+
+    .content{
+      margin-top: 10px;
+      text-align:left;
+      display:flex;
+      justify-content:center;
+    }
+    .content-inner{
+      width: 100%;
+      max-width: 520px;
+      color:#0b1220;
+      font-size: 16px;
       line-height: 1.6;
     }
-    .bullets{
-      display:inline-block;
-      text-align:left;
-      margin: 14px auto 0;
-      padding:0;
+
+    .checklist{
       list-style:none;
-      font-size: 16px;
+      padding:0;
+      margin: 0;
+      display:grid;
+      gap: 10px;
     }
-    .bullets li{
+    .checklist li{
       display:flex;
       gap: 10px;
       align-items:flex-start;
-      padding: 6px 0;
     }
     .check{
       font-weight: 900;
-      margin-top: 1px;
+      margin-top: 2px;
     }
-    .note{
-      margin-top: 26px;
+    .hint{
+      margin-top: 28px;
       font-size: 13px;
-      color: rgba(15,23,42,0.55);
+      color: rgba(15,23,42,.55);
+      text-align:center;
     }
 
-    @media (max-width: 840px){
-      nav{ display:none; }
-      .hamburger{ display:inline-flex; }
-      .cta{ min-width: auto; }
-      .top{ height: 72px; }
-      .brand img{ width: 52px; height: 52px; }
-      .brand{ min-width:auto; }
+    /* responsive */
+    @media (max-width: 860px){
+      .topbar{height: 76px;}
+      nav.desktop, .cta{display:none;}
+      .mobile-right{display:flex;}
+      .brand{min-width:auto;}
+      .brand img{width: 50px;height:50px;}
+      .brand span{font-size: 17px;}
+      main{padding-top: 22px;}
+      .hero{padding: 0 var(--pad);}
+      .content{justify-content:flex-start;}
+      .content-inner{max-width: 620px;}
     }
   </style>
 </head>
 
 <body>
   <header>
-    <div class="wrap">
-      <div class="top">
-        <div class="brand">
-          <img src="/images/logo.png" alt="Hjelpeportalen logo" />
-          <div class="name">Hjelpeportalen</div>
-        </div>
+    <div class="container">
+      <div class="topbar">
+        <a class="brand" href="/">
+          <img src="/images/logo.png" alt="Hjelpeportalen logo">
+          <span id="brandName">Hjelpeportalen</span>
+        </a>
 
-        <nav aria-label="Hovedmeny">
+        <nav class="desktop" aria-label="Hovedmeny">
           <a href="#tjenester">Tjenester</a>
-          <a href="#omoss">Om oss</a>
+          <a href="#om-oss">Om oss</a>
           <a href="#kontakt">Kontakt</a>
           <a href="#priser">Priser</a>
         </nav>
 
         <div class="cta">
-          <a class="btn" href="#bestill">Bestill hjelp</a>
-          <button class="hamburger" id="hamburger" aria-label="Åpne meny" aria-expanded="false">
-            <span></span>
+          <button class="btn" onclick="location.href='#bestill'">Bestill hjelp</button>
+        </div>
+
+        <div class="mobile-right">
+          <button class="burger" id="burger" aria-label="Åpne meny" aria-expanded="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="2" stroke-linecap="round">
+              <path d="M4 7h16M4 12h16M4 17h16"/>
+            </svg>
           </button>
         </div>
       </div>
 
-      <div class="mobileMenu" id="mobileMenu">
-        <a href="#tjenester">Tjenester</a>
-        <a href="#omoss">Om oss</a>
-        <a href="#kontakt">Kontakt</a>
-        <a href="#priser">Priser</a>
-        <a href="#bestill"><strong>Bestill hjelp</strong></a>
+      <div class="drawer" id="drawer">
+        <div class="container">
+          <a href="#tjenester" onclick="closeDrawer()">Tjenester</a>
+          <a href="#om-oss" onclick="closeDrawer()">Om oss</a>
+          <a href="#kontakt" onclick="closeDrawer()">Kontakt</a>
+          <a href="#priser" onclick="closeDrawer()">Priser</a>
+          <a href="#bestill" onclick="closeDrawer()">Bestill hjelp</a>
+        </div>
       </div>
     </div>
   </header>
 
   <main>
-    <div class="wrap">
-      <section class="hero" id="home">
-        <h1 id="pageTitle">Hjelpeportalen</h1>
-        <p id="pageIngress">Vi hjelper deg med praktiske oppgaver i hverdagen – hjemme og ute.</p>
+    <div class="container">
+      <section class="hero" id="hero">
+        <h1 id="heroTitle">Hjelpeportalen</h1>
+        <p id="heroIngress">Vi hjelper deg med praktiske oppgaver i hverdagen – hjemme og ute.</p>
 
-        <ul class="bullets" id="bulletList">
-          <!-- fylles fra markdown -->
-        </ul>
+        <div class="content">
+          <div class="content-inner" id="heroBody">
+            <!-- fylles fra /content/home.md -->
+          </div>
+        </div>
 
-        <div class="note" id="contentNote">Innhold lastet fra /content/home.md</div>
+        <div class="hint" id="hint">Innhold lastet fra <code>/content/home.md</code></div>
       </section>
     </div>
   </main>
 
   <script>
-    // Mobilmeny toggle
-    const hamburger = document.getElementById('hamburger');
-    const mobileMenu = document.getElementById('mobileMenu');
-    hamburger?.addEventListener('click', () => {
-      const open = mobileMenu.style.display === 'block';
-      mobileMenu.style.display = open ? 'none' : 'block';
-      hamburger.setAttribute('aria-expanded', open ? 'false' : 'true');
+    // ---- Mobile menu
+    const burger = document.getElementById('burger');
+    const drawer = document.getElementById('drawer');
+
+    function openDrawer(){
+      drawer.style.display = 'block';
+      burger.setAttribute('aria-expanded','true');
+    }
+    function closeDrawer(){
+      drawer.style.display = 'none';
+      burger.setAttribute('aria-expanded','false');
+    }
+    burger.addEventListener('click', () => {
+      const open = burger.getAttribute('aria-expanded') === 'true';
+      open ? closeDrawer() : openDrawer();
     });
+    window.closeDrawer = closeDrawer;
 
-    // --- Content loader ---
-    const titleEl = document.getElementById('pageTitle');
-    const ingressEl = document.getElementById('pageIngress');
-    const listEl = document.getElementById('bulletList');
+    // ---- Content parsing (støtter både YAML-frontmatter og tabell-format)
+    function parseYamlFrontmatter(md){
+      if (!md.trimStart().startsWith('---')) return null;
+      const start = md.indexOf('---');
+      const end = md.indexOf('\n---', start + 3);
+      if (end === -1) return null;
 
-    function escapeHtml(s){
-      return s.replace(/[&<>"']/g, m => ({
-        '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
-      }[m]));
+      const fm = md.slice(start + 3, end).trim();
+      const body = md.slice(end + 4).trim(); // skip "\n---"
+      const meta = {};
+
+      fm.split('\n').forEach(line => {
+        const m = line.match(/^([A-Za-z0-9_-]+)\s*:\s*(.*)\s*$/);
+        if (!m) return;
+        const key = m[1];
+        let val = m[2] || '';
+        val = val.replace(/^"(.*)"$/, '$1').replace(/^'(.*)'$/, '$1');
+        meta[key] = val;
+      });
+
+      return { meta, body };
     }
 
-    function parseMarkdownTableMeta(md){
-      // Ser etter en tabell med header: | title | lead | intro | ingress |
-      // og leser første datarad.
-      const lines = md.split('\n').map(l => l.trim());
-      let headerIdx = -1;
-
-      for (let i=0; i<Math.min(lines.length, 30); i++){
-        const l = lines[i].toLowerCase();
-        if (l.startsWith('|') && l.includes('title') && l.includes('ingress')) {
-          headerIdx = i;
-          break;
-        }
-      }
-      if (headerIdx === -1) return null;
-
-      // Finn separator-linje og datalinje
-      const sep = lines[headerIdx + 1] || '';
-      const row = lines[headerIdx + 2] || '';
-      if (!sep.includes('---') || !row.startsWith('|')) return null;
-
-      const headers = lines[headerIdx].split('|').map(x => x.trim()).filter(Boolean);
-      const values  = row.split('|').map(x => x.trim()).filter(Boolean);
-      const obj = {};
-      headers.forEach((h, idx) => obj[h.toLowerCase()] = values[idx] ?? '');
-
-      return obj;
-    }
-
-    function extractBullets(md){
-      // plukker ut linjer som ser ut som punktliste (starter med - eller ✓)
-      const out = [];
+    function parseMarkdownTable(md){
+      // Ser etter en tabell som starter med | title | ...
       const lines = md.split('\n');
+      if (lines.length < 3) return null;
+      const header = lines[0].trim();
+      const sep = lines[1].trim();
 
-      for (const raw of lines){
-        const line = raw.trim();
-        if (!line) continue;
+      if (!header.startsWith('|') || !header.includes('title') || !sep.includes('---')) return null;
 
-        // Skip tabell-linjer
-        if (line.startsWith('|') && line.endsWith('|')) continue;
+      // finn første data-rad (ofte linje 2)
+      const row = (lines[2] || '').trim();
+      if (!row.startsWith('|')) return null;
 
-        // ✓ eller "- "
-        if (line.startsWith('✓') || line.startsWith('✔')){
-          out.push(line.replace(/^([✓✔]\s*)/, '').trim());
-        } else if (line.startsWith('- ')) {
-          // Ikke ta med “- - -” etc
-          if (line.replace(/-/g,'').trim() === '') continue;
-          out.push(line.slice(2).trim());
-        }
+      const cols = header.split('|').map(s => s.trim()).filter(Boolean);
+      const vals = row.split('|').map(s => s.trim()).filter(Boolean);
+
+      const meta = {};
+      cols.forEach((c, i) => meta[c] = vals[i] || '');
+
+      // body = resten etter tabell (starter typisk på linje 3)
+      const body = lines.slice(3).join('\n').trim();
+      return { meta, body };
+    }
+
+    function cleanupAccidentalKeyLines(md){
+      // hvis filen har linjer som "title: xxx" uten --- skal de ikke vises som tekst
+      return md.split('\n').filter(line => {
+        const t = line.trim();
+        // behold hvis det er en setning, fjern hvis det ser ut som "key: value" og key er kjent
+        return !/^(title|ingress|intro|lead)\s*:\s*/i.test(t);
+      }).join('\n').trim();
+    }
+
+    function renderBodyAsChecklist(md){
+      const container = document.createElement('div');
+
+      const lines = md.split('\n').map(l => l.trim()).filter(Boolean);
+
+      // plukk ut punktlinjer (✓ eller -)
+      const items = [];
+      const rest = [];
+
+      for (const line of lines){
+        if (line.startsWith('✓')) items.push(line.replace(/^✓\s*/, ''));
+        else if (line.startsWith('- ')) items.push(line.replace(/^-+\s*/, ''));
+        else rest.push(line);
       }
-      return out;
+
+      if (items.length){
+        const ul = document.createElement('ul');
+        ul.className = 'checklist';
+        items.forEach(txt => {
+          const li = document.createElement('li');
+          const mark = document.createElement('div');
+          mark.className = 'check';
+          mark.textContent = '✓';
+          const span = document.createElement('div');
+          span.textContent = txt;
+          li.appendChild(mark);
+          li.appendChild(span);
+          ul.appendChild(li);
+        });
+        container.appendChild(ul);
+      }
+
+      // eventuelle ekstra linjer under (hvis dere legger til mer tekst senere)
+      if (rest.length){
+        const p = document.createElement('p');
+        p.style.marginTop = items.length ? '18px' : '0';
+        p.style.color = 'var(--muted)';
+        p.textContent = rest.join(' ');
+        container.appendChild(p);
+      }
+
+      return container.innerHTML;
     }
 
     async function loadHome(){
       try{
         const res = await fetch('/content/home.md', { cache: 'no-store' });
-        if (!res.ok) throw new Error('Kunne ikke laste home.md');
-        const md = await res.text();
+        if (!res.ok) throw new Error('Kunne ikke hente /content/home.md');
+        let md = await res.text();
 
-        // 1) Hvis tabell-meta finnes, bruk det
-        const meta = parseMarkdownTableMeta(md);
-        if (meta){
-          if (meta.title) titleEl.textContent = meta.title;
-          // Bruk ingress først, ellers lead/intro som fallback
-          const ingress = meta.ingress || meta.lead || meta.intro;
-          if (ingress) ingressEl.textContent = ingress;
-        } else {
-          // 2) fallback: prøv å finne første H1 og første avsnitt
-          const h1 = md.match(/^\s*#\s+(.+)\s*$/m);
-          if (h1?.[1]) titleEl.textContent = h1[1].trim();
+        // 1) prøv YAML-frontmatter
+        let parsed = parseYamlFrontmatter(md);
 
-          const afterH1 = md.split('\n').slice(0, 30).join('\n');
-          const p = afterH1
-            .split('\n')
-            .map(l => l.trim())
-            .filter(l => l && !l.startsWith('#') && !l.startsWith('|') && !l.startsWith('-') && !l.startsWith('✓') && !l.startsWith('✔'))[0];
-          if (p) ingressEl.textContent = p;
+        // 2) hvis ikke, prøv tabell-format
+        if (!parsed) parsed = parseMarkdownTable(md);
+
+        // 3) fallback: bare rens bort "title:"-linjer
+        if (!parsed){
+          md = cleanupAccidentalKeyLines(md);
+          parsed = { meta: {}, body: md };
         }
 
-        // bullets
-        const bullets = extractBullets(md).slice(0, 10);
-        listEl.innerHTML = bullets.map(t => `
-          <li><span class="check">✓</span><span>${escapeHtml(t)}</span></li>
-        `).join('');
+        const meta = parsed.meta || {};
+        const body = parsed.body || '';
 
-      } catch (e){
-        console.warn(e);
+        // Bruk "title" fra CMS som stor overskrift på forsiden
+        const heroTitle = meta.title || 'Hjelpeportalen';
+        document.getElementById('heroTitle').textContent = heroTitle;
+
+        // Bruk "ingress" hvis den finnes
+        const ingress = meta.ingress || meta.intro || meta.lead || '';
+        if (ingress){
+          document.getElementById('heroIngress').textContent = ingress;
+        }
+
+        // Body (punkter)
+        document.getElementById('heroBody').innerHTML = renderBodyAsChecklist(body);
+
+      }catch(err){
+        document.getElementById('hint').textContent = 'Kunne ikke laste innhold. Sjekk /content/home.md og deploy.';
+        console.error(err);
       }
     }
 
