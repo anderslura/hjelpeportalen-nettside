@@ -6,9 +6,7 @@
   <title>Hjelpeportalen</title>
 
   <style>
-    :root {
-      --brand-color: #1f5fbf;
-    }
+    :root { --brand-color: #1f5fbf; }
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
@@ -28,21 +26,21 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 32px;
+      gap: 24px;
       padding: 20px 0 48px;
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 10px; /* ✅ tekst nærmere logo */
+      gap: 6px; /* ✅ enda nærmere (Fiken-ish) */
       text-decoration: none;
       color: inherit;
       line-height: 1;
     }
 
     .brand-logo {
-      width: 110px;  /* ✅ enda litt større */
+      width: 110px;
       height: 110px;
       object-fit: contain;
       flex: 0 0 auto;
@@ -69,10 +67,7 @@
       padding: 8px 10px;
       border-radius: 10px;
     }
-
-    .nav-link:hover {
-      background: #f3f4f6;
-    }
+    .nav-link:hover { background: #f3f4f6; }
 
     .nav-cta {
       text-decoration: none;
@@ -82,16 +77,63 @@
       padding: 10px 18px;
       border-radius: 999px;
     }
+    .nav-cta:hover { opacity: 0.9; }
 
-    .nav-cta:hover {
-      opacity: 0.9;
+    /* ---------- MOBIL MENY ---------- */
+    .menu-btn {
+      display: none; /* desktop: skjult */
+      border: 1px solid #e5e7eb;
+      background: #fff;
+      color: #111;
+      padding: 10px 12px;
+      border-radius: 12px;
+      font-size: 14px;
+      cursor: pointer;
     }
 
+    .menu-btn:active { transform: translateY(1px); }
+
+    .menu-panel {
+      display: none;
+      margin-top: 10px;
+      border: 1px solid #e5e7eb;
+      background: #fff;
+      border-radius: 16px;
+      padding: 10px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    }
+
+    .menu-panel a {
+      display: block;
+      padding: 12px 12px;
+      border-radius: 12px;
+      text-decoration: none;
+      color: #111;
+      font-size: 15px;
+    }
+
+    .menu-panel a:hover { background: #f3f4f6; }
+
+    .menu-panel .menu-cta {
+      margin-top: 8px;
+      background: #111;
+      color: #fff;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    /* ---------- RESPONSIVE ---------- */
     @media (max-width: 760px) {
-      .nav { display: none; }
-      .brand-logo { width: 82px; height: 82px; }
-      .brand { gap: 10px; }
+      .wrap { padding: 18px 16px; }
+      .topbar { padding: 10px 0 24px; }
+
+      .brand-logo { width: 72px; height: 72px; }
+      .brand { gap: 6px; }
       .brand-name { font-size: 17px; }
+
+      .nav { display: none; }      /* ✅ skjul desktop-meny */
+      .menu-btn { display: inline-flex; align-items:center; gap:8px; } /* ✅ vis mobil-knapp */
+      .menu-panel { display: none; } /* styres av JS */
     }
 
     /* ---------- INNHOLD ---------- */
@@ -136,14 +178,29 @@
         <span class="brand-name">Hjelpeportalen</span>
       </a>
 
-      <nav class="nav">
+      <!-- Desktop nav -->
+      <nav class="nav" aria-label="Hovedmeny">
         <a class="nav-link" href="#tjenester">Tjenester</a>
         <a class="nav-link" href="#om">Om oss</a>
         <a class="nav-link" href="#kontakt">Kontakt</a>
-        <a class="nav-link" href="#priser">Priser</a> <!-- ✅ ny knapp -->
+        <a class="nav-link" href="#priser">Priser</a>
         <a class="nav-cta" href="#kontakt">Bestill hjelp</a>
       </nav>
+
+      <!-- Mobil menu button -->
+      <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menuPanel">
+        ☰ Meny
+      </button>
     </header>
+
+    <!-- Mobil menu panel -->
+    <div class="menu-panel" id="menuPanel">
+      <a href="#tjenester">Tjenester</a>
+      <a href="#om">Om oss</a>
+      <a href="#kontakt">Kontakt</a>
+      <a href="#priser">Priser</a>
+      <a class="menu-cta" href="#kontakt">Bestill hjelp</a>
+    </div>
 
     <!-- HOVEDINNHOLD -->
     <h1 id="title">Laster…</h1>
@@ -156,6 +213,28 @@
   </div>
 
   <script>
+    // Mobilmeny toggle
+    (function () {
+      const btn = document.getElementById("menuBtn");
+      const panel = document.getElementById("menuPanel");
+      if (!btn || !panel) return;
+
+      btn.addEventListener("click", () => {
+        const open = panel.style.display === "block";
+        panel.style.display = open ? "none" : "block";
+        btn.setAttribute("aria-expanded", open ? "false" : "true");
+      });
+
+      // Lukk meny etter klikk på link
+      panel.querySelectorAll("a").forEach(a => {
+        a.addEventListener("click", () => {
+          panel.style.display = "none";
+          btn.setAttribute("aria-expanded", "false");
+        });
+      });
+    })();
+
+    // CMS-innhold
     function parseFrontmatter(md) {
       const parts = md.split('---');
       if (parts.length < 3) return { frontmatter: {}, body: md.trim() };
