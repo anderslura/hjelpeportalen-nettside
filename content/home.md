@@ -7,8 +7,4 @@ lead: Fast pris. Valgfri tid. Trygge hjelpere.
 * Tilpasset dine behov i bestillingen
 * Ordrebekreftelse med tid og pris
 
-
-
-
-
-Tilbys i nærområdet rundt Osøyro ved lansering
+**Tilbys i nærområdet rundt Osøyro ved lansering**
