@@ -1,6 +1,6 @@
 ---
 title: Hverdags­hjelp
-lead: Trygg hverdagshjelp, enkelt bestilt.
+lead: Fast pris. Valgfri tid. Trygge hjelpere.
 ---
 * Enkel hjelp i hjemmet
 * Handling og ærender
