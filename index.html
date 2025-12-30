@@ -11,12 +11,13 @@
       --muted:#475569;
       --line:#e5e7eb;
       --bg:#ffffff;
+
+      /* Brand */
+      --brand:#0b5fa5;        /* logo-tekst + desktop CTA */
       --btn:#0b0b0b;
       --btnText:#ffffff;
-      --max: 1100px;
 
-      /* ✅ Brand blå (logo-tekst) */
-      --brand:#0b5fa5;
+      --max: 1100px;
     }
     *{box-sizing:border-box}
     body{
@@ -52,8 +53,7 @@
       width:44px; height:44px;
       display:block;
     }
-
-    /* ✅ Lås logo-tekst til blå (web + mobil) */
+    /* 🔵 Logo-tekst låst til brand-blå */
     .brand span{
       color:var(--brand);
     }
@@ -71,46 +71,47 @@
     }
     .links a:hover{opacity:1}
 
+    /* ✅ Desktop CTA: samme blå som logo-tekst */
     .cta{
       margin-left:12px;
       padding:10px 14px;
       border-radius:999px;
-      background:var(--btn);
-      color:var(--btnText) !important;
+      background:var(--brand);
+      color:#fff !important;
       font-weight:700;
       text-decoration:none;
       display:inline-block;
     }
+    .cta:hover{filter:brightness(0.95)}
 
-    /* Mobile controls (CTA + burger) */
+    /* Mobile controls */
     .right{
       display:flex;
       align-items:center;
       gap:10px;
     }
+
+    /* Fjernes fra header på mobil (vi flytter CTA ned i hero) */
     .ctaMobile{
-      display:none; /* vises kun på mobil */
-      padding:10px 14px;
-      border-radius:999px;
-      background:var(--btn);
-      color:var(--btnText) !important;
-      font-weight:700;
-      text-decoration:none;
-      line-height:1;
-      white-space:nowrap;
+      display:none;
     }
 
-    /* Mobile menu */
+    /* Mobile menu button: større / “Fiken-ish” */
     .burger{
       display:none;
       border:1px solid var(--line);
       background:#fff;
-      border-radius:10px;
-      padding:10px 12px;
+      border-radius:12px;
+      padding:12px 14px;
       font-weight:700;
       line-height:1;
       white-space:nowrap;
+      font-size:14px;
+      color:var(--brand);
+      cursor:pointer;
     }
+    .burger:active{transform:scale(0.99)}
+
     .mobileMenu{
       display:none;
       border-top:1px solid var(--line);
@@ -130,7 +131,6 @@
     @media (max-width: 860px){
       .links{display:none}
       .burger{display:inline-flex; align-items:center; gap:8px}
-      .ctaMobile{display:inline-block}
       .brand span{font-size:16px}
     }
 
@@ -156,8 +156,28 @@
       color:var(--text);
       max-width:780px;
     }
+
+    /* ✅ Mobil CTA under teksten (skjult på desktop) */
+    .heroCtaWrap{
+      display:none;
+      margin-top:16px;
+    }
+    .heroCta{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:14px 18px;
+      border-radius:999px;
+      background:var(--brand);
+      color:#fff;
+      font-weight:800;
+      text-decoration:none;
+      box-shadow: 0 10px 22px rgba(2, 8, 23, 0.10);
+    }
+    .heroCta:hover{filter:brightness(0.95)}
+
     .body{
-      margin:22px auto 0 auto; /* litt mer luft ned til body/lista */
+      margin:22px auto 0 auto;
       max-width:780px;
       color:var(--muted);
       font-size:22px;
@@ -170,7 +190,7 @@
       margin:18px auto 0 auto;
       padding:0;
       max-width:640px;
-      list-style:none; /* vi lager egne ✓ */
+      list-style:none;
       text-align:left;
     }
     .body li{
@@ -186,7 +206,7 @@
       position:absolute;
       left:0;
       top:0;
-      color:#111;     /* svart ✓ */
+      color:#111;
       font-weight:900;
     }
 
@@ -196,6 +216,11 @@
       h1{font-size:46px}
       .lead,.body{font-size:18px}
       .body li{font-size:16px}
+
+      /* ✅ Vis mobil-CTA under tekst */
+      .heroCtaWrap{display:block}
+      .heroCta{width: min(360px, 92%);} /* “knapp midt på” */
+      .burger{padding:12px 14px; font-size:14px;}
     }
 
     /* Error */
@@ -226,14 +251,13 @@
 
       <!-- Mobile controls -->
       <div class="right">
-        <a class="ctaMobile" href="#bestill">Bestill hjelp</a>
         <button class="burger" id="burger" aria-expanded="false" aria-controls="mobileMenu">
           ☰ Meny
         </button>
       </div>
     </div>
 
-    <!-- Mobile dropdown (uten Bestill-knapp for å unngå duplikat) -->
+    <!-- Mobile dropdown (uten Bestill-knapp) -->
     <div class="mobileMenu" id="mobileMenu">
       <a href="#tjenester">Tjenester</a>
       <a href="#omoss">Om oss</a>
@@ -246,6 +270,12 @@
     <section class="hero">
       <h1 id="pageTitle">Laster…</h1>
       <div class="lead" id="pageLead" style="display:none;"></div>
+
+      <!-- ✅ Mobil CTA flyttet hit (vises bare på mobil) -->
+      <div class="heroCtaWrap">
+        <a class="heroCta" href="#bestill">Bestill hjelp</a>
+      </div>
+
       <div class="body" id="pageBody"></div>
       <div class="error" id="err" style="display:none;"></div>
     </section>
