@@ -10,8 +10,10 @@
       --text:#0f172a;
       --muted:#475569;
       --line:#e5e7eb;
-      /* Endret: myk off-white bakgrunn (M365-ish) */
-      --bg:#f5f6f8;
+
+      /* Bakgrunner */
+      --bg:#f5f6f8;          /* main bakgrunn (M365-ish) */
+      --header-bg:#f3f0f8;   /* dus lilla/rosa – Microsoft-stil */
 
       /* Brand */
       --brand:#0b5fa5;
@@ -27,8 +29,8 @@
 
     /* Header */
     header{
-      border-bottom:1px solid var(--line);
-      background:#fff;
+      background:var(--header-bg);
+      border-bottom:1px solid #e6e1f0;
     }
     .nav{
       max-width:var(--max);
@@ -57,12 +59,12 @@
     .links a{
       text-decoration:none;
       color:var(--text);
-      opacity:.9;
+      opacity:.85;
     }
 
     .burger{
       display:none;
-      border:1px solid var(--line);
+      border:1px solid #e0daee;
       background:#fff;
       border-radius:12px;
       padding:12px 14px;
@@ -73,17 +75,18 @@
 
     .mobileMenu{
       display:none;
-      border-top:1px solid var(--line);
+      border-top:1px solid #e6e1f0;
       padding:10px 20px 18px;
       max-width:var(--max);
       margin:0 auto;
+      background:var(--header-bg);
     }
     .mobileMenu a{
       display:block;
       padding:10px 0;
       text-decoration:none;
       color:var(--text);
-      border-bottom:1px dashed #f1f5f9;
+      border-bottom:1px dashed #ebe7f5;
     }
 
     @media (max-width:860px){
@@ -130,15 +133,12 @@
     .heroCta:hover{filter:brightness(.95)}
     .heroCta:active{transform:scale(.98)}
 
-    /* DESKTOP – større knapp */
     @media (min-width:521px){
       .heroCta{
         font-size:20px;
         padding:16px 28px;
       }
     }
-
-    /* MOBILE – behold som nå */
     @media (max-width:520px){
       main{padding:46px 18px 70px}
       h1{font-size:46px}
