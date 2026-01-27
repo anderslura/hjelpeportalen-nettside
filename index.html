@@ -48,7 +48,14 @@
       text-decoration:none;
       font-weight:700;
     }
-    .brand img{width:44px;height:44px;display:block}
+
+    /* 🔵 SVG-logo – skarp uansett zoom */
+    .brand img{
+      width:44px;
+      height:44px;
+      display:block;
+    }
+
     .brand span{color:var(--brand)}
 
     .links{
@@ -62,7 +69,7 @@
       opacity:.85;
     }
 
-    /* 🔵 Hamburger – NY STIL */
+    /* 🔵 Hamburger */
     .burger{
       display:none;
       background:var(--brand);
@@ -198,7 +205,8 @@
 <header>
   <div class="nav">
     <a class="brand" href="/">
-      <img src="/images/logo.png" alt="Hjelpeportalen logo">
+      <!-- 🔥 NY SVG-LOGO -->
+      <img src="/images/logo-hjelpeportalen.svg" alt="Hjelpeportalen logo">
       <span>Hjelpeportalen</span>
     </a>
     <nav class="links">
