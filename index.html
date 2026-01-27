@@ -49,14 +49,20 @@
       font-weight:700;
     }
 
-    /* 🔵 SVG-logo – skarp uansett zoom */
+    /* ✅ Større logo i header */
     .brand img{
-      width:44px;
-      height:44px;
+      width:56px;   /* var 44 */
+      height:56px;  /* var 44 */
       display:block;
+      flex:0 0 auto;
     }
 
-    .brand span{color:var(--brand)}
+    /* (valgfritt, men matcher bildet bedre) */
+    .brand span{
+      color:var(--brand);
+      font-size:18px;    /* gir litt mer “tyngde” i brand */
+      line-height:1;
+    }
 
     .links{
       display:flex;
@@ -69,7 +75,7 @@
       opacity:.85;
     }
 
-    /* 🔵 Hamburger */
+    /* 🔵 Hamburger – NY STIL */
     .burger{
       display:none;
       background:var(--brand);
@@ -160,6 +166,15 @@
         font-size:18px;
         padding:14px 18px;
       }
+
+      /* ✅ litt mindre logo på mobil så den ikke tar over */
+      .brand img{
+        width:48px;
+        height:48px;
+      }
+      .brand span{
+        font-size:17px;
+      }
     }
 
     /* Content */
@@ -205,7 +220,6 @@
 <header>
   <div class="nav">
     <a class="brand" href="/">
-      <!-- 🔥 NY SVG-LOGO -->
       <img src="/images/logo-hjelpeportalen.svg" alt="Hjelpeportalen logo">
       <span>Hjelpeportalen</span>
     </a>
