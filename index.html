@@ -1,299 +1,572 @@
 <!doctype html>
-<html lang="nb">
+<html lang="no">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Hjelpeportalen</title>
+  <title>Hjelpeportalen – Hverdagshjelp</title>
+  <meta name="description" content="Fast pris. Valgfri tid. Trygge hjelpere. Bestill hverdagshjelp i Osøyro-området ved lansering." />
 
   <style>
     :root{
-      --text:#0f172a;
-      --muted:#475569;
-      --line:#e5e7eb;
-
-      /* Bakgrunner */
-      --bg:#f5f6f8;          /* main bakgrunn */
-      --header-bg:#f3f0f8;   /* dus M365-lilla */
-
-      /* Brand */
-      --brand:#0b5fa5;
-      --max: 1100px;
+      --bg: #f4f6fb;
+      --surface: #ffffff;
+      --text: #0b1220;
+      --muted: #5b6475;
+      --border: rgba(17, 24, 39, .12);
+      --shadow: 0 12px 30px rgba(17,24,39,.08);
+      --primary: #0b5cad;
+      --primary-2: #0a4f97;
+      --nav: rgba(244,246,251,.9);
+      --radius: 18px;
     }
-    *{box-sizing:border-box}
+
+    *{ box-sizing: border-box; }
     body{
       margin:0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      color:var(--text);
-      background:var(--bg);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color: var(--text);
+      background: var(--bg);
     }
+    a{ color: inherit; text-decoration: none; }
+    .container{ width:min(1100px, calc(100% - 48px)); margin:0 auto; }
 
-    /* Header */
+    /* Topbar */
     header{
-      background:var(--header-bg);
-      border-bottom:1px solid #e6e1f0;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: var(--nav);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
     }
-    .nav{
-      max-width:var(--max);
-      margin:0 auto;
-      padding:18px 20px;
+    .topbar{
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:16px;
+      padding: 18px 0;
+      gap: 16px;
     }
+
     .brand{
       display:flex;
       align-items:center;
-      gap:12px;
-      text-decoration:none;
-      font-weight:700;
+      gap: 14px;
+      font-weight: 800;
+      letter-spacing: .2px;
+      min-width: 220px;
     }
 
-    /* ✅ Større logo i header */
+    /* LOGO: større */
     .brand img{
-      width:60px;
-      height:60px;
+      width: 48px;
+      height: 48px;
       display:block;
-      flex:0 0 auto;
     }
-
     .brand span{
-      color:var(--brand);
-      font-size:18px;
-      line-height:1;
+      font-size: 18px;
+      line-height: 1;
     }
 
-    .links{
+    nav ul{
+      list-style:none;
       display:flex;
-      gap:22px;
-      font-size:14px;
+      gap: 22px;
+      padding:0;
+      margin:0;
+      align-items:center;
     }
-    .links a{
-      text-decoration:none;
-      color:var(--text);
-      opacity:.85;
+    nav a{
+      color: var(--text);
+      font-weight: 600;
+      font-size: 14px;
+      opacity: .85;
     }
-
-    /* 🔵 Hamburger – NY STIL */
-    .burger{
-      display:none;
-      background:var(--brand);
-      color:#fff;
-      border:none;
-      border-radius:999px;
-      padding:12px 16px;
-      font-weight:700;
-      font-size:14px;
-      cursor:pointer;
-      box-shadow:0 8px 18px rgba(2,8,23,.18);
-    }
-    .burger:active{transform:scale(.97)}
-
-    .mobileMenu{
-      display:none;
-      border-top:1px solid #e6e1f0;
-      padding:10px 20px 18px;
-      max-width:var(--max);
-      margin:0 auto;
-      background:var(--header-bg);
-    }
-    .mobileMenu a{
-      display:block;
-      padding:12px 0;
-      text-decoration:none;
-      color:var(--text);
-      border-bottom:1px dashed #ebe7f5;
-      font-weight:600;
-    }
-
-    @media (max-width:860px){
-      .links{display:none}
-      .burger{display:inline-flex}
-    }
-
-    /* ✅ Mobil-boost: større logo + litt tight padding */
-    @media (max-width:520px){
-      .nav{
-        padding:14px 14px;   /* litt tighter så logo får plass */
-        gap:12px;
-      }
-      .brand{
-        gap:10px;
-      }
-      .brand img{
-        width:64px;
-        height:64px;
-      }
-      .brand span{
-        font-size:19px;
-      }
-    }
+    nav a:hover{ opacity: 1; }
 
     /* Hero */
-    main{
-      max-width:var(--max);
-      margin:0 auto;
-      padding:70px 20px 90px;
+    .hero{
+      padding: 72px 0 38px;
+      text-align:center;
     }
-    .hero{text-align:center}
-    h1{
-      margin:0;
-      font-size:64px;
-      letter-spacing:-0.03em;
-      line-height:1.05;
+    .hero h1{
+      margin: 0 0 10px;
+      font-size: clamp(40px, 5vw, 64px);
+      letter-spacing: -1px;
     }
-    .lead{
-      margin:14px auto 0;
-      font-size:22px;
-      font-weight:800;
-      max-width:780px;
+    .hero p.lead{
+      margin: 0 auto 18px;
+      max-width: 680px;
+      font-size: 18px;
+      color: var(--muted);
+      font-weight: 700;
     }
-
-    /* CTA */
-    .heroCtaWrap{
-      margin:22px 0 6px;
-    }
-    .heroCta{
+    .cta{
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      background:var(--brand);
-      color:#fff;
-      text-decoration:none;
-      border-radius:999px;
-      font-weight:800;
-      box-shadow:0 14px 28px rgba(2,8,23,.14);
-      transition:transform .05s ease, filter .15s ease;
+      padding: 14px 28px;
+      border-radius: 999px;
+      background: var(--primary);
+      color: #fff;
+      font-weight: 800;
+      border: 1px solid rgba(0,0,0,.04);
+      box-shadow: 0 10px 24px rgba(11,92,173,.18);
     }
-    .heroCta:hover{filter:brightness(.95)}
-    .heroCta:active{transform:scale(.98)}
+    .cta:hover{ background: var(--primary-2); }
 
-    @media (min-width:521px){
-      .heroCta{
-        font-size:20px;
-        padding:16px 28px;
-      }
-    }
-    @media (max-width:520px){
-      main{padding:46px 18px 70px}
-      h1{font-size:46px}
-      .lead{font-size:18px}
-      .heroCta{
-        width:min(360px,92%);
-        font-size:18px;
-        padding:14px 18px;
-      }
-    }
-
-    /* Content */
-    .body{
-      margin:22px auto 0;
-      max-width:780px;
-      font-size:22px;
-      color:var(--muted);
-      line-height:1.5;
-    }
-    .body ul{
-      margin:18px auto 0;
-      padding:0;
-      max-width:640px;
-      list-style:none;
+    .checklist{
+      margin: 28px auto 0;
+      width: min(520px, 100%);
       text-align:left;
+      display:grid;
+      gap: 12px;
+      color: var(--text);
+      font-weight: 600;
     }
-    .body li{
-      margin:10px 0;
-      padding-left:34px;
-      position:relative;
-      font-size:18px;
-      color:var(--text);
+    .check{
+      display:flex;
+      gap: 10px;
+      align-items:flex-start;
     }
-    .body li::before{
-      content:"✓";
-      position:absolute;
-      left:0;
-      top:0;
-      font-weight:900;
-      color:#111;
+    .check .tick{
+      width: 18px;
+      height: 18px;
+      margin-top: 2px;
+      flex: 0 0 18px;
     }
-    .body ul + p{
-      margin-top:18px;
-      font-weight:600;
+    .hint{
+      margin: 26px auto 0;
+      color: var(--muted);
+      font-weight: 800;
+      font-size: 20px;
     }
 
-    .error{margin-top:18px;color:#b91c1c;font-weight:700}
+    /* Pricing */
+    .section{
+      padding: 26px 0 78px;
+    }
+    .section h2{
+      margin: 0 0 10px;
+      font-size: 28px;
+      letter-spacing: -0.3px;
+      text-align:center;
+    }
+    .section .sub{
+      text-align:center;
+      color: var(--muted);
+      margin: 0 auto 28px;
+      max-width: 720px;
+      font-weight: 600;
+    }
+
+    .pricing-grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .card{
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+      min-height: 100%;
+    }
+    .card .banner{
+      padding: 14px 16px;
+      background: #0b1220;
+      color: rgba(255,255,255,.92);
+      font-weight: 800;
+      font-size: 13px;
+      letter-spacing: .2px;
+      display:flex;
+      justify-content:center;
+      text-align:center;
+    }
+    .card .body{
+      padding: 22px 22px 18px;
+      display:flex;
+      flex-direction:column;
+      gap: 12px;
+      flex: 1;
+    }
+    .plan-title{
+      font-size: 22px;
+      margin: 0;
+      letter-spacing: -0.2px;
+    }
+    .plan-desc{
+      margin: 0;
+      color: var(--muted);
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    .price{
+      margin-top: 6px;
+      display:flex;
+      align-items: baseline;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .price .kr{
+      font-size: 44px;
+      font-weight: 900;
+      letter-spacing: -1px;
+    }
+    .price .meta{
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 13px;
+      line-height: 1.3;
+    }
+    .note{
+      color: var(--muted);
+      font-size: 12.5px;
+      font-weight: 700;
+    }
+
+    .btn-row{
+      display:flex;
+      gap: 10px;
+      margin-top: 8px;
+      flex-wrap: wrap;
+    }
+    .btn{
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-weight: 900;
+      font-size: 14px;
+      border: 1px solid var(--border);
+      background: #fff;
+      cursor:pointer;
+    }
+    .btn.primary{
+      background: #0b1220;
+      color: #fff;
+      border-color: rgba(0,0,0,.06);
+    }
+    .btn.primary:hover{ opacity: .92; }
+    .btn.ghost:hover{ background: rgba(17,24,39,.04); }
+
+    .divider{
+      height: 1px;
+      background: rgba(17,24,39,.10);
+      margin: 14px 0 0;
+    }
+
+    .points{
+      padding: 16px 22px 22px;
+    }
+    .points h4{
+      margin: 0 0 12px;
+      font-size: 14px;
+      color: var(--text);
+      opacity: .9;
+      letter-spacing: .2px;
+    }
+    .points ul{
+      margin:0;
+      padding:0;
+      list-style:none;
+      display:grid;
+      gap: 10px;
+      color: var(--text);
+      font-weight: 700;
+      font-size: 13.5px;
+    }
+    .points li{
+      display:flex;
+      gap: 10px;
+      align-items:flex-start;
+      color: rgba(11,18,32,.92);
+      font-weight: 700;
+      line-height: 1.35;
+    }
+    .points svg{
+      width: 18px;
+      height: 18px;
+      margin-top: 1px;
+      flex: 0 0 18px;
+    }
+
+    /* Highlight: 2 timer = Mest verdi (i tråd med strategien din) */
+    .card.featured{
+      outline: 2px solid rgba(11,92,173,.25);
+      transform: translateY(-4px);
+    }
+    .card.featured .banner{
+      background: var(--primary);
+    }
+
+    footer{
+      padding: 34px 0 46px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .pricing-grid{ grid-template-columns: 1fr; }
+      .card.featured{ transform: none; }
+      nav ul{ gap: 16px; }
+    }
+    @media (max-width: 640px){
+      .topbar{ padding: 14px 0; }
+      nav{ display:none; } /* enkel mobil – hamburger kan legges til senere */
+      .hero{ padding-top: 54px; }
+
+      /* LOGO: fortsatt større, men skalerer ned på mobil */
+      .brand img{ width: 40px; height: 40px; }
+      .brand span{ font-size: 17px; }
+    }
   </style>
 </head>
 
 <body>
-<header>
-  <div class="nav">
-    <a class="brand" href="/">
-      <img src="/images/logo-hjelpeportalen.svg" alt="Hjelpeportalen logo">
-      <span>Hjelpeportalen</span>
-    </a>
-    <nav class="links">
-      <a href="#tjenester">Tjenester</a>
-      <a href="#omoss">Om oss</a>
-      <a href="#kontakt">Kontakt</a>
-      <a href="#priser">Priser</a>
-    </nav>
-    <button class="burger" id="burger">☰ Meny</button>
-  </div>
-  <div class="mobileMenu" id="mobileMenu">
-    <a href="#tjenester">Tjenester</a>
-    <a href="#omoss">Om oss</a>
-    <a href="#kontakt">Kontakt</a>
-    <a href="#priser">Priser</a>
-  </div>
-</header>
+  <header>
+    <div class="container topbar">
+      <a class="brand" href="#top">
+        <img src="images/logo-hjelpeportalen.svg" alt="Hjelpeportalen logo" />
+        <span>Hjelpeportalen</span>
+      </a>
 
-<main>
-  <section class="hero">
-    <h1 id="pageTitle">Laster…</h1>
-    <div class="lead" id="pageLead" style="display:none"></div>
-
-    <div class="heroCtaWrap">
-      <a class="heroCta" href="#bestill">Bestill hjelp</a>
+      <nav aria-label="Hovedmeny">
+        <ul>
+          <li><a href="#tjenester">Tjenester</a></li>
+          <li><a href="#om">Om oss</a></li>
+          <li><a href="#kontakt">Kontakt</a></li>
+          <li><a href="#priser">Priser</a></li>
+        </ul>
+      </nav>
     </div>
+  </header>
 
-    <div class="body" id="pageBody"></div>
-    <div class="error" id="err" style="display:none"></div>
-  </section>
-</main>
+  <main id="top">
+    <section class="hero">
+      <div class="container">
+        <h1>Hverdagshjelp</h1>
+        <p class="lead">Fast pris. Valgfri tid. Trygge hjelpere.</p>
 
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-<script>
-  const burger=document.getElementById("burger");
-  const menu=document.getElementById("mobileMenu");
-  burger.onclick=()=>menu.style.display=menu.style.display==="block"?"none":"block";
+        <a class="cta" href="#priser" id="bookBtn">Bestill hjelp</a>
 
-  function parseFrontmatter(md){
-    if(!md.startsWith("---")) return {data:{},body:md};
-    const end=md.indexOf("\n---",3);
-    const raw=md.slice(3,end).trim();
-    const body=md.slice(end+4);
-    const data={};
-    raw.split("\n").forEach(l=>{
-      const i=l.indexOf(":");
-      if(i>-1)data[l.slice(0,i).trim()]=l.slice(i+1).trim();
-    });
-    return {data,body};
-  }
+        <div class="checklist" id="tjenester">
+          <div class="check">
+            <svg class="tick" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>Hjelp i hjemmet – når du trenger det</span>
+          </div>
+          <div class="check">
+            <svg class="tick" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>Handling, ærender og følge</span>
+          </div>
+          <div class="check">
+            <svg class="tick" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>Tilpasset dine behov i bestillingen</span>
+          </div>
+          <div class="check">
+            <svg class="tick" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>For alle – uten krav eller binding</span>
+          </div>
+          <div class="check">
+            <svg class="tick" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>Ordrebekreftelse med tid og pris</span>
+          </div>
+        </div>
 
-  async function loadHome(){
-    try{
-      const res=await fetch("/content/home.md",{cache:"no-store"});
-      const md=await res.text();
-      const p=parseFrontmatter(md);
-      pageTitle.textContent=p.data.title||"Hjelpeportalen";
-      if(p.data.lead){pageLead.style.display="block";pageLead.textContent=p.data.lead}
-      pageBody.innerHTML=marked.parse(p.body||"");
-    }catch(e){
-      err.style.display="block";
-      err.textContent="Kunne ikke laste inn innhold";
+        <div class="hint">Tilbys i nærområdet rundt Osøyro ved lansering!</div>
+      </div>
+    </section>
+
+    <section class="section" id="priser">
+      <div class="container">
+        <h2>Priser</h2>
+        <p class="sub">
+          Velg varighet som passer behovet ditt. Prisene er faste og tydelige – og kjøring i lokal avdeling er inkludert.
+        </p>
+
+        <div class="pricing-grid">
+          <!-- 1 time -->
+          <article class="card">
+            <div class="banner">1 time – Enkeltoppdrag</div>
+            <div class="body">
+              <h3 class="plan-title">Hverdagshjelp</h3>
+              <p class="plan-desc">Rask og effektiv hjelp til konkrete oppgaver.</p>
+
+              <div class="price">
+                <div class="kr">kr 679</div>
+                <div class="meta">per oppdrag<br/>inkl. kjøring lokalt</div>
+              </div>
+
+              <div class="note">(Fast pris – ingen skjulte tillegg.)</div>
+
+              <div class="btn-row">
+                <button class="btn primary" data-duration="60" onclick="openBooking(this)">Bestill 1 time</button>
+                <button class="btn ghost" onclick="scrollToDetails()">Se detaljer</button>
+              </div>
+
+              <div class="divider"></div>
+            </div>
+
+            <div class="points">
+              <h4>Eksempler på hjelp</h4>
+              <ul>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  Lett husarbeid og praktisk hjelp
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  Små ærender og følge
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  Rydding / sortering (kort økt)
+                </li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- 1,5 time -->
+          <article class="card">
+            <div class="banner">1,5 time – Utvidet hjelp</div>
+            <div class="body">
+              <h3 class="plan-title">Hverdagshjelp</h3>
+              <p class="plan-desc">Mer rom for å rekke flere ting i samme besøk.</p>
+
+              <div class="price">
+                <div class="kr">kr 998</div>
+                <div class="meta">per oppdrag<br/>inkl. kjøring lokalt</div>
+              </div>
+
+              <div class="note">(God balanse mellom tid og verdi.)</div>
+
+              <div class="btn-row">
+                <button class="btn primary" data-duration="90" onclick="openBooking(this)">Bestill 1,5 time</button>
+                <button class="btn ghost" onclick="scrollToDetails()">Se detaljer</button>
+              </div>
+
+              <div class="divider"></div>
+            </div>
+
+            <div class="points">
+              <h4>Eksempler på hjelp</h4>
+              <ul>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  Kombinasjon av 2–3 oppgaver
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  Strukturering og lett planlegging
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  Hjelp for pårørende (oversikt + gjennomføring)
+                </li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- 2 timer (featured = Mest verdi) -->
+          <article class="card featured">
+            <div class="banner">2 timer – Mest verdi</div>
+            <div class="body">
+              <h3 class="plan-title">Hverdagshjelp</h3>
+              <p class="plan-desc">Best verdi når du vil få skikkelig tak i ting.</p>
+
+              <div class="price">
+                <div class="kr">kr 1 290</div>
+                <div class="meta">per oppdrag<br/>inkl. kjøring lokalt</div>
+              </div>
+
+              <div class="note">(Anbefalt når du vil ha ro, flyt og ferdigstille.)</div>
+
+              <div class="btn-row">
+                <button class="btn primary" data-duration="120" onclick="openBooking(this)">Bestill 2 timer</button>
+                <button class="btn ghost" onclick="scrollToDetails()">Se detaljer</button>
+              </div>
+
+              <div class="divider"></div>
+            </div>
+
+            <div class="points">
+              <h4>Eksempler på hjelp</h4>
+              <ul>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  Flere rom / større oppgavepakke
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  Sortering, rydding, lett rengjøring
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  Praktisk hjelp + følge/ærend i samme besøk
+                </li>
+              </ul>
+            </div>
+          </article>
+        </div>
+
+        <div style="height:36px"></div>
+
+        <section id="om" style="padding:22px 0 0;">
+          <h2>Om oss</h2>
+          <p class="sub" style="max-width:820px">
+            Hjelpeportalen gjør det enkelt å bestille trygg, praktisk hjelp i hverdagen – med fast pris og tydelig bestilling.
+            (Dette kan dere bytte med CMS-tekst senere.)
+          </p>
+        </section>
+
+        <section id="kontakt" style="padding:18px 0 0;">
+          <h2>Kontakt</h2>
+          <p class="sub" style="max-width:820px">
+            Send oss en forespørsel på e-post eller bruk bestillingsknappen.
+          </p>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      © <span id="y"></span> Hjelpeportalen. Fast pris – ingen skjulte tillegg.
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+
+    function scrollToDetails(){
+      document.getElementById("om").scrollIntoView({ behavior: "smooth", block: "start" });
     }
-  }
-  loadHome();
-</script>
+
+    function openBooking(btn){
+      const duration = btn?.dataset?.duration || "60";
+
+      // Når du får bookinglenke: bytt denne ut med window.open(...) eller popup/iframe.
+      // Eksempel:
+      // window.open("https://DIN-BOOKING-LENKE?duration=" + duration, "_blank");
+
+      alert("Booking er ikke koblet til ennå. Varighet valgt: " + duration + " minutter.");
+    }
+  </script>
 </body>
 </html>
