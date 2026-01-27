@@ -51,16 +51,15 @@
 
     /* ✅ Større logo i header */
     .brand img{
-      width:56px;   /* var 44 */
-      height:56px;  /* var 44 */
+      width:60px;
+      height:60px;
       display:block;
       flex:0 0 auto;
     }
 
-    /* (valgfritt, men matcher bildet bedre) */
     .brand span{
       color:var(--brand);
-      font-size:18px;    /* gir litt mer “tyngde” i brand */
+      font-size:18px;
       line-height:1;
     }
 
@@ -110,6 +109,24 @@
     @media (max-width:860px){
       .links{display:none}
       .burger{display:inline-flex}
+    }
+
+    /* ✅ Mobil-boost: større logo + litt tight padding */
+    @media (max-width:520px){
+      .nav{
+        padding:14px 14px;   /* litt tighter så logo får plass */
+        gap:12px;
+      }
+      .brand{
+        gap:10px;
+      }
+      .brand img{
+        width:64px;
+        height:64px;
+      }
+      .brand span{
+        font-size:19px;
+      }
     }
 
     /* Hero */
@@ -165,15 +182,6 @@
         width:min(360px,92%);
         font-size:18px;
         padding:14px 18px;
-      }
-
-      /* ✅ litt mindre logo på mobil så den ikke tar over */
-      .brand img{
-        width:48px;
-        height:48px;
-      }
-      .brand span{
-        font-size:17px;
       }
     }
 
