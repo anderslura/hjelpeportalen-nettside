@@ -18,9 +18,11 @@
       --primary-2: #0a4f97;
       --nav: rgba(244,246,251,.9);
       --radius: 18px;
+      --ring: rgba(11,92,173,.25);
     }
 
     *{ box-sizing: border-box; }
+    html{ scroll-behavior:smooth; }
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
@@ -56,10 +58,10 @@
       min-width: 220px;
     }
 
-    /* LOGO: større */
+    /* LOGO: tydelig større enn før, matcher/overgår teksten */
     .brand img{
-      width: 48px;
-      height: 48px;
+      width: 56px;
+      height: 56px;
       display:block;
     }
     .brand span{
@@ -83,6 +85,138 @@
     }
     nav a:hover{ opacity: 1; }
 
+    /* Mobile menu button (hamburger) */
+    .menu-btn{
+      display:none;
+      align-items:center;
+      justify-content:center;
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.7);
+      backdrop-filter: blur(10px);
+      cursor:pointer;
+    }
+    .menu-btn:focus{
+      outline: 3px solid var(--ring);
+      outline-offset: 2px;
+    }
+    .burger{
+      width: 20px;
+      height: 14px;
+      position: relative;
+    }
+    .burger span{
+      position:absolute;
+      left:0;
+      right:0;
+      height:2px;
+      border-radius: 2px;
+      background: rgba(11,18,32,.88);
+      transition: transform .18s ease, top .18s ease, opacity .18s ease;
+    }
+    .burger span:nth-child(1){ top:0; }
+    .burger span:nth-child(2){ top:6px; }
+    .burger span:nth-child(3){ top:12px; }
+
+    /* Mobile drawer */
+    .drawer-backdrop{
+      position: fixed;
+      inset: 0;
+      background: rgba(11,18,32,.35);
+      backdrop-filter: blur(4px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .18s ease;
+      z-index: 60;
+    }
+    .drawer{
+      position: fixed;
+      top: 12px;
+      right: 12px;
+      left: 12px;
+      max-width: 520px;
+      margin: 0 auto;
+      background: rgba(255,255,255,.92);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(17,24,39,.18);
+      padding: 10px;
+      transform: translateY(-10px);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform .18s ease, opacity .18s ease;
+      z-index: 70;
+    }
+    .drawer .row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding: 8px 8px 10px;
+    }
+    .drawer .title{
+      font-weight: 900;
+      letter-spacing: .2px;
+      font-size: 14px;
+      color: rgba(11,18,32,.88);
+    }
+    .drawer .close{
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #fff;
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight: 900;
+      color: rgba(11,18,32,.9);
+    }
+    .drawer nav{
+      display:block;
+      padding: 4px;
+    }
+    .drawer a{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding: 12px 12px;
+      border-radius: 12px;
+      font-weight: 800;
+      color: rgba(11,18,32,.92);
+    }
+    .drawer a:hover{
+      background: rgba(11,92,173,.08);
+    }
+    .drawer .pill{
+      font-size: 12px;
+      font-weight: 900;
+      color: var(--primary);
+      background: rgba(11,92,173,.10);
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(11,92,173,.14);
+    }
+
+    /* Open states */
+    body.menu-open{
+      overflow: hidden;
+    }
+    body.menu-open .drawer-backdrop{
+      opacity: 1;
+      pointer-events: auto;
+    }
+    body.menu-open .drawer{
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    body.menu-open .burger span:nth-child(1){ top:6px; transform: rotate(45deg); }
+    body.menu-open .burger span:nth-child(2){ opacity:0; }
+    body.menu-open .burger span:nth-child(3){ top:6px; transform: rotate(-45deg); }
+
     /* Hero */
     .hero{
       padding: 72px 0 38px;
@@ -92,6 +226,7 @@
       margin: 0 0 10px;
       font-size: clamp(40px, 5vw, 64px);
       letter-spacing: -1px;
+      color: var(--primary); /* ✅ H1 i logo-blå */
     }
     .hero p.lead{
       margin: 0 auto 18px;
@@ -133,6 +268,7 @@
       height: 18px;
       margin-top: 2px;
       flex: 0 0 18px;
+      color: rgba(11,18,32,.88);
     }
     .hint{
       margin: 26px auto 0;
@@ -141,10 +277,37 @@
       font-size: 20px;
     }
 
-    /* Pricing */
-    .section{
-      padding: 26px 0 78px;
+    /* Pricing wrapper with dynamic background */
+    .pricing-wrap{
+      position: relative;
+      padding: 30px 0 78px;
+      overflow: hidden;
     }
+    .pricing-wrap::before{
+      content:"";
+      position:absolute;
+      inset:-120px -120px -120px -120px;
+      background:
+        radial-gradient(1200px 600px at 12% 15%, rgba(255, 238, 208, .65), transparent 60%),
+        radial-gradient(1000px 520px at 80% 20%, rgba(212, 233, 255, .75), transparent 62%),
+        radial-gradient(900px 520px at 55% 78%, rgba(230, 214, 255, .55), transparent 60%),
+        linear-gradient(180deg, rgba(244,246,251,1) 0%, rgba(244,246,251,1) 35%, rgba(244,246,251,0.0) 100%);
+      filter: saturate(1.05);
+      pointer-events:none;
+    }
+    .pricing-wrap::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: linear-gradient(180deg, rgba(244,246,251,0) 0%, rgba(244,246,251,0) 55%, rgba(244,246,251,1) 100%);
+      pointer-events:none;
+    }
+    .pricing-wrap > .container{
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Pricing section */
     .section h2{
       margin: 0 0 10px;
       font-size: 28px;
@@ -167,7 +330,7 @@
     }
 
     .card{
-      background: var(--surface);
+      background: rgba(255,255,255,.96);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
@@ -292,9 +455,10 @@
       height: 18px;
       margin-top: 1px;
       flex: 0 0 18px;
+      color: rgba(11,18,32,.85);
     }
 
-    /* Highlight: 2 timer = Mest verdi (i tråd med strategien din) */
+    /* Highlight: 2 timer = Mest verdi */
     .card.featured{
       outline: 2px solid rgba(11,92,173,.25);
       transform: translateY(-4px);
@@ -317,13 +481,16 @@
       .card.featured{ transform: none; }
       nav ul{ gap: 16px; }
     }
-    @media (max-width: 640px){
+    @media (max-width: 740px){
+      nav{ display:none; }
+      .menu-btn{ display:flex; }
       .topbar{ padding: 14px 0; }
-      nav{ display:none; } /* enkel mobil – hamburger kan legges til senere */
+    }
+    @media (max-width: 640px){
       .hero{ padding-top: 54px; }
 
-      /* LOGO: fortsatt større, men skalerer ned på mobil */
-      .brand img{ width: 40px; height: 40px; }
+      /* Logo skalerer litt ned, men fortsatt tydelig større enn tekst */
+      .brand img{ width: 46px; height: 46px; }
       .brand span{ font-size: 17px; }
     }
   </style>
@@ -332,7 +499,7 @@
 <body>
   <header>
     <div class="container topbar">
-      <a class="brand" href="#top">
+      <a class="brand" href="#top" aria-label="Til toppen">
         <img src="images/logo-hjelpeportalen.svg" alt="Hjelpeportalen logo" />
         <span>Hjelpeportalen</span>
       </a>
@@ -345,8 +512,29 @@
           <li><a href="#priser">Priser</a></li>
         </ul>
       </nav>
+
+      <button class="menu-btn" id="menuBtn" aria-label="Åpne meny" aria-controls="mobileMenu" aria-expanded="false">
+        <div class="burger" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </div>
+      </button>
     </div>
   </header>
+
+  <!-- Mobile menu -->
+  <div class="drawer-backdrop" id="menuBackdrop" aria-hidden="true"></div>
+  <div class="drawer" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Meny">
+    <div class="row">
+      <div class="title">Meny</div>
+      <button class="close" id="menuClose" aria-label="Lukk meny">✕</button>
+    </div>
+    <nav>
+      <a href="#tjenester" class="mLink">Tjenester <span class="pill">Hjelp</span></a>
+      <a href="#om" class="mLink">Om oss <span class="pill">Trygghet</span></a>
+      <a href="#kontakt" class="mLink">Kontakt <span class="pill">Svar</span></a>
+      <a href="#priser" class="mLink">Priser <span class="pill">Fast</span></a>
+    </nav>
+  </div>
 
   <main id="top">
     <section class="hero">
@@ -393,7 +581,7 @@
       </div>
     </section>
 
-    <section class="section" id="priser">
+    <section class="pricing-wrap section" id="priser">
       <div class="container">
         <h2>Priser</h2>
         <p class="sub">
@@ -483,7 +671,7 @@
             </div>
           </article>
 
-          <!-- 2 timer (featured = Mest verdi) -->
+          <!-- 2 timer (featured) -->
           <article class="card featured">
             <div class="banner">2 timer – Mest verdi</div>
             <div class="body">
@@ -560,13 +748,38 @@
 
     function openBooking(btn){
       const duration = btn?.dataset?.duration || "60";
-
-      // Når du får bookinglenke: bytt denne ut med window.open(...) eller popup/iframe.
-      // Eksempel:
-      // window.open("https://DIN-BOOKING-LENKE?duration=" + duration, "_blank");
-
       alert("Booking er ikke koblet til ennå. Varighet valgt: " + duration + " minutter.");
     }
+
+    // Mobile menu logic
+    (function(){
+      const body = document.body;
+      const btn = document.getElementById("menuBtn");
+      const closeBtn = document.getElementById("menuClose");
+      const backdrop = document.getElementById("menuBackdrop");
+      const links = document.querySelectorAll(".mLink");
+
+      function openMenu(){
+        body.classList.add("menu-open");
+        btn.setAttribute("aria-expanded","true");
+        btn.setAttribute("aria-label","Lukk meny");
+      }
+      function closeMenu(){
+        body.classList.remove("menu-open");
+        btn.setAttribute("aria-expanded","false");
+        btn.setAttribute("aria-label","Åpne meny");
+      }
+      btn?.addEventListener("click", () => {
+        if(body.classList.contains("menu-open")) closeMenu();
+        else openMenu();
+      });
+      closeBtn?.addEventListener("click", closeMenu);
+      backdrop?.addEventListener("click", closeMenu);
+      links.forEach(a => a.addEventListener("click", closeMenu));
+      document.addEventListener("keydown", (e) => {
+        if(e.key === "Escape") closeMenu();
+      });
+    })();
   </script>
 </body>
 </html>
