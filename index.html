@@ -58,7 +58,7 @@
       min-width: 220px;
     }
 
-    /* LOGO: tydelig større enn før, matcher/overgår teksten */
+    /* LOGO */
     .brand img{
       width: 56px;
       height: 56px;
@@ -201,32 +201,85 @@
     }
 
     /* Open states */
-    body.menu-open{
-      overflow: hidden;
-    }
-    body.menu-open .drawer-backdrop{
-      opacity: 1;
-      pointer-events: auto;
-    }
-    body.menu-open .drawer{
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
-    }
+    body.menu-open{ overflow: hidden; }
+    body.menu-open .drawer-backdrop{ opacity: 1; pointer-events: auto; }
+    body.menu-open .drawer{ opacity: 1; transform: translateY(0); pointer-events: auto; }
     body.menu-open .burger span:nth-child(1){ top:6px; transform: rotate(45deg); }
     body.menu-open .burger span:nth-child(2){ opacity:0; }
     body.menu-open .burger span:nth-child(3){ top:6px; transform: rotate(-45deg); }
 
-    /* Hero */
+    /* =========================
+       HERO + VIDEO (NEW)
+       ========================= */
     .hero{
       padding: 72px 0 38px;
       text-align:center;
     }
+
+    .hero-media{
+      position: relative;
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      background: #0b1220;
+      margin: 0 auto 22px;
+      width: min(980px, 100%);
+      aspect-ratio: 16 / 9;
+      isolation: isolate;
+    }
+
+    /* fallback gradient if video doesn't load */
+    .hero-media::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(900px 520px at 15% 20%, rgba(212,233,255,.55), transparent 60%),
+        radial-gradient(900px 520px at 80% 30%, rgba(230,214,255,.45), transparent 60%),
+        linear-gradient(180deg, rgba(11,18,32,.35), rgba(11,18,32,.65));
+      z-index: 0;
+    }
+
+    .hero-video{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      object-position: center;
+      z-index: 1;
+      opacity: .92;
+    }
+
+    /* soft overlay so text above still feels "brand" */
+    .hero-media::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: linear-gradient(180deg, rgba(244,246,251,.70) 0%, rgba(244,246,251,.55) 35%, rgba(244,246,251,.85) 100%);
+      z-index: 2;
+      pointer-events:none;
+    }
+
+    /* optional subtle vignette for depth */
+    .hero-vignette{
+      position:absolute;
+      inset:0;
+      z-index: 3;
+      pointer-events:none;
+      background:
+        radial-gradient(1200px 600px at 50% 40%, rgba(255,255,255,.00) 0%, rgba(0,0,0,.10) 75%, rgba(0,0,0,.18) 100%);
+      mix-blend-mode: multiply;
+      opacity: .35;
+    }
+
+    /* Title/lead */
     .hero h1{
       margin: 0 0 10px;
       font-size: clamp(40px, 5vw, 64px);
       letter-spacing: -1px;
-      color: var(--primary); /* ✅ H1 i logo-blå */
+      color: var(--primary);
     }
     .hero p.lead{
       margin: 0 auto 18px;
@@ -235,6 +288,7 @@
       color: var(--muted);
       font-weight: 700;
     }
+
     .cta{
       display:inline-flex;
       align-items:center;
@@ -277,6 +331,11 @@
       font-size: 20px;
     }
 
+    /* Respect reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      .hero-video{ display:none; }
+    }
+
     /* Pricing wrapper with dynamic background */
     .pricing-wrap{
       position: relative;
@@ -302,10 +361,7 @@
       background: linear-gradient(180deg, rgba(244,246,251,0) 0%, rgba(244,246,251,0) 55%, rgba(244,246,251,1) 100%);
       pointer-events:none;
     }
-    .pricing-wrap > .container{
-      position: relative;
-      z-index: 1;
-    }
+    .pricing-wrap > .container{ position: relative; z-index: 1; }
 
     /* Pricing section */
     .section h2{
@@ -357,17 +413,8 @@
       gap: 12px;
       flex: 1;
     }
-    .plan-title{
-      font-size: 22px;
-      margin: 0;
-      letter-spacing: -0.2px;
-    }
-    .plan-desc{
-      margin: 0;
-      color: var(--muted);
-      font-weight: 600;
-      line-height: 1.4;
-    }
+    .plan-title{ font-size: 22px; margin: 0; letter-spacing: -0.2px; }
+    .plan-desc{ margin: 0; color: var(--muted); font-weight: 600; line-height: 1.4; }
 
     .price{
       margin-top: 6px;
@@ -387,11 +434,7 @@
       font-size: 13px;
       line-height: 1.3;
     }
-    .note{
-      color: var(--muted);
-      font-size: 12.5px;
-      font-weight: 700;
-    }
+    .note{ color: var(--muted); font-size: 12.5px; font-weight: 700; }
 
     .btn-row{
       display:flex;
@@ -416,15 +459,9 @@
     .btn.primary:hover{ opacity: .92; }
     .btn.ghost:hover{ background: rgba(17,24,39,.04); }
 
-    .divider{
-      height: 1px;
-      background: rgba(17,24,39,.10);
-      margin: 14px 0 0;
-    }
+    .divider{ height: 1px; background: rgba(17,24,39,.10); margin: 14px 0 0; }
 
-    .points{
-      padding: 16px 22px 22px;
-    }
+    .points{ padding: 16px 22px 22px; }
     .points h4{
       margin: 0 0 12px;
       font-size: 14px;
@@ -463,9 +500,7 @@
       outline: 2px solid rgba(11,92,173,.25);
       transform: translateY(-4px);
     }
-    .card.featured .banner{
-      background: var(--primary);
-    }
+    .card.featured .banner{ background: var(--primary); }
 
     footer{
       padding: 34px 0 46px;
@@ -480,6 +515,7 @@
       .pricing-grid{ grid-template-columns: 1fr; }
       .card.featured{ transform: none; }
       nav ul{ gap: 16px; }
+      .hero-media{ aspect-ratio: 16 / 10; }
     }
     @media (max-width: 740px){
       nav{ display:none; }
@@ -488,10 +524,9 @@
     }
     @media (max-width: 640px){
       .hero{ padding-top: 54px; }
-
-      /* Logo skalerer litt ned, men fortsatt tydelig større enn tekst */
       .brand img{ width: 46px; height: 46px; }
       .brand span{ font-size: 17px; }
+      .hero-media{ border-radius: 18px; }
     }
   </style>
 </head>
@@ -539,6 +574,22 @@
   <main id="top">
     <section class="hero">
       <div class="container">
+
+        <!-- HERO VIDEO (NEW) -->
+        <div class="hero-media" aria-label="Hjelpeportalen hero-video">
+          <video
+            class="hero-video"
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="metadata"
+          >
+            <source src="assets/video/hero-hjelpeportalen-1080.mp4" type="video/mp4" />
+          </video>
+          <div class="hero-vignette" aria-hidden="true"></div>
+        </div>
+
         <h1>Hverdagshjelp</h1>
         <p class="lead">Fast pris. Valgfri tid. Trygge hjelpere.</p>
 
@@ -750,6 +801,21 @@
       const duration = btn?.dataset?.duration || "60";
       alert("Booking er ikke koblet til ennå. Varighet valgt: " + duration + " minutter.");
     }
+
+    // Make sure hero video tries to play (some browsers require a nudge)
+    (function(){
+      const v = document.querySelector(".hero-video");
+      if(!v) return;
+      const tryPlay = () => {
+        const p = v.play();
+        if(p && typeof p.catch === "function") p.catch(()=>{});
+      };
+      document.addEventListener("visibilitychange", () => {
+        if(!document.hidden) tryPlay();
+      });
+      // initial attempt
+      tryPlay();
+    })();
 
     // Mobile menu logic
     (function(){
