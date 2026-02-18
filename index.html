@@ -58,13 +58,11 @@
       min-width: 220px;
     }
 
-    /* LOGO: større enn tekst, svart logo */
+    /* LOGO: større enn tekst (uten å endre farge) */
     .brand img{
       width: 70px;
       height: 70px;
       display:block;
-      /* Hvis SVG ikke er svart, kan du bytte til en svart fil:
-         images/logo-hjelpeportalen-black.svg */
     }
     .brand span{
       font-size: 18px;
@@ -436,7 +434,14 @@
       font-size: 13px;
       line-height: 1.3;
     }
-    .note{ color: var(--muted); font-size: 12.5px; font-weight: 700; }
+
+    /* Denne teksten er forklaringen under pris */
+    .note{
+      color: rgba(11,18,32,.78);
+      font-size: 12.5px;
+      font-weight: 800;
+      line-height: 1.35;
+    }
 
     .btn-row{
       display:flex;
@@ -463,40 +468,6 @@
 
     .divider{ height: 1px; background: rgba(17,24,39,.10); margin: 14px 0 0; }
 
-    .points{ padding: 16px 22px 22px; }
-    .points h4{
-      margin: 0 0 12px;
-      font-size: 14px;
-      color: var(--text);
-      opacity: .9;
-      letter-spacing: .2px;
-    }
-    .points ul{
-      margin:0;
-      padding:0;
-      list-style:none;
-      display:grid;
-      gap: 10px;
-      color: var(--text);
-      font-weight: 700;
-      font-size: 13.5px;
-    }
-    .points li{
-      display:flex;
-      gap: 10px;
-      align-items:flex-start;
-      color: rgba(11,18,32,.92);
-      font-weight: 700;
-      line-height: 1.35;
-    }
-    .points svg{
-      width: 18px;
-      height: 18px;
-      margin-top: 1px;
-      flex: 0 0 18px;
-      color: rgba(11,18,32,.85);
-    }
-
     /* Highlight: 2 timer = Mest verdi */
     .card.featured{
       outline: 2px solid rgba(11,92,173,.25);
@@ -504,7 +475,7 @@
     }
     .card.featured .banner{ background: var(--primary); }
 
-    /* New: "Hva rekker vi" info box */
+    /* Info-boks: Hva rekker vi (beholder den – fjerner bare "eksempel-listene" i boksene) */
     .time-guide{
       margin: 26px auto 0;
       max-width: 980px;
@@ -615,8 +586,8 @@
   <header>
     <div class="container topbar">
       <a class="brand" href="#top" aria-label="Til toppen">
-        <!-- Bytt til en svart logo-fil om nødvendig -->
-        <img src="images/logo-hjelpeportalen-black.svg" alt="Hjelpeportalen logo" />
+        <!-- Refererer til eksisterende fil i repo (svart original, ingen fargeendring) -->
+        <img src="images/logo-hjelpeportalen.svg" alt="Hjelpeportalen logo" />
         <span>Hjelpeportalen</span>
       </a>
 
@@ -717,7 +688,7 @@
       <div class="container">
         <h2>Priser</h2>
         <p class="sub">
-          Velg varighet som passer behovet ditt. Prisene er faste og tydelige – og kjøring i lokal avdeling er inkludert.
+          Velg varighet som passer behovet ditt. Prisene er faste og tydelige – og lokal kjøring er inkludert.
         </p>
 
         <div class="pricing-grid">
@@ -730,7 +701,7 @@
 
               <div class="price">
                 <div class="kr">kr 690</div>
-                <div class="meta">per oppdrag<br/>inkl. mva + kjøring lokalt</div>
+                <div class="meta">per oppdrag<br/>inkl. mva og lokal kjøring</div>
               </div>
 
               <div class="note">
@@ -745,24 +716,6 @@
 
               <div class="divider"></div>
             </div>
-
-            <div class="points">
-              <h4>Eksempler på hjelp</h4>
-              <ul>
-                <li>
-                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                  Lett husarbeid og praktisk hjelp
-                </li>
-                <li>
-                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                  Små ærender og følge (kort)
-                </li>
-                <li>
-                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                  Rydding / sortering (kort økt)
-                </li>
-              </ul>
-            </div>
           </article>
 
           <!-- 1,5 time -->
@@ -774,7 +727,7 @@
 
               <div class="price">
                 <div class="kr">kr 990</div>
-                <div class="meta">per oppdrag<br/>inkl. mva + kjøring lokalt</div>
+                <div class="meta">per oppdrag<br/>inkl. mva og lokal kjøring</div>
               </div>
 
               <div class="note">
@@ -789,24 +742,6 @@
 
               <div class="divider"></div>
             </div>
-
-            <div class="points">
-              <h4>Eksempler på hjelp</h4>
-              <ul>
-                <li>
-                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                  Kombinasjon av 2–3 oppgaver
-                </li>
-                <li>
-                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                  Strukturering og lett planlegging
-                </li>
-                <li>
-                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                  Hjelp for pårørende (oversikt + gjennomføring)
-                </li>
-              </ul>
-            </div>
           </article>
 
           <!-- 2 timer (featured) -->
@@ -818,7 +753,7 @@
 
               <div class="price">
                 <div class="kr">kr 1 290</div>
-                <div class="meta">per oppdrag<br/>inkl. mva + kjøring lokalt</div>
+                <div class="meta">per oppdrag<br/>inkl. mva og lokal kjøring</div>
               </div>
 
               <div class="note">
@@ -833,33 +768,15 @@
 
               <div class="divider"></div>
             </div>
-
-            <div class="points">
-              <h4>Eksempler på hjelp</h4>
-              <ul>
-                <li>
-                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                  Flere rom / større oppgavepakke
-                </li>
-                <li>
-                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                  Sortering, rydding, lett rengjøring
-                </li>
-                <li>
-                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                  Praktisk hjelp + følge/ærend i samme besøk
-                </li>
-              </ul>
-            </div>
           </article>
         </div>
 
-        <!-- New: Time guide / expectations -->
+        <!-- Hva rekker vi-boks (beholder den – gir ekstra forventningsstyring) -->
         <div class="time-guide" aria-label="Hva rekker vi på ulike tidsvalg">
           <h3>Hva rekker vi på ulike tidsvalg?</h3>
           <p>
             For å sikre ro, kvalitet og forutsigbarhet anbefaler vi å velge litt ekstra tid ved oppdrag med kjøring og ventetid.
-            (Kjøring i lokal avdeling er inkludert i prisen.)
+            Lokal kjøring er inkludert i prisen.
           </p>
 
           <div class="time-cols">
@@ -867,7 +784,7 @@
               <div class="t">1 time – best for</div>
               <ul>
                 <li><span class="dot"></span>En konkret oppgave hjemme</li>
-                <li><span class="dot"></span>Enkelt ærend i nærområdet (kort)</li>
+                <li><span class="dot"></span>Et kort ærend i nærområdet</li>
                 <li><span class="dot"></span>Lett matlaging / lett organisering</li>
               </ul>
             </div>
@@ -875,7 +792,7 @@
             <div class="time-col">
               <div class="t">1,5 time – anbefalt for</div>
               <ul>
-                <li><span class="dot"></span>Kombinasjon av praktisk hjelp + ett ærend</li>
+                <li><span class="dot"></span>Kombinasjon av praktisk hjelp og ett ærend</li>
                 <li><span class="dot"></span>Oppgaver som krever litt planlegging/struktur</li>
                 <li><span class="dot"></span>Følge når det normalt er lite ventetid</li>
               </ul>
@@ -885,7 +802,7 @@
               <div class="t">2 timer – anbefalt for</div>
               <ul>
                 <li><span class="dot"></span>Følge til lege/avtaler med ventetid</li>
-                <li><span class="dot"></span>Kjøring + flere gjøremål i samme besøk</li>
+                <li><span class="dot"></span>Kjøring og flere gjøremål i samme besøk</li>
                 <li><span class="dot"></span>Større rydde-/organiseringsoppgaver</li>
               </ul>
             </div>
@@ -945,7 +862,6 @@
       document.addEventListener("visibilitychange", () => {
         if(!document.hidden) tryPlay();
       });
-      // initial attempt
       tryPlay();
     })();
 
