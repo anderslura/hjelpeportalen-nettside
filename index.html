@@ -21,12 +21,18 @@
       --radius: 18px;
       --ring: rgba(11,92,173,.25);
 
+      /* Min beste anbefaling: roligere cards (ikke blendende hvitt) */
+      --card-bg: #f7f8fc;
+
       /* Konsistent bakgrunn for HELE siden */
       --page-bg:
         radial-gradient(1200px 600px at 12% 15%, rgba(255, 238, 208, .65), transparent 60%),
         radial-gradient(1000px 520px at 80% 20%, rgba(212, 233, 255, .75), transparent 62%),
         radial-gradient(900px 520px at 55% 78%, rgba(230, 214, 255, .55), transparent 60%),
         linear-gradient(180deg, rgba(244,246,251,1) 0%, rgba(244,246,251,1) 35%, rgba(244,246,251,1) 100%);
+
+      /* Hero radius: brukes for å tvinge video/overlays til samme runding */
+      --hero-radius: 22px;
     }
 
     *{ box-sizing: border-box; }
@@ -72,8 +78,6 @@
       width: 70px;
       height: 70px;
       display:block;
-
-      /* Dette gjør bildet “svart” visuelt */
       filter: grayscale(1) saturate(0) brightness(0);
     }
     .brand span{
@@ -228,8 +232,8 @@
 
     .hero-media{
       position: relative;
-      border-radius: 22px;
-      overflow: hidden;
+      border-radius: var(--hero-radius);
+      overflow: hidden; /* clipper */
       border: 1px solid var(--border);
       box-shadow: var(--shadow);
       background: #0b1220;
@@ -237,6 +241,18 @@
       width: min(980px, 100%);
       aspect-ratio: 16 / 9;
       isolation: isolate;
+
+      /* iOS/Safari-fiks: tvinger clipping med video */
+      clip-path: inset(0 round var(--hero-radius));
+      transform: translateZ(0);
+    }
+
+    /* Sørger for at ALLE lag arver samme runding */
+    .hero-media::before,
+    .hero-media::after,
+    .hero-video,
+    .hero-vignette{
+      border-radius: inherit;
     }
 
     .hero-media::before{
@@ -259,6 +275,7 @@
       object-position: center;
       z-index: 1;
       opacity: .92;
+      transform: translateZ(0);
     }
 
     .hero-media::after{
@@ -341,14 +358,13 @@
       .hero-video{ display:none; }
     }
 
-    /* Pricing wrapper (ikke egen bakgrunn nå – siden har samme bakgrunn overalt) */
+    /* Pricing */
     .pricing-wrap{
       position: relative;
       padding: 30px 0 78px;
       overflow: hidden;
     }
 
-    /* Pricing section */
     .section h2{
       margin: 0 0 10px;
       font-size: 28px;
@@ -370,9 +386,10 @@
       align-items: stretch;
     }
 
+    /* ✅ Roligere cards (mindre “hvitt i trynet”) */
     .card{
-      background: rgba(255,255,255,.96);
-      border: 1px solid var(--border);
+      background: var(--card-bg);
+      border: 1px solid rgba(17, 24, 39, .10);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       overflow:hidden;
@@ -442,8 +459,6 @@
       background: #fff;
       cursor:pointer;
     }
-
-    /* Bestill-knapp = blå med hvit tekst */
     .btn.primary{
       background: var(--primary);
       color: #fff;
@@ -451,12 +466,10 @@
       box-shadow: 0 10px 20px rgba(11,92,173,.16);
     }
     .btn.primary:hover{ background: var(--primary-2); }
-
     .btn.ghost:hover{ background: rgba(17,24,39,.04); }
 
     .divider{ height: 1px; background: rgba(17,24,39,.10); margin: 14px 0 0; }
 
-    /* Highlight: 2 timer = Mest verdi */
     .card.featured{
       outline: 2px solid rgba(11,92,173,.25);
       transform: translateY(-4px);
@@ -467,8 +480,8 @@
     .time-guide{
       margin: 26px auto 0;
       max-width: 980px;
-      background: rgba(255,255,255,.92);
-      border: 1px solid var(--border);
+      background: var(--card-bg); /* samme rolige tone */
+      border: 1px solid rgba(17, 24, 39, .10);
       border-radius: 16px;
       box-shadow: 0 10px 26px rgba(17,24,39,.06);
       padding: 18px 18px 14px;
@@ -498,7 +511,8 @@
       border: 1px solid rgba(17,24,39,.10);
       border-radius: 14px;
       padding: 12px 12px 10px;
-      background: rgba(255,255,255,.96);
+      background: rgba(255,255,255,.72); /* litt glass, men rolig */
+      backdrop-filter: blur(6px);
     }
     .time-col .t{
       font-weight: 900;
@@ -566,7 +580,9 @@
       .hero{ padding-top: 54px; }
       .brand img{ width: 72px; height: 72px; }
       .brand span{ font-size: 17px; }
-      .hero-media{ border-radius: 18px; }
+
+      /* Mobil: litt mindre radius, men ALT følger med */
+      :root{ --hero-radius: 18px; }
     }
   </style>
 </head>
@@ -614,7 +630,6 @@
   <main id="top">
     <section class="hero">
       <div class="container">
-
         <div class="hero-media" aria-label="Hjelpeportalen hero-video">
           <video class="hero-video" autoplay muted loop playsinline preload="metadata">
             <source src="assets/video/hero-hjelpeportalen-1080.mp4" type="video/mp4" />
