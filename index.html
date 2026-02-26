@@ -73,16 +73,19 @@
       min-width: 220px;
     }
 
-    /* LOGO: større + tvang til svart (uansett om SVG er blå) */
+    /* LOGO: større + behold original SVG-farger (ingen filter) */
     .brand img{
       width: 70px;
       height: 70px;
       display:block;
-      filter: grayscale(1) saturate(0) brightness(0);
+      filter: none;
     }
+
+    /* Brand-tekst: sett til blå */
     .brand span{
       font-size: 18px;
       line-height: 1;
+      color: var(--primary);
     }
 
     nav ul{
