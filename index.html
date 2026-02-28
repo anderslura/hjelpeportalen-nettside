@@ -460,9 +460,15 @@
     }
     .card.featured .banner{ background: var(--primary); }
 
+    /* =========================
+       TJENESTEBILDER: MER MOTIV
+       - Desktop/tablet: 4:3 (mindre cropping enn 16:9)
+       - Mobil: 1:1 (viser mye mer)
+       - Smart crop: object-position
+       ========================= */
     .media{
       width: 100%;
-      aspect-ratio: 16 / 9;
+      aspect-ratio: 4 / 3; /* ✅ var 16/9 */
       border-radius: 14px;
       border: 1px solid rgba(17,24,39,.10);
       background:
@@ -486,13 +492,18 @@
       color: rgba(11,92,173,.95);
     }
 
-    /* ✅ Bilde inne i .media */
     .media img{
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center 25%; /* ✅ viser mer av ansikt/overkropp */
       display:block;
     }
+
+    /* Per-bilde finjustering (valgfritt, men gir proff “crop”) */
+    .media img.pos-top{ object-position: center 18%; }
+    .media img.pos-mid{ object-position: center 28%; }
+    .media img.pos-low{ object-position: center 40%; }
 
     .pills{
       display:flex;
@@ -516,11 +527,17 @@
       nav ul{ gap: 16px; }
       .hero-media{ aspect-ratio: 16 / 10; }
     }
+
+    /* ✅ Mobil: mer motiv, mindre cropping */
     @media (max-width: 740px){
       nav{ display:none; }
       .menu-btn{ display:flex; }
       .topbar{ padding: 14px 0; }
+
+      .media{ aspect-ratio: 1 / 1; }             /* ✅ firkant på mobil */
+      .media img{ object-position: center 20%; } /* ✅ enda mer ansikt */
     }
+
     @media (max-width: 640px){
       .hero{ padding-top: 54px; }
       .brand img{ width: 72px; height: 72px; }
@@ -643,6 +660,7 @@
             <div class="body">
               <div class="media" aria-label="Sosial støtte – bilde">
                 <img
+                  class="pos-mid"
                   src="images/sosialstotte.jpg"
                   alt="Sosial støtte med trygg samtale og samvær"
                   loading="lazy"
@@ -670,6 +688,7 @@
             <div class="body">
               <div class="media" aria-label="Hverdagshjelp i hjemmet – bilde">
                 <img
+                  class="pos-top"
                   src="images/hverdagshjelpihjemmet.jpg"
                   alt="Hverdagshjelp i hjemmet med praktisk støtte"
                   loading="lazy"
@@ -697,6 +716,7 @@
             <div class="body">
               <div class="media" aria-label="Følge og ærender – bilde">
                 <img
+                  class="pos-mid"
                   src="images/folgeogarender.jpg"
                   alt="Følge og ærender, hjelp til handling og korte ærend"
                   loading="lazy"
@@ -723,6 +743,7 @@
             <div class="body">
               <div class="media" aria-label="Følge til avtale – bilde">
                 <img
+                  class="pos-top"
                   src="images/folgetilavtale.jpg"
                   alt="Følge til avtale, trygg ledsagelse til time"
                   loading="lazy"
