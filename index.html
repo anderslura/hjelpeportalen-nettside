@@ -21,10 +21,8 @@
       --radius: 18px;
       --ring: rgba(11,92,173,.25);
 
-      /* Roligere cards */
       --card-bg: #f7f8fc;
 
-      /* Konsistent bakgrunn for HELE siden */
       --page-bg:
         radial-gradient(1200px 600px at 12% 15%, rgba(255, 238, 208, .65), transparent 60%),
         radial-gradient(1000px 520px at 80% 20%, rgba(212, 233, 255, .75), transparent 62%),
@@ -46,7 +44,6 @@
     a{ color: inherit; text-decoration: none; }
     .container{ width:min(1100px, calc(100% - 48px)); margin:0 auto; }
 
-    /* Topbar */
     header{
       position: sticky;
       top: 0;
@@ -101,7 +98,6 @@
     }
     nav a:hover{ opacity: 1; }
 
-    /* Mobile menu button */
     .menu-btn{
       display:none;
       align-items:center;
@@ -136,7 +132,6 @@
     .burger span:nth-child(2){ top:6px; }
     .burger span:nth-child(3){ top:12px; }
 
-    /* Mobile drawer */
     .drawer-backdrop{
       position: fixed;
       inset: 0;
@@ -216,7 +211,6 @@
       border: 1px solid rgba(11,92,173,.14);
     }
 
-    /* Open states */
     body.menu-open{ overflow: hidden; }
     body.menu-open .drawer-backdrop{ opacity: 1; pointer-events: auto; }
     body.menu-open .drawer{ opacity: 1; transform: translateY(0); pointer-events: auto; }
@@ -224,7 +218,6 @@
     body.menu-open .burger span:nth-child(2){ opacity:0; }
     body.menu-open .burger span:nth-child(3){ top:6px; transform: rotate(-45deg); }
 
-    /* HERO + VIDEO */
     .hero{
       padding: 72px 0 38px;
       text-align:center;
@@ -241,7 +234,6 @@
       width: min(980px, 100%);
       aspect-ratio: 16 / 9;
       isolation: isolate;
-
       clip-path: inset(0 round var(--hero-radius));
       transform: translateZ(0);
     }
@@ -352,17 +344,11 @@
       font-size: 20px;
     }
 
-    @media (prefers-reduced-motion: reduce){
-      .hero-video{ display:none; }
-    }
-
-    /* Sections */
     .section{
       position: relative;
       padding: 30px 0 78px;
       overflow: hidden;
     }
-
     .section h2{
       margin: 0 0 10px;
       font-size: 28px;
@@ -377,7 +363,6 @@
       font-weight: 600;
     }
 
-    /* Grids */
     .grid-3{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
@@ -385,7 +370,6 @@
       align-items: stretch;
     }
 
-    /* Cards */
     .card{
       background: var(--card-bg);
       border: 1px solid rgba(17, 24, 39, .10);
@@ -476,7 +460,6 @@
     }
     .card.featured .banner{ background: var(--primary); }
 
-    /* Service card media placeholder */
     .media{
       width: 100%;
       aspect-ratio: 16 / 9;
@@ -503,7 +486,6 @@
       color: rgba(11,92,173,.95);
     }
 
-    /* Duration pills */
     .pills{
       display:flex;
       flex-wrap: wrap;
@@ -520,7 +502,6 @@
       border-radius: 999px;
     }
 
-    /* Responsive */
     @media (max-width: 980px){
       .grid-3{ grid-template-columns: 1fr; }
       .card.featured{ transform: none; }
@@ -575,7 +556,6 @@
     </div>
   </header>
 
-  <!-- Mobile menu -->
   <div class="drawer-backdrop" id="menuBackdrop" aria-hidden="true"></div>
   <div class="drawer" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Meny">
     <div class="row">
@@ -642,7 +622,6 @@
       </div>
     </section>
 
-    <!-- TJENESTER -->
     <section class="section" aria-label="Tjenester">
       <div class="container">
         <h2>Tjenester</h2>
@@ -652,30 +631,6 @@
 
         <div class="grid-3">
           <article class="card">
-            <div class="banner">Hjelp i hjemmet</div>
-            <div class="body">
-              <div class="media" aria-label="Bildeplassholder"><small>Bilde kommer</small></div>
-              <h3 class="plan-title">Hverdagshjelp i hjemmet</h3>
-              <p class="plan-desc">
-                Praktisk og trygg hjelp med rydding, enkel matlaging, organisering og digital støtte – tilpasset ditt behov.
-              </p>
-
-              <div class="pills" aria-label="Varigheter">
-                <span class="pill">1t</span>
-                <span class="pill">1t 30m</span>
-                <span class="pill">2t</span>
-              </div>
-
-              <div class="btn-row">
-                <button class="btn primary" onclick="openBookingService('hverdagshjelp')">Bestill</button>
-                <button class="btn ghost" onclick="scrollToDetails()">Se detaljer</button>
-              </div>
-
-              <div class="divider"></div>
-            </div>
-          </article>
-
-          <article class="card">
             <div class="banner">Sosial støtte</div>
             <div class="body">
               <div class="media" aria-label="Bildeplassholder"><small>Bilde kommer</small></div>
@@ -683,41 +638,53 @@
               <p class="plan-desc">
                 Sosial støtte gjennom samtale, samvær og enkle aktiviteter hjemme eller ute – trygt og innen avtalt tid.
               </p>
-
               <div class="pills" aria-label="Varigheter">
                 <span class="pill">1t</span>
                 <span class="pill">1t 30m</span>
                 <span class="pill">2t</span>
               </div>
-
               <div class="btn-row">
                 <button class="btn primary" onclick="openBookingService('sosial-stotte')">Bestill</button>
-                <button class="btn ghost" onclick="scrollToDetails()">Se detaljer</button>
               </div>
-
               <div class="divider"></div>
             </div>
           </article>
 
           <article class="card">
-            <div class="banner">Handling og ærender</div>
+            <div class="banner">Hverdagshjelp i hjemmet</div>
+            <div class="body">
+              <div class="media" aria-label="Bildeplassholder"><small>Bilde kommer</small></div>
+              <h3 class="plan-title">Hverdagshjelp i hjemmet</h3>
+              <p class="plan-desc">
+                Praktisk og trygg hjelp i hjemmet til daglige gjøremål som rydding, enkel matlaging, organisering og digital støtte.
+              </p>
+              <div class="pills" aria-label="Varigheter">
+                <span class="pill">1t</span>
+                <span class="pill">1t 30m</span>
+                <span class="pill">2t</span>
+              </div>
+              <div class="btn-row">
+                <button class="btn primary" onclick="openBookingService('hverdagshjelp')">Bestill</button>
+              </div>
+              <div class="divider"></div>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="banner">Følge og ærender</div>
             <div class="body">
               <div class="media" aria-label="Bildeplassholder"><small>Bilde kommer</small></div>
               <h3 class="plan-title">Følge og ærender</h3>
               <p class="plan-desc">
-                Ledsagelse til korte ærender som handling og henting, gjennomført effektivt innen bestilt tidsramme.
+                Ledsagelse til korte ærender som handling og henting, beregnet for oppdrag uten planlagt ventetid.
               </p>
-
               <div class="pills" aria-label="Varigheter">
                 <span class="pill">1t 30m</span>
                 <span class="pill">2t</span>
               </div>
-
               <div class="btn-row">
                 <button class="btn primary" onclick="openBookingService('arender')">Bestill</button>
-                <button class="btn ghost" onclick="scrollToDetails()">Se detaljer</button>
               </div>
-
               <div class="divider"></div>
             </div>
           </article>
@@ -730,64 +697,12 @@
               <p class="plan-desc">
                 Trygg ledsagelse til avtaler som lege og møter, inkludert planlagt ventetid ved behov.
               </p>
-
               <div class="pills" aria-label="Varigheter">
                 <span class="pill">2t</span>
               </div>
-
               <div class="btn-row">
                 <button class="btn primary" onclick="openBookingService('folge-til-avtale')">Bestill</button>
-                <button class="btn ghost" onclick="scrollToDetails()">Se detaljer</button>
               </div>
-
-              <div class="divider"></div>
-            </div>
-          </article>
-
-          <article class="card">
-            <div class="banner">Rydding og organisering</div>
-            <div class="body">
-              <div class="media" aria-label="Bildeplassholder"><small>Bilde kommer</small></div>
-              <h3 class="plan-title">Organisering</h3>
-              <p class="plan-desc">
-                Struktur, rydding og system i hjemmet – for mer oversikt, ro og en enklere hverdag.
-              </p>
-
-              <div class="pills" aria-label="Varigheter">
-                <span class="pill">1t</span>
-                <span class="pill">1t 30m</span>
-                <span class="pill">2t</span>
-              </div>
-
-              <div class="btn-row">
-                <button class="btn primary" onclick="openBookingService('organisering')">Bestill</button>
-                <button class="btn ghost" onclick="scrollToDetails()">Se detaljer</button>
-              </div>
-
-              <div class="divider"></div>
-            </div>
-          </article>
-
-          <article class="card">
-            <div class="banner">Matlaging</div>
-            <div class="body">
-              <div class="media" aria-label="Bildeplassholder"><small>Bilde kommer</small></div>
-              <h3 class="plan-title">Enkel matlaging</h3>
-              <p class="plan-desc">
-                Enkel og praktisk matlaging i hjemmet – tilpasset ønsker, behov og tilgjengelig tid.
-              </p>
-
-              <div class="pills" aria-label="Varigheter">
-                <span class="pill">1t</span>
-                <span class="pill">1t 30m</span>
-                <span class="pill">2t</span>
-              </div>
-
-              <div class="btn-row">
-                <button class="btn primary" onclick="openBookingService('matlaging')">Bestill</button>
-                <button class="btn ghost" onclick="scrollToDetails()">Se detaljer</button>
-              </div>
-
               <div class="divider"></div>
             </div>
           </article>
@@ -795,7 +710,6 @@
       </div>
     </section>
 
-    <!-- PRISER (enkelt og likt for alle tjenester) -->
     <section class="section" id="priser" aria-label="Priser">
       <div class="container">
         <h2>Priser</h2>
@@ -815,9 +729,7 @@
                 <div class="meta">per oppdrag<br/>inkl. mva og nødvendig kjøring</div>
               </div>
 
-              <div class="note">
-                Samme pris for alle tjenester ved 1 time.
-              </div>
+              <div class="note">Samme pris for alle tjenester ved 1 time.</div>
 
               <div class="btn-row">
                 <button class="btn primary" data-duration="60" onclick="openBooking(this)">Bestill 1 time</button>
@@ -838,9 +750,7 @@
                 <div class="meta">per oppdrag<br/>inkl. mva og nødvendig kjøring</div>
               </div>
 
-              <div class="note">
-                Samme pris for alle tjenester ved 1,5 time.
-              </div>
+              <div class="note">Samme pris for alle tjenester ved 1,5 time.</div>
 
               <div class="btn-row">
                 <button class="btn primary" data-duration="90" onclick="openBooking(this)">Bestill 1,5 time</button>
@@ -861,9 +771,7 @@
                 <div class="meta">per oppdrag<br/>inkl. mva og nødvendig kjøring</div>
               </div>
 
-              <div class="note">
-                Samme pris for alle tjenester ved 2 timer.
-              </div>
+              <div class="note">Samme pris for alle tjenester ved 2 timer.</div>
 
               <div class="btn-row">
                 <button class="btn primary" data-duration="120" onclick="openBooking(this)">Bestill 2 timer</button>
@@ -903,17 +811,11 @@
   <script>
     document.getElementById("y").textContent = new Date().getFullYear();
 
-    function scrollToDetails(){
-      document.getElementById("om").scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-
-    // Placeholder – vi kobler bookinglink senere
     function openBooking(btn){
       const duration = btn?.dataset?.duration || "60";
       alert("Booking er ikke koblet til ennå. Varighet valgt: " + duration + " minutter.");
     }
 
-    // Placeholder for tjenesteknapper – vi kobler alt til samme link senere
     function openBookingService(serviceKey){
       alert("Booking er ikke koblet til ennå. Tjeneste valgt: " + serviceKey);
     }
