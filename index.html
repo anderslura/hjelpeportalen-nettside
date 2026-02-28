@@ -21,7 +21,7 @@
       --radius: 18px;
       --ring: rgba(11,92,173,.25);
 
-      /* Min beste anbefaling: roligere cards (ikke blendende hvitt) */
+      /* Roligere cards */
       --card-bg: #f7f8fc;
 
       /* Konsistent bakgrunn for HELE siden */
@@ -31,7 +31,6 @@
         radial-gradient(900px 520px at 55% 78%, rgba(230, 214, 255, .55), transparent 60%),
         linear-gradient(180deg, rgba(244,246,251,1) 0%, rgba(244,246,251,1) 35%, rgba(244,246,251,1) 100%);
 
-      /* Hero radius: brukes for å tvinge video/overlays til samme runding */
       --hero-radius: 22px;
     }
 
@@ -73,7 +72,6 @@
       min-width: 220px;
     }
 
-    /* LOGO: større + behold original SVG-farger (ingen filter) */
     .brand img{
       width: 70px;
       height: 70px;
@@ -81,7 +79,6 @@
       filter: none;
     }
 
-    /* Brand-tekst: sett til blå */
     .brand span{
       font-size: 18px;
       line-height: 1;
@@ -104,7 +101,7 @@
     }
     nav a:hover{ opacity: 1; }
 
-    /* Mobile menu button (hamburger) */
+    /* Mobile menu button */
     .menu-btn{
       display:none;
       align-items:center;
@@ -236,7 +233,7 @@
     .hero-media{
       position: relative;
       border-radius: var(--hero-radius);
-      overflow: hidden; /* clipper */
+      overflow: hidden;
       border: 1px solid var(--border);
       box-shadow: var(--shadow);
       background: #0b1220;
@@ -245,12 +242,10 @@
       aspect-ratio: 16 / 9;
       isolation: isolate;
 
-      /* iOS/Safari-fiks: tvinger clipping med video */
       clip-path: inset(0 round var(--hero-radius));
       transform: translateZ(0);
     }
 
-    /* Sørger for at ALLE lag arver samme runding */
     .hero-media::before,
     .hero-media::after,
     .hero-video,
@@ -331,7 +326,7 @@
 
     .checklist{
       margin: 28px auto 0;
-      width: min(520px, 100%);
+      width: min(720px, 100%);
       text-align:left;
       display:grid;
       gap: 12px;
@@ -361,8 +356,8 @@
       .hero-video{ display:none; }
     }
 
-    /* Pricing */
-    .pricing-wrap{
+    /* Sections */
+    .section{
       position: relative;
       padding: 30px 0 78px;
       overflow: hidden;
@@ -378,18 +373,19 @@
       text-align:center;
       color: var(--muted);
       margin: 0 auto 28px;
-      max-width: 720px;
+      max-width: 780px;
       font-weight: 600;
     }
 
-    .pricing-grid{
+    /* Grids */
+    .grid-3{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 18px;
       align-items: stretch;
     }
 
-    /* ✅ Roligere cards (mindre “hvitt i trynet”) */
+    /* Cards */
     .card{
       background: var(--card-bg);
       border: 1px solid rgba(17, 24, 39, .10);
@@ -418,6 +414,7 @@
       gap: 12px;
       flex: 1;
     }
+
     .plan-title{ font-size: 22px; margin: 0; letter-spacing: -0.2px; }
     .plan-desc{ margin: 0; color: var(--muted); font-weight: 600; line-height: 1.4; }
 
@@ -479,100 +476,56 @@
     }
     .card.featured .banner{ background: var(--primary); }
 
-    /* Hva rekker vi */
-    .time-guide{
-      margin: 26px auto 0;
-      max-width: 980px;
-      background: var(--card-bg); /* samme rolige tone */
-      border: 1px solid rgba(17, 24, 39, .10);
-      border-radius: 16px;
-      box-shadow: 0 10px 26px rgba(17,24,39,.06);
-      padding: 18px 18px 14px;
-    }
-    .time-guide h3{
-      margin: 0 0 6px;
-      font-size: 16px;
-      letter-spacing: -.2px;
-      text-align:center;
-    }
-    .time-guide p{
-      margin: 0 auto 12px;
-      max-width: 820px;
-      text-align:center;
-      color: var(--muted);
-      font-weight: 700;
-      font-size: 13.5px;
-      line-height: 1.45;
-    }
-    .time-cols{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-top: 10px;
-    }
-    .time-col{
-      border: 1px solid rgba(17,24,39,.10);
+    /* Service card media placeholder */
+    .media{
+      width: 100%;
+      aspect-ratio: 16 / 9;
       border-radius: 14px;
-      padding: 12px 12px 10px;
-      background: rgba(255,255,255,.72); /* litt glass, men rolig */
-      backdrop-filter: blur(6px);
-    }
-    .time-col .t{
-      font-weight: 900;
-      font-size: 13px;
-      margin: 0 0 8px;
-      letter-spacing: .2px;
-      text-align:center;
-      color: rgba(11,18,32,.92);
-    }
-    .time-col ul{
-      list-style:none;
-      padding:0;
-      margin:0;
-      display:grid;
-      gap: 8px;
-      font-size: 13px;
-      font-weight: 700;
-      color: rgba(11,18,32,.92);
-    }
-    .time-col li{
+      border: 1px solid rgba(17,24,39,.10);
+      background:
+        radial-gradient(900px 520px at 20% 30%, rgba(212,233,255,.60), transparent 62%),
+        radial-gradient(900px 520px at 80% 40%, rgba(230,214,255,.55), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.82), rgba(255,255,255,.70));
       display:flex;
-      gap: 8px;
-      align-items:flex-start;
-      line-height: 1.35;
+      align-items:center;
+      justify-content:center;
+      color: rgba(11,18,32,.55);
+      font-weight: 900;
+      letter-spacing: .2px;
+      overflow:hidden;
     }
-    .dot{
-      width: 8px;
-      height: 8px;
+    .media small{
+      font-size: 12px;
+      padding: 8px 10px;
       border-radius: 999px;
-      margin-top: 6px;
-      background: rgba(11,92,173,.35);
-      flex: 0 0 8px;
-    }
-    .warn{
-      margin-top: 10px;
-      text-align:center;
-      font-size: 12.5px;
-      color: rgba(11,18,32,.75);
-      font-weight: 800;
+      background: rgba(11,92,173,.08);
+      border: 1px solid rgba(11,92,173,.14);
+      color: rgba(11,92,173,.95);
     }
 
-    footer{
-      padding: 34px 0 46px;
-      border-top: 1px solid var(--border);
-      color: var(--muted);
-      font-weight: 700;
-      font-size: 13px;
-      background: transparent;
+    /* Duration pills */
+    .pills{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 2px;
+    }
+    .pill{
+      font-size: 12px;
+      font-weight: 900;
+      color: rgba(11,18,32,.86);
+      background: rgba(255,255,255,.72);
+      border: 1px solid rgba(17,24,39,.10);
+      padding: 6px 10px;
+      border-radius: 999px;
     }
 
     /* Responsive */
     @media (max-width: 980px){
-      .pricing-grid{ grid-template-columns: 1fr; }
+      .grid-3{ grid-template-columns: 1fr; }
       .card.featured{ transform: none; }
       nav ul{ gap: 16px; }
       .hero-media{ aspect-ratio: 16 / 10; }
-      .time-cols{ grid-template-columns: 1fr; }
     }
     @media (max-width: 740px){
       nav{ display:none; }
@@ -583,9 +536,16 @@
       .hero{ padding-top: 54px; }
       .brand img{ width: 72px; height: 72px; }
       .brand span{ font-size: 17px; }
-
-      /* Mobil: litt mindre radius, men ALT følger med */
       :root{ --hero-radius: 18px; }
+    }
+
+    footer{
+      padding: 34px 0 46px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 13px;
+      background: transparent;
     }
   </style>
 </head>
@@ -645,8 +605,8 @@
 
         <a class="cta" href="#priser" id="bookBtn">Bestill hjelp</a>
 
-        <div class="checklist" id="tjenester">
-          <div class="check">
+        <div class="checklist" aria-label="Hvorfor Hjelpeportalen">
+          <div class="check" id="tjenester">
             <svg class="tick" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
@@ -656,7 +616,7 @@
             <svg class="tick" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
-            <span>Handling, ærender og følge</span>
+            <span>Praktisk hjelp, matlaging, sosial støtte og følge – hjemme eller ute</span>
           </div>
           <div class="check">
             <svg class="tick" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -682,32 +642,32 @@
       </div>
     </section>
 
-    <section class="pricing-wrap section" id="priser">
+    <!-- TJENESTER -->
+    <section class="section" aria-label="Tjenester">
       <div class="container">
-        <h2>Priser</h2>
+        <h2>Tjenester</h2>
         <p class="sub">
-          Velg varighet som passer behovet ditt. Prisene er faste og tydelige – og lokal kjøring er inkludert.
+          Velg tjenesten du trenger – du velger varighet i bestillingen. Prisene er like for alle tjenester ved samme varighet.
         </p>
 
-        <div class="pricing-grid">
+        <div class="grid-3">
           <article class="card">
-            <div class="banner">1 time – Enkeltoppdrag</div>
+            <div class="banner">Hjelp i hjemmet</div>
             <div class="body">
-              <h3 class="plan-title">Hverdagshjelp</h3>
-              <p class="plan-desc">Rask og effektiv hjelp til én konkret oppgave.</p>
+              <div class="media" aria-label="Bildeplassholder"><small>Bilde kommer</small></div>
+              <h3 class="plan-title">Hverdagshjelp i hjemmet</h3>
+              <p class="plan-desc">
+                Praktisk og trygg hjelp med rydding, enkel matlaging, organisering og digital støtte – tilpasset ditt behov.
+              </p>
 
-              <div class="price">
-                <div class="kr">kr 690</div>
-                <div class="meta">per oppdrag<br/>inkl. mva og lokal kjøring</div>
-              </div>
-
-              <div class="note">
-                Passer for én konkret oppgave som kan gjennomføres innen 60 minutter.
-                Egner seg ikke for kombinasjon av kjøring, ventetid og flere gjøremål.
+              <div class="pills" aria-label="Varigheter">
+                <span class="pill">1t</span>
+                <span class="pill">1t 30m</span>
+                <span class="pill">2t</span>
               </div>
 
               <div class="btn-row">
-                <button class="btn primary" data-duration="60" onclick="openBooking(this)">Bestill 1 time</button>
+                <button class="btn primary" onclick="openBookingService('hverdagshjelp')">Bestill</button>
                 <button class="btn ghost" onclick="scrollToDetails()">Se detaljer</button>
               </div>
 
@@ -716,23 +676,22 @@
           </article>
 
           <article class="card">
-            <div class="banner">1,5 time – Utvidet hjelp</div>
+            <div class="banner">Sosial støtte</div>
             <div class="body">
-              <h3 class="plan-title">Hverdagshjelp</h3>
-              <p class="plan-desc">Mer rom for å rekke flere ting i samme besøk.</p>
+              <div class="media" aria-label="Bildeplassholder"><small>Bilde kommer</small></div>
+              <h3 class="plan-title">Sosial støtte</h3>
+              <p class="plan-desc">
+                Sosial støtte gjennom samtale, samvær og enkle aktiviteter hjemme eller ute – trygt og innen avtalt tid.
+              </p>
 
-              <div class="price">
-                <div class="kr">kr 990</div>
-                <div class="meta">per oppdrag<br/>inkl. mva og lokal kjøring</div>
-              </div>
-
-              <div class="note">
-                Passer for kombinasjon av praktisk hjelp og ett ærend,
-                eller oppgaver som krever litt mer ro og struktur.
+              <div class="pills" aria-label="Varigheter">
+                <span class="pill">1t</span>
+                <span class="pill">1t 30m</span>
+                <span class="pill">2t</span>
               </div>
 
               <div class="btn-row">
-                <button class="btn primary" data-duration="90" onclick="openBooking(this)">Bestill 1,5 time</button>
+                <button class="btn primary" onclick="openBookingService('sosial-stotte')">Bestill</button>
                 <button class="btn ghost" onclick="scrollToDetails()">Se detaljer</button>
               </div>
 
@@ -740,24 +699,92 @@
             </div>
           </article>
 
-          <article class="card featured">
-            <div class="banner">2 timer – Mest verdi</div>
+          <article class="card">
+            <div class="banner">Handling og ærender</div>
             <div class="body">
-              <h3 class="plan-title">Hverdagshjelp</h3>
-              <p class="plan-desc">Best verdi når du vil få skikkelig tak i ting.</p>
+              <div class="media" aria-label="Bildeplassholder"><small>Bilde kommer</small></div>
+              <h3 class="plan-title">Følge og ærender</h3>
+              <p class="plan-desc">
+                Ledsagelse til korte ærender som handling og henting, gjennomført effektivt innen bestilt tidsramme.
+              </p>
 
-              <div class="price">
-                <div class="kr">kr 1 290</div>
-                <div class="meta">per oppdrag<br/>inkl. mva og lokal kjøring</div>
-              </div>
-
-              <div class="note">
-                Anbefales ved følge til avtaler, større ryddeoppgaver,
-                eller når både kjøring og praktisk hjelp skal kombineres i samme besøk.
+              <div class="pills" aria-label="Varigheter">
+                <span class="pill">1t 30m</span>
+                <span class="pill">2t</span>
               </div>
 
               <div class="btn-row">
-                <button class="btn primary" data-duration="120" onclick="openBooking(this)">Bestill 2 timer</button>
+                <button class="btn primary" onclick="openBookingService('arender')">Bestill</button>
+                <button class="btn ghost" onclick="scrollToDetails()">Se detaljer</button>
+              </div>
+
+              <div class="divider"></div>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="banner">Følge til avtale</div>
+            <div class="body">
+              <div class="media" aria-label="Bildeplassholder"><small>Bilde kommer</small></div>
+              <h3 class="plan-title">Følge til avtale</h3>
+              <p class="plan-desc">
+                Trygg ledsagelse til avtaler som lege og møter, inkludert planlagt ventetid ved behov.
+              </p>
+
+              <div class="pills" aria-label="Varigheter">
+                <span class="pill">2t</span>
+              </div>
+
+              <div class="btn-row">
+                <button class="btn primary" onclick="openBookingService('folge-til-avtale')">Bestill</button>
+                <button class="btn ghost" onclick="scrollToDetails()">Se detaljer</button>
+              </div>
+
+              <div class="divider"></div>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="banner">Rydding og organisering</div>
+            <div class="body">
+              <div class="media" aria-label="Bildeplassholder"><small>Bilde kommer</small></div>
+              <h3 class="plan-title">Organisering</h3>
+              <p class="plan-desc">
+                Struktur, rydding og system i hjemmet – for mer oversikt, ro og en enklere hverdag.
+              </p>
+
+              <div class="pills" aria-label="Varigheter">
+                <span class="pill">1t</span>
+                <span class="pill">1t 30m</span>
+                <span class="pill">2t</span>
+              </div>
+
+              <div class="btn-row">
+                <button class="btn primary" onclick="openBookingService('organisering')">Bestill</button>
+                <button class="btn ghost" onclick="scrollToDetails()">Se detaljer</button>
+              </div>
+
+              <div class="divider"></div>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="banner">Matlaging</div>
+            <div class="body">
+              <div class="media" aria-label="Bildeplassholder"><small>Bilde kommer</small></div>
+              <h3 class="plan-title">Enkel matlaging</h3>
+              <p class="plan-desc">
+                Enkel og praktisk matlaging i hjemmet – tilpasset ønsker, behov og tilgjengelig tid.
+              </p>
+
+              <div class="pills" aria-label="Varigheter">
+                <span class="pill">1t</span>
+                <span class="pill">1t 30m</span>
+                <span class="pill">2t</span>
+              </div>
+
+              <div class="btn-row">
+                <button class="btn primary" onclick="openBookingService('matlaging')">Bestill</button>
                 <button class="btn ghost" onclick="scrollToDetails()">Se detaljer</button>
               </div>
 
@@ -765,46 +792,86 @@
             </div>
           </article>
         </div>
+      </div>
+    </section>
 
-        <div class="time-guide" aria-label="Hva rekker vi på ulike tidsvalg">
-          <h3>Hva rekker vi på ulike tidsvalg?</h3>
-          <p>
-            For å sikre ro, kvalitet og forutsigbarhet anbefaler vi å velge litt ekstra tid ved oppdrag med kjøring og ventetid.
-            Lokal kjøring er inkludert i prisen.
-          </p>
+    <!-- PRISER (enkelt og likt for alle tjenester) -->
+    <section class="section" id="priser" aria-label="Priser">
+      <div class="container">
+        <h2>Priser</h2>
+        <p class="sub">
+          Fast pris per oppdrag – samme pris uansett tjeneste ved valgt varighet. Prisene inkluderer mva og nødvendig lokal kjøring.
+        </p>
 
-          <div class="time-cols">
-            <div class="time-col">
-              <div class="t">1 time – best for</div>
-              <ul>
-                <li><span class="dot"></span>En konkret oppgave hjemme</li>
-                <li><span class="dot"></span>Et kort ærend i nærområdet</li>
-                <li><span class="dot"></span>Lett matlaging / lett organisering</li>
-              </ul>
+        <div class="grid-3">
+          <article class="card">
+            <div class="banner">1 time</div>
+            <div class="body">
+              <h3 class="plan-title">Enkeltoppdrag</h3>
+              <p class="plan-desc">Passer når du trenger rask hjelp til én konkret ting.</p>
+
+              <div class="price">
+                <div class="kr">kr 690</div>
+                <div class="meta">per oppdrag<br/>inkl. mva og nødvendig kjøring</div>
+              </div>
+
+              <div class="note">
+                Samme pris for alle tjenester ved 1 time.
+              </div>
+
+              <div class="btn-row">
+                <button class="btn primary" data-duration="60" onclick="openBooking(this)">Bestill 1 time</button>
+              </div>
+
+              <div class="divider"></div>
             </div>
+          </article>
 
-            <div class="time-col">
-              <div class="t">1,5 time – anbefalt for</div>
-              <ul>
-                <li><span class="dot"></span>Kombinasjon av praktisk hjelp og ett ærend</li>
-                <li><span class="dot"></span>Oppgaver som krever litt planlegging/struktur</li>
-                <li><span class="dot"></span>Følge når det normalt er lite ventetid</li>
-              </ul>
+          <article class="card">
+            <div class="banner">1,5 time</div>
+            <div class="body">
+              <h3 class="plan-title">Utvidet hjelp</h3>
+              <p class="plan-desc">Mer rom for å rekke flere ting i samme besøk.</p>
+
+              <div class="price">
+                <div class="kr">kr 990</div>
+                <div class="meta">per oppdrag<br/>inkl. mva og nødvendig kjøring</div>
+              </div>
+
+              <div class="note">
+                Samme pris for alle tjenester ved 1,5 time.
+              </div>
+
+              <div class="btn-row">
+                <button class="btn primary" data-duration="90" onclick="openBooking(this)">Bestill 1,5 time</button>
+              </div>
+
+              <div class="divider"></div>
             </div>
+          </article>
 
-            <div class="time-col">
-              <div class="t">2 timer – anbefalt for</div>
-              <ul>
-                <li><span class="dot"></span>Følge til lege/avtaler med ventetid</li>
-                <li><span class="dot"></span>Kjøring og flere gjøremål i samme besøk</li>
-                <li><span class="dot"></span>Større rydde-/organiseringsoppgaver</li>
-              </ul>
+          <article class="card featured">
+            <div class="banner">2 timer</div>
+            <div class="body">
+              <h3 class="plan-title">Mest verdi</h3>
+              <p class="plan-desc">Best når du vil få skikkelig tak i ting – eller har kjøring/ventetid.</p>
+
+              <div class="price">
+                <div class="kr">kr 1 290</div>
+                <div class="meta">per oppdrag<br/>inkl. mva og nødvendig kjøring</div>
+              </div>
+
+              <div class="note">
+                Samme pris for alle tjenester ved 2 timer.
+              </div>
+
+              <div class="btn-row">
+                <button class="btn primary" data-duration="120" onclick="openBooking(this)">Bestill 2 timer</button>
+              </div>
+
+              <div class="divider"></div>
             </div>
-          </div>
-
-          <div class="warn">
-            Usikker på tidsbehov? Velg 1,5 eller 2 timer – spesielt ved kjøring og ventetid.
-          </div>
+          </article>
         </div>
 
         <div style="height:36px"></div>
@@ -840,9 +907,15 @@
       document.getElementById("om").scrollIntoView({ behavior: "smooth", block: "start" });
     }
 
+    // Placeholder – vi kobler bookinglink senere
     function openBooking(btn){
       const duration = btn?.dataset?.duration || "60";
       alert("Booking er ikke koblet til ennå. Varighet valgt: " + duration + " minutter.");
+    }
+
+    // Placeholder for tjenesteknapper – vi kobler alt til samme link senere
+    function openBookingService(serviceKey){
+      alert("Booking er ikke koblet til ennå. Tjeneste valgt: " + serviceKey);
     }
 
     (function(){
