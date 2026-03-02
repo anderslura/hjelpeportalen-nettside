@@ -460,15 +460,9 @@
     }
     .card.featured .banner{ background: var(--primary); }
 
-    /* =========================
-       TJENESTEBILDER: MER MOTIV
-       - Desktop/tablet: 4:3 (mindre cropping enn 16:9)
-       - Mobil: 1:1 (viser mye mer)
-       - Smart crop: object-position
-       ========================= */
     .media{
       width: 100%;
-      aspect-ratio: 4 / 3; /* ✅ var 16/9 */
+      aspect-ratio: 4 / 3;
       border-radius: 14px;
       border: 1px solid rgba(17,24,39,.10);
       background:
@@ -496,11 +490,10 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center 25%; /* ✅ viser mer av ansikt/overkropp */
+      object-position: center 25%;
       display:block;
     }
 
-    /* Per-bilde finjustering (valgfritt, men gir proff “crop”) */
     .media img.pos-top{ object-position: center 18%; }
     .media img.pos-mid{ object-position: center 28%; }
     .media img.pos-low{ object-position: center 40%; }
@@ -528,14 +521,13 @@
       .hero-media{ aspect-ratio: 16 / 10; }
     }
 
-    /* ✅ Mobil: mer motiv, mindre cropping */
     @media (max-width: 740px){
       nav{ display:none; }
       .menu-btn{ display:flex; }
       .topbar{ padding: 14px 0; }
 
-      .media{ aspect-ratio: 1 / 1; }             /* ✅ firkant på mobil */
-      .media img{ object-position: center 20%; } /* ✅ enda mer ansikt */
+      .media{ aspect-ratio: 1 / 1; }
+      .media img{ object-position: center 20%; }
     }
 
     @media (max-width: 640px){
@@ -611,7 +603,6 @@
         <a class="cta" href="#priser" id="bookBtn">Bestill hjelp</a>
 
         <div class="checklist" aria-label="Hvorfor Hjelpeportalen">
-          <!-- ✅ Fjernet: "Hjelp i hjemmet – når du trenger det" (duplisert info) -->
           <div class="check" id="tjenester">
             <svg class="tick" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -706,19 +697,20 @@
             </div>
           </article>
 
+          <!-- ✅ NYTT NAVN: Følge – uten ventetid -->
           <article class="card">
-            <div class="banner">Følge og ærender</div>
+            <div class="banner">Følge – uten ventetid</div>
             <div class="body">
-              <div class="media" aria-label="Følge og ærender – bilde">
+              <div class="media" aria-label="Følge – uten ventetid – bilde">
                 <img
                   class="pos-mid"
                   src="images/folgeogarender.jpg"
-                  alt="Følge og ærender, hjelp til handling og korte ærend"
+                  alt="Følge uten ventetid, ledsagelse til korte ærender"
                   loading="lazy"
                   decoding="async"
                 />
               </div>
-              <h3 class="plan-title">Følge og ærender</h3>
+              <h3 class="plan-title">Følge – uten ventetid</h3>
               <p class="plan-desc">
                 Ledsagelse til korte ærender som handling og henting, beregnet for oppdrag uten planlagt ventetid.
               </p>
@@ -727,26 +719,26 @@
                 <span class="pill">2t</span>
               </div>
               <div class="btn-row">
-                <button class="btn primary" onclick="openBookingService('arender')">Bestill</button>
+                <button class="btn primary" onclick="openBookingService('folge-uten-ventetid')">Bestill</button>
               </div>
               <div class="divider"></div>
             </div>
           </article>
 
+          <!-- ✅ NYTT NAVN: Følge – med ventetid -->
           <article class="card">
-            <!-- ✅ Endret: Følge til avtale -> Følgetjenester -->
-            <div class="banner">Følgetjenester</div>
+            <div class="banner">Følge – med ventetid</div>
             <div class="body">
-              <div class="media" aria-label="Følgetjenester – bilde">
+              <div class="media" aria-label="Følge – med ventetid – bilde">
                 <img
                   class="pos-top"
                   src="images/folgetilavtale.jpg"
-                  alt="Følgetjenester, trygg ledsagelse til avtale eller besøk"
+                  alt="Følge med ventetid, trygg ledsagelse til avtale eller besøk"
                   loading="lazy"
                   decoding="async"
                 />
               </div>
-              <h3 class="plan-title">Følgetjenester</h3>
+              <h3 class="plan-title">Følge – med ventetid</h3>
               <p class="plan-desc">
                 Trygg ledsagelse til avtaler og besøk, inkludert planlagt ventetid ved behov.
               </p>
@@ -754,7 +746,7 @@
                 <span class="pill">2t</span>
               </div>
               <div class="btn-row">
-                <button class="btn primary" onclick="openBookingService('folge-til-avtale')">Bestill</button>
+                <button class="btn primary" onclick="openBookingService('folge-med-ventetid')">Bestill</button>
               </div>
               <div class="divider"></div>
             </div>
