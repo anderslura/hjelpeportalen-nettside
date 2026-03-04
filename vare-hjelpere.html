@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Våre hjelpere i Os | Trygghet og standard | Hjelpeportalen</title>
+  <meta name="description" content="Les hvordan Hjelpeportalen velger ut og følger opp hjelpere i Os. Tydelig standard, trygghet og forutsigbar gjennomføring." />
+
+  <style>
+    :root{
+      --text:#0b1220;
+      --muted:#5b6475;
+      --border: rgba(17, 24, 39, .12);
+      --shadow: 0 12px 30px rgba(17,24,39,.08);
+      --primary:#0b5cad;
+      --primary-2:#0a4f97;
+      --radius:18px;
+
+      --page-bg:
+        radial-gradient(1200px 600px at 12% 15%, rgba(255, 238, 208, .65), transparent 60%),
+        radial-gradient(1000px 520px at 80% 20%, rgba(212, 233, 255, .75), transparent 62%),
+        radial-gradient(900px 520px at 55% 78%, rgba(230, 214, 255, .55), transparent 60%),
+        linear-gradient(180deg, rgba(244,246,251,1) 0%, rgba(244,246,251,1) 35%, rgba(244,246,251,1) 100%);
+    }
+
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color: var(--text);
+      background: var(--page-bg);
+      background-attachment: fixed;
+    }
+    a{ color:inherit; text-decoration:none; }
+    .container{ width:min(980px, calc(100% - 48px)); margin:0 auto; }
+
+    header{
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(244,246,251,.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding: 16px 0;
+      gap: 12px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap: 12px;
+      font-weight: 900;
+      letter-spacing: .2px;
+    }
+    .brand img{ width:54px; height:54px; display:block; }
+    .brand span{ color: var(--primary); }
+
+    .back{
+      font-weight: 900;
+      font-size: 14px;
+      opacity: .88;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.72);
+    }
+    .back:hover{ opacity: 1; }
+
+    main{ padding: 44px 0 64px; }
+    h1{
+      margin: 0 0 10px;
+      font-size: clamp(34px, 4.6vw, 52px);
+      letter-spacing: -0.8px;
+      color: var(--primary);
+    }
+    .lead{
+      margin: 0 0 24px;
+      color: var(--muted);
+      font-weight: 750;
+      line-height: 1.6;
+      max-width: 820px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 18px;
+    }
+    .card{
+      background: rgba(255,255,255,.78);
+      border: 1px solid rgba(17,24,39,.10);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 18px 18px;
+    }
+    .card h2{
+      margin: 0 0 8px;
+      font-size: 18px;
+      letter-spacing: -0.2px;
+    }
+    .card p{
+      margin: 0;
+      color: rgba(11,18,32,.82);
+      font-weight: 650;
+      line-height: 1.55;
+    }
+    .list{
+      margin: 10px 0 0;
+      padding-left: 18px;
+      color: rgba(11,18,32,.82);
+      font-weight: 650;
+      line-height: 1.65;
+    }
+
+    .ctaRow{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 22px;
+    }
+    .cta{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding: 12px 18px;
+      border-radius: 999px;
+      background: var(--primary);
+      color:#fff;
+      font-weight: 900;
+      border: 1px solid rgba(0,0,0,.04);
+      box-shadow: 0 10px 24px rgba(11,92,173,.18);
+    }
+    .cta:hover{ background: var(--primary-2); }
+    .ghost{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding: 12px 18px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.72);
+      border: 1px solid var(--border);
+      font-weight: 900;
+      opacity: .9;
+    }
+    .ghost:hover{ opacity: 1; }
+
+    footer{
+      padding: 26px 0 44px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-weight: 750;
+      font-size: 13px;
+    }
+
+    @media (max-width: 860px){
+      .grid{ grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container topbar">
+      <a class="brand" href="index.html" aria-label="Til forsiden">
+        <img src="images/logo-hjelpeportalen.svg" alt="Hjelpeportalen logo" />
+        <span>Hjelpeportalen</span>
+      </a>
+      <a class="back" href="index.html">← Tilbake</a>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <h1>Våre hjelpere</h1>
+      <p class="lead">
+        Hjelpeportalen gjør det enkelt å bestille trygg, praktisk hjelp i hverdagen.
+        For at du skal føle deg trygg, har vi en tydelig standard for hvordan oppdrag gjennomføres – fra kommunikasjon til kvalitet og oppfølging.
+      </p>
+
+      <div class="grid">
+        <section class="card" aria-label="Utvelgelse og kvalitet">
+          <h2>Utvelgelse og kvalitet</h2>
+          <p>Vi samarbeider med selvstendige hjelpere som følger Hjelpeportalen sin standard.</p>
+          <ul class="list">
+            <li>Tydelig kommunikasjon før og under oppdrag</li>
+            <li>Punktlighet og respekt for avtalt tid</li>
+            <li>Rolig, hyggelig og profesjonell opptreden</li>
+            <li>Fokus på trygghet og forutsigbarhet</li>
+          </ul>
+        </section>
+
+        <section class="card" aria-label="Trygghet og rutiner">
+          <h2>Trygghet og rutiner</h2>
+          <p>Vi ønsker at du alltid skal vite hva du kan forvente.</p>
+          <ul class="list">
+            <li>Klare bestillinger og ordrebekreftelse</li>
+            <li>Fast pris og tydelig varighet</li>
+            <li>Rutiner for avvik og oppfølging ved behov</li>
+            <li>Diskresjon og respekt i alle situasjoner</li>
+          </ul>
+        </section>
+
+        <section class="card" aria-label="Slik fungerer et oppdrag">
+          <h2>Slik fungerer et oppdrag</h2>
+          <ul class="list">
+            <li>Du bestiller tjeneste og varighet</li>
+            <li>Vi bekrefter tid og pris</li>
+            <li>Hjelper møter til avtalt tid</li>
+            <li>Oppdrag gjennomføres innen avtalt varighet</li>
+          </ul>
+        </section>
+
+        <section class="card" aria-label="Geografi">
+          <h2>Hvor tilbyr vi hjelp?</h2>
+          <p>
+            Vi tilbyr hjelp i Os og nærliggende områder. Vi starter i Osøyro og tilbyr hjelp i blant annet Osøyro, Halhjem, Søfteland, Lysekloster og nærliggende områder.
+          </p>
+        </section>
+      </div>
+
+      <div class="ctaRow">
+        <a class="cta" href="index.html#priser">Bestill hjelp</a>
+        <a class="ghost" href="index.html#kontakt">Kontakt oss</a>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      © <span id="y"></span> Hjelpeportalen. Fast pris – ingen skjulte tillegg.
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
