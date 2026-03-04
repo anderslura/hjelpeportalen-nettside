@@ -3,8 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Hjelpeportalen – Hverdagshjelp</title>
-  <meta name="description" content="Fast pris. Valgfri tid. Trygge hjelpere. Bestill hverdagshjelp i Osøyro-området ved lansering." />
+
+  <title>Hverdagshjelp i Os | Praktisk hjelp, følge og sosial støtte | Hjelpeportalen</title>
+  <meta name="description" content="Bestill hverdagshjelp i Os og nærliggende områder. Praktisk hjelp i hjemmet, sosial støtte og følge til avtaler – fast pris og trygge hjelpere." />
 
   <style>
     :root{
@@ -189,26 +190,17 @@
       display:block;
       padding: 4px;
     }
+    /* Ren mobilmeny uten "chips" */
     .drawer a{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding: 12px 12px;
+      display:block;
+      padding: 14px 12px;
       border-radius: 12px;
-      font-weight: 800;
+      font-weight: 900;
       color: rgba(11,18,32,.92);
+      letter-spacing: .1px;
     }
     .drawer a:hover{
-      background: rgba(11,92,173,.08);
-    }
-    .drawer .pill{
-      font-size: 12px;
-      font-weight: 900;
-      color: var(--primary);
-      background: rgba(11,92,173,.10);
-      padding: 4px 8px;
-      border-radius: 999px;
-      border: 1px solid rgba(11,92,173,.14);
+      background: rgba(17,24,39,.04);
     }
 
     body.menu-open{ overflow: hidden; }
@@ -477,15 +469,6 @@
       letter-spacing: .2px;
       overflow:hidden;
     }
-    .media small{
-      font-size: 12px;
-      padding: 8px 10px;
-      border-radius: 999px;
-      background: rgba(11,92,173,.08);
-      border: 1px solid rgba(11,92,173,.14);
-      color: rgba(11,92,173,.95);
-    }
-
     .media img{
       width: 100%;
       height: 100%;
@@ -514,6 +497,25 @@
       border-radius: 999px;
     }
 
+    /* Geografi-seksjon (SEO + tydelighet) */
+    .geo{
+      padding: 40px 0 10px;
+    }
+    .geo h2{
+      margin: 0 0 10px;
+      font-size: 26px;
+      letter-spacing: -0.2px;
+      text-align:center;
+    }
+    .geo .sub{
+      text-align:center;
+      color: var(--muted);
+      margin: 0 auto 12px;
+      max-width: 820px;
+      font-weight: 650;
+      line-height: 1.55;
+    }
+
     @media (max-width: 980px){
       .grid-3{ grid-template-columns: 1fr; }
       .card.featured{ transform: none; }
@@ -525,7 +527,6 @@
       nav{ display:none; }
       .menu-btn{ display:flex; }
       .topbar{ padding: 14px 0; }
-
       .media{ aspect-ratio: 1 / 1; }
       .media img{ object-position: center 20%; }
     }
@@ -560,6 +561,7 @@
         <ul>
           <li><a href="#tjenester">Tjenester</a></li>
           <li><a href="#om">Om oss</a></li>
+          <li><a href="vare-hjelpere.html">Våre hjelpere</a></li>
           <li><a href="#kontakt">Kontakt</a></li>
           <li><a href="#priser">Priser</a></li>
         </ul>
@@ -579,11 +581,12 @@
       <div class="title">Meny</div>
       <button class="close" id="menuClose" aria-label="Lukk meny">✕</button>
     </div>
-    <nav>
-      <a href="#tjenester" class="mLink">Tjenester <span class="pill">Hjelp</span></a>
-      <a href="#om" class="mLink">Om oss <span class="pill">Trygghet</span></a>
-      <a href="#kontakt" class="mLink">Kontakt <span class="pill">Svar</span></a>
-      <a href="#priser" class="mLink">Priser <span class="pill">Fast</span></a>
+    <nav aria-label="Mobilmeny">
+      <a href="#tjenester" class="mLink">Tjenester</a>
+      <a href="#om" class="mLink">Om oss</a>
+      <a href="vare-hjelpere.html" class="mLink">Våre hjelpere</a>
+      <a href="#kontakt" class="mLink">Kontakt</a>
+      <a href="#priser" class="mLink">Priser</a>
     </nav>
   </div>
 
@@ -597,13 +600,13 @@
           <div class="hero-vignette" aria-hidden="true"></div>
         </div>
 
-        <h1>Hverdagshjelp</h1>
+        <h1>Hverdagshjelp i Os</h1>
         <p class="lead">Fast pris. Valgfri tid. Trygge hjelpere.</p>
 
         <a class="cta" href="#priser" id="bookBtn">Bestill hjelp</a>
 
         <div class="checklist" aria-label="Hvorfor Hjelpeportalen">
-          <div class="check" id="tjenester">
+          <div class="check">
             <svg class="tick" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
@@ -629,11 +632,11 @@
           </div>
         </div>
 
-        <div class="hint">Tilbys i nærområdet rundt Osøyro ved lansering!</div>
+        <div class="hint">Tilbys i Os og nærområdet rundt Osøyro ved lansering!</div>
       </div>
     </section>
 
-    <section class="section" aria-label="Tjenester">
+    <section class="section" id="tjenester" aria-label="Tjenester">
       <div class="container">
         <h2>Tjenester</h2>
         <p class="sub">
@@ -648,7 +651,7 @@
                 <img
                   class="pos-mid"
                   src="images/services/sosial-stotte-os.webp"
-                  alt="Sosial støtte i Os og Bjørnafjorden – tur, samtale og hyggelig samvær"
+                  alt="Sosial støtte i Os – tur, samtale og hyggelig samvær"
                   loading="lazy"
                   decoding="async"
                 />
@@ -676,7 +679,7 @@
                 <img
                   class="pos-top"
                   src="images/services/hverdagshjelp-hjemmet-os.webp"
-                  alt="Hverdagshjelp i hjemmet i Os og Bjørnafjorden – praktisk hjelp i hverdagen"
+                  alt="Hverdagshjelp i hjemmet i Os – praktisk hjelp i hverdagen"
                   loading="lazy"
                   decoding="async"
                 />
@@ -697,7 +700,6 @@
             </div>
           </article>
 
-          <!-- ✅ NYTT NAVN: Følge – uten ventetid -->
           <article class="card">
             <div class="banner">Følge – uten ventetid</div>
             <div class="body">
@@ -705,7 +707,7 @@
                 <img
                   class="pos-mid"
                   src="images/services/folge-og-aerender-os.webp"
-                  alt="Følge og ærender i Os og Bjørnafjorden – hjelp til handling og praktiske oppgaver"
+                  alt="Følge og ærender i Os – hjelp til handling og praktiske oppgaver"
                   loading="lazy"
                   decoding="async"
                 />
@@ -725,7 +727,6 @@
             </div>
           </article>
 
-          <!-- ✅ NYTT NAVN: Følge – med ventetid -->
           <article class="card">
             <div class="banner">Følge – med ventetid</div>
             <div class="body">
@@ -733,7 +734,7 @@
                 <img
                   class="pos-top"
                   src="images/services/folge-til-avtale-os.webp"
-                  alt="Følge til avtaler i Os og Bjørnafjorden – trygg ledsagelse med ventetid"
+                  alt="Følge til avtaler i Os – trygg ledsagelse med ventetid"
                   loading="lazy"
                   decoding="async"
                 />
@@ -843,6 +844,20 @@
             Send oss en forespørsel på e-post eller bruk bestillingsknappen.
           </p>
         </section>
+      </div>
+    </section>
+
+    <!-- Geografi / områder (SEO + tydelighet) -->
+    <section class="geo" aria-label="Områder vi tilbyr hjelp">
+      <div class="container" style="max-width:820px;">
+        <h2>Områder vi tilbyr hjelp</h2>
+        <p class="sub">
+          Hjelpeportalen tilbyr hverdagshjelp i Os og nærliggende områder.
+          Tjenestene inkluderer praktisk hjelp i hjemmet, sosial støtte og følge til avtaler.
+        </p>
+        <p class="sub">
+          Vi starter i Osøyro og tilbyr hjelp i blant annet Osøyro, Halhjem, Søfteland, Lysekloster og nærliggende områder.
+        </p>
       </div>
     </section>
   </main>
