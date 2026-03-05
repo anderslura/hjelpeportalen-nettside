@@ -433,6 +433,10 @@
       border: 1px solid var(--border);
       background: #fff;
       cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      text-decoration:none;
     }
     .btn.primary{
       background: var(--primary);
@@ -866,7 +870,7 @@
               <div class="note">Samme pris for alle tjenester ved 1 time.</div>
 
               <div class="btn-row">
-                <button class="btn primary" data-duration="60" onclick="openBooking(this)">Bestill 1 time</button>
+                <button class="btn primary" data-duration="60" onclick="openBooking(this)">Bestill hjelp</button>
               </div>
 
               <div class="divider"></div>
@@ -877,7 +881,7 @@
             <div class="banner">1,5 time</div>
             <div class="body">
               <h3 class="plan-title">Utvidet hjelp</h3>
-              <p class="plan-desc">Mer rom for å rekke flere ting i samme besøk.</p>
+              <p class="plan-desc">Mer tid til oppgaven du ønsker hjelp med.</p>
 
               <div class="price">
                 <div class="kr">kr 990</div>
@@ -887,7 +891,7 @@
               <div class="note">Samme pris for alle tjenester ved 1,5 time.</div>
 
               <div class="btn-row">
-                <button class="btn primary" data-duration="90" onclick="openBooking(this)">Bestill 1,5 time</button>
+                <button class="btn primary" data-duration="90" onclick="openBooking(this)">Bestill hjelp</button>
               </div>
 
               <div class="divider"></div>
@@ -908,7 +912,7 @@
               <div class="note">Samme pris for alle tjenester ved 2 timer.</div>
 
               <div class="btn-row">
-                <button class="btn primary" data-duration="120" onclick="openBooking(this)">Bestill 2 timer</button>
+                <button class="btn primary" data-duration="120" onclick="openBooking(this)">Bestill hjelp</button>
               </div>
 
               <div class="divider"></div>
@@ -930,23 +934,35 @@
                 Vi mener at hjelp i hverdagen skal være enkelt å bestille, trygt å motta og tilgjengelig når man trenger det.
               </p>
 
-              <div class="panel-grid" aria-label="Kort oppsummert">
-                <div class="mini-card">
-                  <div class="kicker">Vårt løfte</div>
-                  <div class="value">Tydelig bestilling. Fast pris. Trygge rammer.</div>
-                  <div class="muted">Du vet hva du får – og når du får det.</div>
-                </div>
-                <div class="mini-card">
-                  <div class="kicker">For hvem</div>
-                  <div class="value">For alle – uten krav eller binding.</div>
-                  <div class="muted">Bestill det du trenger, når du trenger det.</div>
-                </div>
-              </div>
+              <!-- Fjernet "boks i boks" (mini-cards). Samme innhold, renere layout -->
+              <div style="height:14px"></div>
+
+              <p style="margin:0; font-weight:900; color: rgba(11,18,32,.92); letter-spacing:-.2px;">
+                Vårt løfte
+              </p>
+              <p style="margin-top:6px; text-align:center; font-weight:900; color: rgba(11,18,32,.92);">
+                Tydelig bestilling. Fast pris. Trygge rammer.
+              </p>
+              <p style="margin-top:6px;">
+                Du vet hva du får – og når du får det.
+              </p>
+
+              <div style="height:12px"></div>
+
+              <p style="margin:0; font-weight:900; color: rgba(11,18,32,.92); letter-spacing:-.2px;">
+                For hvem
+              </p>
+              <p style="margin-top:6px; text-align:center; font-weight:900; color: rgba(11,18,32,.92);">
+                For alle – uten krav eller binding.
+              </p>
+              <p style="margin-top:6px;">
+                Bestill det du trenger, når du trenger det.
+              </p>
             </div>
           </div>
         </section>
 
-        <!-- Kontakt (telefontid oppdatert + "Bestill"-referanse) -->
+        <!-- Kontakt: rydde bort boks-i-boks + slå sammen telefon/telefontid + Bestilling først -->
         <section id="kontakt" aria-label="Kontakt" style="margin-top:18px;">
           <div class="panel">
             <div class="panel-head">KONTAKT</div>
@@ -956,12 +972,21 @@
                 <span class="inline-pill" style="margin-left:8px;">Kontaktinfo blir synlig ved lansering</span>
               </p>
 
-              <div class="panel-grid" aria-label="Kontaktinformasjon">
+              <!-- 3 bokser: Bestilling (først), Telefon (m/ telefontid), E-post -->
+              <div class="panel-grid" aria-label="Kontaktinformasjon" style="grid-template-columns: repeat(3, 1fr);">
                 <div class="mini-card">
-                  <div class="kicker">Telefontid (avdeling Os)</div>
+                  <div class="kicker">Bestilling</div>
+                  <div class="value">Trykk «Bestill»</div>
+                  <div class="muted">
+                    Bestilling gir raskere oppfølging og best oversikt for både deg og hjelperen.
+                  </div>
+                </div>
+
+                <div class="mini-card">
+                  <div class="kicker">Telefon (avdeling Os)</div>
                   <div class="value">Man–Fre: 17:30–19:00</div>
                   <div class="muted">
-                    Telefontid gjelder kun for henvendelser. Oppdrag kan utføres også utenom telefontid – etter avtale.
+                    Telefonnummer blir synlig ved lansering. Ring oss i telefontiden for spørsmål, endringer eller planlegging.
                   </div>
                 </div>
 
@@ -970,22 +995,6 @@
                   <div class="value">Blir synlig ved lansering</div>
                   <div class="muted">
                     Du kan sende e-post også utenom telefontid – vi svarer så raskt vi kan.
-                  </div>
-                </div>
-
-                <div class="mini-card">
-                  <div class="kicker">Telefon</div>
-                  <div class="value">Blir synlig ved lansering</div>
-                  <div class="muted">
-                    Ring oss i telefontiden for spørsmål, endringer og planlegging.
-                  </div>
-                </div>
-
-                <div class="mini-card">
-                  <div class="kicker">Bestilling</div>
-                  <div class="value">Trykk «Bestill»</div>
-                  <div class="muted">
-                    Bestilling gir bedre oversikt og raskere oppfølging.
                   </div>
                 </div>
               </div>
