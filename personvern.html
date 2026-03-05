@@ -1,1 +1,66 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cookies | Hjelpeportalen</title>
+  <meta name="description" content="Informasjon om cookies på Hjelpeportalen." />
+  <style>
+    body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial;line-height:1.6;color:#0b1220;background:#f4f6fb;}
+    .wrap{max-width:920px;margin:0 auto;padding:32px 20px;}
+    .card{background:#fff;border:1px solid rgba(17,24,39,.12);border-radius:18px;padding:22px;box-shadow:0 12px 30px rgba(17,24,39,.06);}
+    h1{margin:0 0 10px;font-size:28px}
+    h2{margin:22px 0 8px;font-size:18px}
+    p,li{color:rgba(11,18,32,.88);font-weight:550}
+    a{color:#0b5cad}
+    .muted{color:rgba(91,100,117,.95);font-size:13px;font-weight:650}
+    .top{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:14px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;padding:10px 14px;border-radius:10px;border:1px solid rgba(17,24,39,.12);background:#fff;text-decoration:none;font-weight:800}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="top">
+      <a class="btn" href="index.html">← Til forsiden</a>
+      <div class="muted">Sist oppdatert: <span id="d"></span></div>
+    </div>
 
+    <div class="card">
+      <h1>Cookies</h1>
+      <p class="muted">
+        Vi bruker i dag kun nødvendige cookies/teknologi for at nettsiden og bestillingsløsningen skal fungere.
+        Vi bruker ikke sporingscookies for markedsføring eller analyse uten samtykke.
+      </p>
+
+      <h2>Nødvendige cookies</h2>
+      <p>
+        Nødvendige cookies kan brukes for å:
+      </p>
+      <ul>
+        <li>sikre grunnleggende funksjonalitet</li>
+        <li>ivareta sikkerhet</li>
+        <li>muliggjøre bestilling/betaling i tilknyttede systemer</li>
+      </ul>
+
+      <h2>Analyse (ikke aktivert ved lansering)</h2>
+      <p>
+        Dersom vi senere tar i bruk analyseverktøy (f.eks. for å forbedre nettsiden), vil vi:
+      </p>
+      <ul>
+        <li>innføre samtykkebanner</li>
+        <li>gi mulighet til å avslå</li>
+        <li>oppdatere denne cookie-erklæringen</li>
+      </ul>
+
+      <h2>Kontakt</h2>
+      <p>
+        Spørsmål om cookies? Kontaktinfo publiseres ved lansering.
+      </p>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("d").textContent = new Date().toISOString().slice(0,10);
+  </script>
+</body>
+</html>
