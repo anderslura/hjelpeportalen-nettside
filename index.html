@@ -35,6 +35,7 @@
 
     *{ box-sizing: border-box; }
     html{ scroll-behavior:smooth; }
+
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
@@ -225,7 +226,7 @@
     body.menu-open .burger span:nth-child(3){ top:6px; transform: rotate(-45deg); }
 
     .hero{
-      padding: 72px 0 38px;
+      padding: 72px 0 34px;
       text-align:center;
     }
 
@@ -347,7 +348,7 @@
       height: 18px;
       margin-top: 2px;
       flex: 0 0 18px;
-      color: rgba(11,18,32,.88);
+      color: var(--primary);
     }
 
     .hint{
@@ -357,9 +358,28 @@
       font-size: 20px;
     }
 
+    .trust-strip{
+      padding: 18px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: rgba(255,255,255,.60);
+      backdrop-filter: blur(8px);
+    }
+
+    .trust-inner{
+      display:flex;
+      justify-content:center;
+      flex-wrap:wrap;
+      gap:22px;
+      font-weight:900;
+      color:rgba(11,18,32,.75);
+      font-size:13px;
+      letter-spacing: .15px;
+    }
+
     .section{
       position: relative;
-      padding: 30px 0 78px;
+      padding: 60px 0 100px;
       overflow: hidden;
     }
 
@@ -394,6 +414,12 @@
       display:flex;
       flex-direction:column;
       min-height: 100%;
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+
+    .card:hover{
+      transform: translateY(-6px);
+      box-shadow: 0 22px 60px rgba(17,24,39,.15);
     }
 
     .card .banner{
@@ -483,6 +509,10 @@
     .card.featured{
       outline: 2px solid rgba(11,92,173,.25);
       transform: translateY(-4px);
+    }
+
+    .card.featured:hover{
+      transform: translateY(-8px);
     }
 
     .card.featured .banner{ background: var(--primary); }
@@ -750,7 +780,7 @@
       border-radius: 999px;
     }
 
-    .geo{ padding: 18px 0 10px; }
+    .geo{ padding: 10px 0 10px; }
 
     footer{
       padding: 34px 0 46px;
@@ -793,6 +823,7 @@
     @media (max-width: 980px){
       .grid-3{ grid-template-columns: 1fr; }
       .card.featured{ transform: none; }
+      .card.featured:hover{ transform: translateY(-6px); }
       nav ul{ gap: 16px; }
       .hero-media{ aspect-ratio: 16 / 10; }
       .split-panel,
@@ -801,6 +832,9 @@
       }
       .image-placeholder{
         min-height: 260px;
+      }
+      .section{
+        padding: 54px 0 86px;
       }
     }
 
@@ -815,6 +849,7 @@
       .contact-grid{ grid-template-columns: 1fr; }
       .split-copy h3{ font-size: 30px; }
       .split-copy .lead-copy{ font-size: 18px; }
+      .trust-inner{ gap: 14px 18px; }
     }
 
     @media (max-width: 640px){
@@ -827,6 +862,12 @@
       .image-placeholder{
         min-height: 220px;
         border-radius: 16px;
+      }
+      .section{
+        padding: 46px 0 74px;
+      }
+      .hint{
+        font-size: 18px;
       }
     }
   </style>
@@ -916,6 +957,15 @@
         </div>
 
         <div class="hint">Tilbys i Os og nærområdet rundt Osøyro ved lansering!</div>
+      </div>
+    </section>
+
+    <section class="trust-strip" aria-label="Fordeler">
+      <div class="container trust-inner">
+        <span>Fast pris</span>
+        <span>Trygg standard</span>
+        <span>Lokale hjelpere</span>
+        <span>Enkel bestilling</span>
       </div>
     </section>
 
