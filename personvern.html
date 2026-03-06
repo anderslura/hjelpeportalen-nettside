@@ -3,64 +3,546 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Cookies | Hjelpeportalen</title>
-  <meta name="description" content="Informasjon om cookies på Hjelpeportalen." />
+  <title>Personvern | Hjelpeportalen</title>
+  <meta name="description" content="Informasjon om hvordan Hjelpeportalen behandler personopplysninger ved bestilling, kontakt og gjennomføring av tjenester." />
+
   <style>
-    body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial;line-height:1.6;color:#0b1220;background:#f4f6fb;}
-    .wrap{max-width:920px;margin:0 auto;padding:32px 20px;}
-    .card{background:#fff;border:1px solid rgba(17,24,39,.12);border-radius:18px;padding:22px;box-shadow:0 12px 30px rgba(17,24,39,.06);}
-    h1{margin:0 0 10px;font-size:28px}
-    h2{margin:22px 0 8px;font-size:18px}
-    p,li{color:rgba(11,18,32,.88);font-weight:550}
-    a{color:#0b5cad}
-    .muted{color:rgba(91,100,117,.95);font-size:13px;font-weight:650}
-    .top{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:14px}
-    .btn{display:inline-flex;align-items:center;justify-content:center;padding:10px 14px;border-radius:10px;border:1px solid rgba(17,24,39,.12);background:#fff;text-decoration:none;font-weight:800}
+    :root{
+      --text:#0b1220;
+      --muted:#5b6475;
+      --border: rgba(17, 24, 39, .12);
+      --shadow: 0 12px 30px rgba(17,24,39,.08);
+      --primary:#0b5cad;
+      --primary-2:#0a4f97;
+      --radius:18px;
+
+      --page-bg:
+        radial-gradient(1200px 600px at 12% 15%, rgba(255, 238, 208, .65), transparent 60%),
+        radial-gradient(1000px 520px at 80% 20%, rgba(212, 233, 255, .75), transparent 62%),
+        radial-gradient(900px 520px at 55% 78%, rgba(230, 214, 255, .55), transparent 60%),
+        linear-gradient(180deg, rgba(244,246,251,1) 0%, rgba(244,246,251,1) 100%);
+    }
+
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color: var(--text);
+      background: var(--page-bg);
+      background-attachment: fixed;
+    }
+
+    a{ color: inherit; text-decoration:none; }
+    .container{ width:min(980px, calc(100% - 48px)); margin:0 auto; }
+
+    header{
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(244,246,251,.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding: 16px 0;
+      gap: 12px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap: 12px;
+      font-weight: 900;
+      letter-spacing: .2px;
+    }
+
+    .brand img{
+      width:54px;
+      height:54px;
+      display:block;
+    }
+
+    .brand span{ color: var(--primary); }
+
+    .back{
+      font-weight: 900;
+      font-size: 14px;
+      opacity: .88;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.72);
+    }
+
+    .back:hover{ opacity: 1; }
+
+    main{ padding: 34px 0 64px; }
+
+    .panel{
+      margin: 0 auto;
+      background: rgba(255,255,255,.72);
+      border: 1px solid rgba(17,24,39,.12);
+      border-radius: 22px;
+      box-shadow: 0 18px 48px rgba(17,24,39,.10);
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+    }
+
+    .panel-head{
+      padding: 18px 20px;
+      background: rgba(11,18,32,.92);
+      color: rgba(255,255,255,.92);
+      font-weight: 900;
+      letter-spacing: .2px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      font-size: 13px;
+    }
+
+    .panel-body{
+      padding: 26px 24px 22px;
+    }
+
+    h1{
+      margin: 0 0 12px;
+      font-size: clamp(30px, 4.5vw, 42px);
+      letter-spacing: -0.5px;
+      text-align:center;
+      color: var(--primary);
+    }
+
+    .lead{
+      margin: 0 auto 22px;
+      max-width: 820px;
+      text-align:center;
+      color: var(--muted);
+      font-weight: 650;
+      line-height: 1.6;
+    }
+
+    .meta{
+      display:flex;
+      justify-content:center;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-bottom: 22px;
+    }
+
+    .meta-pill{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(17,24,39,.10);
+      background: rgba(255,255,255,.8);
+      font-weight: 850;
+      font-size: 12px;
+      color: rgba(11,18,32,.82);
+    }
+
+    .info-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+
+    .info-card{
+      background: rgba(255,255,255,.78);
+      border: 1px solid rgba(17,24,39,.10);
+      border-radius: 16px;
+      padding: 14px 14px 12px;
+      box-shadow: 0 10px 24px rgba(17,24,39,.06);
+    }
+
+    .kicker{
+      font-size: 12px;
+      font-weight: 900;
+      color: rgba(11,18,32,.88);
+      letter-spacing: .2px;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+
+    .value{
+      font-size: 15px;
+      font-weight: 850;
+      color: rgba(11,18,32,.92);
+      line-height: 1.45;
+    }
+
+    .muted{
+      margin-top: 6px;
+      font-size: 12.5px;
+      font-weight: 750;
+      color: rgba(91,100,117,.95);
+      line-height: 1.45;
+    }
+
+    .section{
+      margin-top: 20px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(17,24,39,.10);
+    }
+
+    .section:first-of-type{
+      margin-top: 0;
+      padding-top: 0;
+      border-top: 0;
+    }
+
+    h2{
+      margin: 0 0 10px;
+      font-size: 19px;
+      letter-spacing: -0.2px;
+      color: rgba(11,18,32,.94);
+    }
+
+    p{
+      margin: 0;
+      color: rgba(11,18,32,.84);
+      font-weight: 650;
+      line-height: 1.65;
+    }
+
+    p + p{ margin-top: 10px; }
+
+    ul{
+      margin: 10px 0 0;
+      padding-left: 18px;
+      color: rgba(11,18,32,.84);
+      font-weight: 650;
+      line-height: 1.7;
+    }
+
+    li + li{ margin-top: 4px; }
+
+    .notice{
+      margin-top: 12px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(17,24,39,.10);
+      background: rgba(255,255,255,.72);
+      color: rgba(11,18,32,.82);
+      font-weight: 700;
+      line-height: 1.55;
+    }
+
+    .btn-row{
+      display:flex;
+      justify-content:center;
+      gap: 10px;
+      margin-top: 22px;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-weight: 900;
+      font-size: 14px;
+      border: 1px solid var(--border);
+      background: #fff;
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      text-decoration:none;
+    }
+
+    .btn.primary{
+      background: var(--primary);
+      color: #fff;
+      border-color: rgba(0,0,0,.05);
+      box-shadow: 0 10px 20px rgba(11,92,173,.14);
+    }
+
+    .btn.primary:hover{ background: var(--primary-2); }
+
+    footer{
+      padding: 34px 0 46px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 13px;
+      background: transparent;
+    }
+
+    .footer-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap: 10px 14px;
+      align-items:center;
+      justify-content:space-between;
+    }
+
+    .footer-links{
+      display:flex;
+      flex-wrap:wrap;
+      gap: 10px;
+      align-items:center;
+      justify-content:flex-end;
+    }
+
+    .footer-links a{
+      color: rgba(91,100,117,.95);
+      font-weight: 800;
+      border-bottom: 1px solid transparent;
+    }
+
+    .footer-links a:hover{
+      color: rgba(11,18,32,.92);
+      border-bottom-color: rgba(11,18,32,.22);
+    }
+
+    .sep{ opacity:.45; }
+
+    @media (max-width: 860px){
+      .info-grid{ grid-template-columns: 1fr; }
+      .footer-row{ justify-content:center; }
+      .footer-links{ justify-content:center; }
+    }
+
+    @media (max-width: 640px){
+      .container{ width:min(980px, calc(100% - 32px)); }
+      .panel{ border-radius: 18px; }
+      .panel-body{ padding: 20px 16px 16px; }
+      .brand img{ width:52px; height:52px; }
+      .brand span{ font-size:17px; }
+    }
   </style>
 </head>
+
 <body>
-  <div class="wrap">
-    <div class="top">
-      <a class="btn" href="index.html">← Til forsiden</a>
-      <div class="muted">Sist oppdatert: <span id="d"></span></div>
+  <header>
+    <div class="container topbar">
+      <a class="brand" href="index.html" aria-label="Til forsiden">
+        <img src="images/logo-hjelpeportalen.svg" alt="Hjelpeportalen logo" />
+        <span>Hjelpeportalen</span>
+      </a>
+      <a class="back" href="index.html">← Til forsiden</a>
     </div>
+  </header>
 
-    <div class="card">
-      <h1>Cookies</h1>
-      <p class="muted">
-        Vi bruker i dag kun nødvendige cookies/teknologi for at nettsiden og bestillingsløsningen skal fungere.
-        Vi bruker ikke sporingscookies for markedsføring eller analyse uten samtykke.
-      </p>
+  <main>
+    <div class="container">
+      <div class="panel">
+        <div class="panel-head">PERSONVERN</div>
+        <div class="panel-body">
+          <h1>Personvernerklæring</h1>
+          <p class="lead">
+            Denne erklæringen forklarer hvordan Hjelpeportalen behandler personopplysninger
+            når du kontakter oss, bestiller tjenester eller kommuniserer med oss om et oppdrag.
+          </p>
 
-      <h2>Nødvendige cookies</h2>
-      <p>
-        Nødvendige cookies kan brukes for å:
-      </p>
-      <ul>
-        <li>sikre grunnleggende funksjonalitet</li>
-        <li>ivareta sikkerhet</li>
-        <li>muliggjøre bestilling/betaling i tilknyttede systemer</li>
-      </ul>
+          <div class="meta" aria-label="Oppsummering">
+            <span class="meta-pill">Enkel bestilling</span>
+            <span class="meta-pill">Fast pris</span>
+            <span class="meta-pill">Trygge rammer</span>
+          </div>
 
-      <h2>Analyse (ikke aktivert ved lansering)</h2>
-      <p>
-        Dersom vi senere tar i bruk analyseverktøy (f.eks. for å forbedre nettsiden), vil vi:
-      </p>
-      <ul>
-        <li>innføre samtykkebanner</li>
-        <li>gi mulighet til å avslå</li>
-        <li>oppdatere denne cookie-erklæringen</li>
-      </ul>
+          <div class="info-grid" aria-label="Virksomhetsinformasjon">
+            <div class="info-card">
+              <div class="kicker">Behandlingsansvarlig</div>
+              <div class="value">
+                Hjelpeportalen AS<br />
+                v/ Anders Grønnesstad Lura, daglig leder
+              </div>
+              <div class="muted">
+                Hjelpeportalen er behandlingsansvarlig for personopplysninger som behandles i forbindelse med
+                nettsiden, kundekontakt, bestilling og gjennomføring av tjenester.
+              </div>
+            </div>
 
-      <h2>Kontakt</h2>
-      <p>
-        Spørsmål om cookies? Kontaktinfo publiseres ved lansering.
-      </p>
+            <div class="info-card">
+              <div class="kicker">Kontaktinformasjon</div>
+              <div class="value">
+                Hegglandsdalsvegen 350B, 5211 Os, Norge<br />
+                Org.nr. 937 141 319<br />
+                kontakt@hjelpeportalen.no<br />
+                56 30 12 34
+              </div>
+              <div class="muted">
+                Dersom du ønsker innsyn, retting, sletting eller har spørsmål om personvern,
+                kan du kontakte oss på e-post eller telefon.
+              </div>
+            </div>
+          </div>
+
+          <section class="section">
+            <h2>Hvilke opplysninger vi kan behandle</h2>
+            <p>
+              Når du bruker Hjelpeportalen, kan vi behandle opplysninger som er nødvendige for å
+              motta, planlegge, bekrefte og følge opp en bestilling eller en henvendelse.
+            </p>
+            <ul>
+              <li>navn</li>
+              <li>telefonnummer</li>
+              <li>e-postadresse</li>
+              <li>adresse for oppdraget</li>
+              <li>bestillingsdetaljer, ønsker og praktisk informasjon om oppdraget</li>
+              <li>meldinger du sender via kontaktskjema, e-post eller andre henvendelser</li>
+              <li>meldinger og varsler knyttet til ordrebekreftelse, påminnelser og oppfølging</li>
+            </ul>
+            <div class="notice">
+              Vi lagrer ikke kortopplysninger hos oss. Betalingsinformasjon behandles av tredjeparts
+              betalingsleverandører i forbindelse med bestilling og betaling.
+            </div>
+          </section>
+
+          <section class="section">
+            <h2>Hvorfor vi behandler opplysningene</h2>
+            <p>Vi behandler personopplysninger for å:</p>
+            <ul>
+              <li>motta og administrere bestillinger</li>
+              <li>bekrefte tid, pris og praktiske detaljer</li>
+              <li>formidle nødvendig informasjon til hjelper som skal utføre oppdraget</li>
+              <li>sende ordrebekreftelser, varsler og påminnelser på e-post eller SMS</li>
+              <li>svare på spørsmål og følge opp kundedialog</li>
+              <li>dokumentere leverte tjenester og håndtere eventuelle avvik</li>
+              <li>oppfylle lovpålagte plikter, blant annet etter bokførings- og regnskapsregelverk</li>
+            </ul>
+          </section>
+
+          <section class="section">
+            <h2>Behandlingsgrunnlag</h2>
+            <p>
+              Vi behandler personopplysninger fordi det er nødvendig for å gjennomføre bestillingen
+              eller for å gjøre tiltak før en avtale inngås, for eksempel når du sender en forespørsel
+              om tjeneste. I tillegg kan vi behandle opplysninger for å oppfylle rettslige plikter,
+              som dokumentasjon etter bokførings- og regnskapsregelverk, og for å ivareta berettigede
+              interesser knyttet til sikker drift, kundeservice og forsvarlig gjennomføring av oppdrag.
+            </p>
+          </section>
+
+          <section class="section">
+            <h2>Deling av opplysninger</h2>
+            <p>
+              Vi deler bare opplysninger når det er nødvendig for å levere tjenesten eller drive
+              virksomheten på en forsvarlig måte.
+            </p>
+            <ul>
+              <li>
+                <strong>Hjelpere:</strong> Vi kan dele nødvendig informasjon om oppdraget med den hjelperen
+                som skal utføre tjenesten. Vi begrenser delingen til det som er nødvendig for god
+                oppdragsutførelse. Våre hjelpere er underlagt taushetsplikt etter avtale.
+              </li>
+              <li>
+                <strong>Bookingtjeneste.no:</strong> brukes til bestilling og administrasjon av oppdrag.
+              </li>
+              <li>
+                <strong>Vipps og Stripe:</strong> brukes til betaling og betalingsbehandling.
+              </li>
+              <li>
+                <strong>Microsoft 365:</strong> brukes til e-post og intern kommunikasjon knyttet til kundekontakt.
+              </li>
+            </ul>
+            <p>
+              Vi selger ikke personopplysninger videre og deler ikke opplysninger til markedsføringsformål
+              med andre aktører.
+            </p>
+          </section>
+
+          <section class="section">
+            <h2>Lagringstid</h2>
+            <p>
+              Vi lagrer ikke personopplysninger lenger enn nødvendig. Lagringstiden avhenger av hva
+              opplysningene brukes til og hvilke plikter vi har.
+            </p>
+            <ul>
+              <li>
+                <strong>Kontakthenvendelser uten bestilling:</strong> lagres normalt i inntil 12 måneder,
+                med mindre videre oppfølging er nødvendig.
+              </li>
+              <li>
+                <strong>Bestillings- og kundeopplysninger:</strong> lagres så lenge det er nødvendig for å
+                levere tjenesten, følge opp kundeforholdet og håndtere eventuelle spørsmål eller avvik.
+              </li>
+              <li>
+                <strong>Bokføringspliktige opplysninger:</strong> lagres så lenge loven krever det.
+              </li>
+              <li>
+                <strong>Varsler og kommunikasjon knyttet til oppdrag:</strong> kan lagres som del av
+                bestillingshistorikken når det er nødvendig for dokumentasjon og oppfølging.
+              </li>
+            </ul>
+          </section>
+
+          <section class="section">
+            <h2>Dine rettigheter</h2>
+            <p>
+              Du kan, innenfor rammene av personvernregelverket, be oss om:
+            </p>
+            <ul>
+              <li>innsyn i hvilke opplysninger vi har om deg</li>
+              <li>retting av uriktige eller ufullstendige opplysninger</li>
+              <li>sletting av opplysninger som ikke lenger er nødvendige</li>
+              <li>begrensning av behandlingen i enkelte tilfeller</li>
+              <li>å protestere mot behandling der regelverket gir rett til det</li>
+            </ul>
+            <p>
+              Ta kontakt på kontakt@hjelpeportalen.no eller 56 30 12 34 dersom du vil bruke rettighetene dine.
+            </p>
+          </section>
+
+          <section class="section">
+            <h2>Cookies og sporing</h2>
+            <p>
+              Ved oppstart bruker vi ikke analyse- eller sporingsverktøy for markedsføring uten samtykke.
+              Dersom vi senere tar i bruk slike verktøy for å forbedre nettsiden eller analysere bruk,
+              vil vi oppdatere våre sider for personvern og cookies og innføre samtykkeløsning der det er nødvendig.
+            </p>
+            <p>
+              Du kan lese mer i vår <a href="cookies.html" style="text-decoration:underline; font-weight:900;">cookie-erklæring</a>.
+            </p>
+          </section>
+
+          <section class="section">
+            <h2>Endringer</h2>
+            <p>
+              Vi kan oppdatere denne personvernerklæringen dersom tjenestene våre, systemene våre eller regelverket endres.
+              Den nyeste versjonen vil alltid være tilgjengelig på nettsiden.
+            </p>
+          </section>
+
+          <div class="btn-row">
+            <a class="btn primary" href="index.html">Til forsiden</a>
+            <a class="btn" href="cookies.html">Cookies</a>
+            <a class="btn" href="vilkar.html">Vilkår</a>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-row">
+        <div>© <span id="y"></span> Hjelpeportalen. Fast pris – ingen skjulte tillegg.</div>
+        <div class="footer-links" aria-label="Juridisk informasjon">
+          <a href="index.html#kontakt">Kontakt</a>
+          <span class="sep">|</span>
+          <a href="personvern.html">Personvern</a>
+          <span class="sep">|</span>
+          <a href="cookies.html">Cookies</a>
+          <span class="sep">|</span>
+          <a href="vilkar.html">Vilkår</a>
+        </div>
+      </div>
+    </div>
+  </footer>
 
   <script>
-    document.getElementById("d").textContent = new Date().toISOString().slice(0,10);
+    document.getElementById("y").textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
