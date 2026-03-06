@@ -237,7 +237,7 @@
       border: 1px solid var(--border);
       box-shadow: var(--shadow);
       background: #0b1220;
-      margin: 0 auto 22px;
+      margin: 0 auto 14px;
       width: min(980px, 100%);
       aspect-ratio: 16 / 9;
       isolation: isolate;
@@ -297,19 +297,39 @@
       opacity: .34;
     }
 
+    .trust-strip{
+      margin: 0 auto 24px;
+      width: min(980px, 100%);
+      border-top: 1px solid rgba(17,24,39,.10);
+      border-bottom: 1px solid rgba(17,24,39,.10);
+      background: rgba(255,255,255,.48);
+      backdrop-filter: blur(8px);
+    }
+
+    .trust-inner{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap: 14px;
+      flex-wrap: wrap;
+      padding: 12px 18px;
+      color: rgba(11,18,32,.78);
+      font-weight: 900;
+      font-size: 13px;
+      letter-spacing: .14px;
+      line-height: 1.4;
+    }
+
+    .trust-sep{
+      opacity: .35;
+      font-weight: 900;
+    }
+
     .hero h1{
-      margin: 0 0 10px;
+      margin: 0 0 18px;
       font-size: clamp(40px, 5vw, 64px);
       letter-spacing: -1px;
       color: var(--primary);
-    }
-
-    .hero p.lead{
-      margin: 0 auto 18px;
-      max-width: 680px;
-      font-size: 18px;
-      color: var(--muted);
-      font-weight: 700;
     }
 
     .cta{
@@ -356,25 +376,6 @@
       color: var(--muted);
       font-weight: 800;
       font-size: 20px;
-    }
-
-    .trust-strip{
-      padding: 18px 0;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      background: rgba(255,255,255,.60);
-      backdrop-filter: blur(8px);
-    }
-
-    .trust-inner{
-      display:flex;
-      justify-content:center;
-      flex-wrap:wrap;
-      gap:22px;
-      font-weight:900;
-      color:rgba(11,18,32,.75);
-      font-size:13px;
-      letter-spacing: .15px;
     }
 
     .section{
@@ -849,7 +850,7 @@
       .contact-grid{ grid-template-columns: 1fr; }
       .split-copy h3{ font-size: 30px; }
       .split-copy .lead-copy{ font-size: 18px; }
-      .trust-inner{ gap: 14px 18px; }
+      .trust-inner{ gap: 10px; font-size: 12.5px; }
     }
 
     @media (max-width: 640px){
@@ -868,6 +869,9 @@
       }
       .hint{
         font-size: 18px;
+      }
+      .hero h1{
+        margin-bottom: 16px;
       }
     }
   </style>
@@ -924,8 +928,17 @@
           <div class="hero-vignette" aria-hidden="true"></div>
         </div>
 
+        <div class="trust-strip" aria-label="Slagord">
+          <div class="trust-inner">
+            <span>Enkel bestilling</span>
+            <span class="trust-sep">|</span>
+            <span>Fast pris</span>
+            <span class="trust-sep">|</span>
+            <span>Trygge rammer</span>
+          </div>
+        </div>
+
         <h1>Hverdagshjelp i Os</h1>
-        <p class="lead">Enkel bestilling. Fast pris. Trygge rammer.</p>
 
         <a class="cta" href="#priser" id="bookBtn">Bestill hjelp</a>
 
@@ -957,15 +970,6 @@
         </div>
 
         <div class="hint">Tilbys i Os og nærområdet rundt Osøyro ved lansering!</div>
-      </div>
-    </section>
-
-    <section class="trust-strip" aria-label="Fordeler">
-      <div class="container trust-inner">
-        <span>Fast pris</span>
-        <span>Trygg standard</span>
-        <span>Lokale hjelpere</span>
-        <span>Enkel bestilling</span>
       </div>
     </section>
 
