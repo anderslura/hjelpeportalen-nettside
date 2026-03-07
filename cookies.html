@@ -12,6 +12,8 @@
       --muted:#5b6475;
       --border: rgba(17, 24, 39, .12);
       --shadow: 0 12px 30px rgba(17,24,39,.08);
+      --primary:#0b5cad;
+      --primary-2:#0a4f97;
       --page-bg:
         radial-gradient(1200px 600px at 12% 15%, rgba(255, 238, 208, .65), transparent 60%),
         radial-gradient(1000px 520px at 80% 20%, rgba(212, 233, 255, .75), transparent 62%),
@@ -20,6 +22,7 @@
     }
 
     *{ box-sizing:border-box; }
+
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
@@ -27,10 +30,10 @@
       background: var(--page-bg);
       background-attachment: fixed;
     }
+
     a{ color: inherit; text-decoration:none; }
     .container{ width:min(980px, calc(100% - 48px)); margin:0 auto; }
 
-    /* Panel (samme uttrykk som index) */
     .panel{
       margin: 28px auto 0;
       background: rgba(255,255,255,.72);
@@ -40,6 +43,7 @@
       overflow: hidden;
       backdrop-filter: blur(10px);
     }
+
     .panel-head{
       padding: 18px 20px;
       background: rgba(11,18,32,.92);
@@ -52,15 +56,19 @@
       text-align:center;
       font-size: 13px;
     }
+
     .panel-body{
       padding: 22px 22px 18px;
     }
+
     h1{
       margin: 0 0 10px;
       font-size: 28px;
       letter-spacing: -0.3px;
       text-align:center;
+      color: var(--primary);
     }
+
     .lead{
       margin: 0 auto 18px;
       max-width: 820px;
@@ -76,6 +84,7 @@
       gap: 14px;
       margin-top: 14px;
     }
+
     .mini-card{
       background: rgba(255,255,255,.78);
       border: 1px solid rgba(17,24,39,.10);
@@ -84,6 +93,7 @@
       box-shadow: 0 10px 24px rgba(17,24,39,.06);
       text-align:left;
     }
+
     .kicker{
       font-size: 12px;
       font-weight: 900;
@@ -91,12 +101,14 @@
       letter-spacing: .2px;
       margin-bottom: 6px;
     }
+
     .value{
       font-size: 15px;
       font-weight: 850;
       color: rgba(11,18,32,.92);
       line-height: 1.35;
     }
+
     .muted{
       margin-top: 6px;
       font-size: 12.5px;
@@ -112,6 +124,7 @@
       margin-top: 16px;
       flex-wrap:wrap;
     }
+
     .btn{
       border-radius: 10px;
       padding: 10px 14px;
@@ -126,16 +139,48 @@
     }
 
     footer{
-      padding: 22px 0 34px;
-      color: rgba(91,100,117,.95);
-      font-weight: 700;
-      font-size: 13px;
+      padding: 34px 0 46px;
+      border-top: 1px solid var(--border);
+      background: transparent;
+      margin-top: 28px;
+    }
+
+    .footer{
       text-align:center;
+      font-weight:750;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .footer a{
+      color: var(--primary);
+      text-decoration:none;
+      font-weight:800;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+    }
+
+    .footer a:hover{
+      text-decoration:underline;
+    }
+
+    .footer-icon{
+      width:16px;
+      height:16px;
+      flex:0 0 16px;
+    }
+
+    .sep{
+      margin:0 6px;
+      opacity:.6;
     }
 
     @media (max-width: 900px){
       .mini-grid{ grid-template-columns: 1fr; }
     }
+
     @media (max-width: 640px){
       .container{ width:min(980px, calc(100% - 32px)); }
       .panel{ border-radius: 18px; }
@@ -189,7 +234,29 @@
   </main>
 
   <footer>
-    © <span id="y"></span> Hjelpeportalen
+    <div class="container footer">
+      © <span id="y"></span> Hjelpeportalen
+      <span class="sep">|</span>
+
+      <a href="index.html#kontakt">Kontakt</a>
+      <span class="sep">|</span>
+
+      <a href="personvern.html">Personvern</a>
+      <span class="sep">|</span>
+
+      <a href="cookies.html">Cookies</a>
+      <span class="sep">|</span>
+
+      <a href="vilkar.html">Vilkår</a>
+      <span class="sep">|</span>
+
+      <a href="https://www.facebook.com/profile.php?id=61584902576820" target="_blank" rel="noopener" aria-label="Facebook">
+        <svg class="footer-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.3.2 2.3.2v2.5h-1.3c-1.3 0-1.7.8-1.7 1.6V12h2.9l-.5 2.9h-2.4v7A10 10 0 0 0 22 12z"/>
+        </svg>
+        Facebook
+      </a>
+    </div>
   </footer>
 
   <script>
