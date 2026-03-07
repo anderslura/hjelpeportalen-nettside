@@ -4,16 +4,14 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Bestillingsvilkår | Hjelpeportalen</title>
-  <meta name="description" content="Bestillingsvilkår for Hjelpeportalen." />
+  <meta name="description" content="Bestillingsvilkår for tjenester levert gjennom Hjelpeportalen." />
 
   <style>
     :root{
       --text:#0b1220;
       --muted:#5b6475;
       --border: rgba(17, 24, 39, .12);
-      --shadow: 0 12px 30px rgba(17,24,39,.08);
       --primary:#0b5cad;
-      --primary-2:#0a4f97;
       --page-bg:
         radial-gradient(1200px 600px at 12% 15%, rgba(255, 238, 208, .65), transparent 60%),
         radial-gradient(1000px 520px at 80% 20%, rgba(212, 233, 255, .75), transparent 62%),
@@ -21,18 +19,18 @@
         linear-gradient(180deg, rgba(244,246,251,1) 0%, rgba(244,246,251,1) 100%);
     }
 
-    *{ box-sizing:border-box; }
+    *{box-sizing:border-box;}
 
     body{
       margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
       line-height:1.6;
       color:var(--text);
       background:var(--page-bg);
       background-attachment: fixed;
     }
 
-    a{ color:inherit; text-decoration:none; }
+    a{color:var(--primary);text-decoration:none;}
 
     .wrap{
       max-width:920px;
@@ -55,7 +53,7 @@
       justify-content:center;
       padding:10px 14px;
       border-radius:10px;
-      border:1px solid rgba(17,24,39,.12);
+      border:1px solid var(--border);
       background:#fff;
       text-decoration:none;
       font-weight:800;
@@ -83,13 +81,13 @@
     h1{
       margin:0 0 10px;
       font-size:28px;
-      color: var(--primary);
+      color:var(--primary);
     }
 
     h2{
       margin:22px 0 8px;
       font-size:18px;
-      color: rgba(11,18,32,.96);
+      color:rgba(11,18,32,.96);
     }
 
     p, li{
@@ -97,47 +95,24 @@
       font-weight:550;
     }
 
-    .legal-link{
-      color: var(--primary);
-      text-decoration: underline;
-      font-weight: 800;
-    }
-
     footer{
-      padding: 34px 0 46px;
-      border-top: 1px solid var(--border);
-      background: transparent;
-      margin-top: 8px;
-    }
-
-    .footer{
-      max-width:920px;
-      margin:0 auto;
-      padding:0 20px;
+      padding:34px 0 46px;
+      border-top:1px solid var(--border);
+      color:var(--muted);
+      font-weight:700;
+      font-size:13px;
+      margin-top:40px;
       text-align:center;
-      font-weight:750;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.8;
     }
 
     .footer a{
-      color: var(--primary);
+      color:var(--primary);
       text-decoration:none;
       font-weight:800;
-      display:inline-flex;
-      align-items:center;
-      gap:6px;
     }
 
     .footer a:hover{
       text-decoration:underline;
-    }
-
-    .footer-icon{
-      width:16px;
-      height:16px;
-      flex:0 0 16px;
     }
 
     .sep{
@@ -145,117 +120,120 @@
       opacity:.6;
     }
 
-    @media (max-width: 640px){
-      .wrap{
-        padding:24px 16px;
-      }
-
-      .card{
-        padding:18px 16px;
-        border-radius:16px;
-      }
-
-      .footer{
-        padding:0 16px;
-      }
+    @media (max-width:640px){
+      .wrap{padding:24px 16px;}
+      .card{padding:18px 16px;border-radius:16px;}
     }
   </style>
 </head>
 
 <body>
-  <div class="wrap">
-    <div class="top">
-      <a class="btn" href="index.html">← Til forsiden</a>
-      <div class="muted">Sist oppdatert: <span id="d"></span></div>
-    </div>
 
-    <div class="card">
-      <h1>Bestillingsvilkår</h1>
-      <p class="muted">
-        Disse vilkårene gjelder for bestilling av tjenester fra Hjelpeportalen (avdeling Os). Kontaktinformasjon publiseres ved lansering.
-      </p>
+<div class="wrap">
 
-      <h2>1. Om tjenesten</h2>
-      <p>
-        Hjelpeportalen tilbyr praktisk hjelp og sosial støtte i hverdagen. Tjenestene er ikke helsehjelp og inkluderer ikke medisinsk behandling.
-      </p>
-
-      <h2>2. Bestilling</h2>
-      <p>
-        Bestilling gjennomføres i bestillingsløsningen. Kunden velger tjeneste, varighet og tidspunkt, og kan legge ved relevant informasjon for oppdraget.
-      </p>
-
-      <h2>3. Pris og betaling</h2>
-      <p>
-        Pris er fast per oppdrag basert på valgt varighet, og inkluderer mva og nødvendig lokal kjøring der dette er oppgitt. Betaling skjer via valgt betalingsløsning.
-      </p>
-
-      <h2>4. Endring og avbestilling</h2>
-      <p>
-        Endring eller avbestilling av bestilling må normalt skje senest 24 timer før avtalt oppstart.
-      </p>
-      <p>
-        Ved senere avbestilling kan inntil 50 % av oppdragsprisen bli belastet. Ved avbestilling samme dag, eller dersom kunden ikke er tilgjengelig ved oppmøte, kan full pris bli belastet.
-      </p>
-      <p>
-        Ved sykdom eller andre uforutsette hendelser vil vi alltid forsøke å finne en rimelig løsning.
-      </p>
-      <p>
-        Dersom Hjelpeportalen må avlyse oppdraget på grunn av sykdom eller andre uforutsette forhold hos oss, vil kunden ikke bli belastet.
-      </p>
-
-      <h2>5. Kundens ansvar</h2>
-      <ul>
-        <li>Kunden skal gi riktig informasjon om oppdraget og nødvendig tilgang (adresse, parkering osv.).</li>
-        <li>Ved ærender eller handling betaler kunden selv for varer der dette er relevant.</li>
-      </ul>
-
-      <h2>6. Gjennomføring</h2>
-      <p>
-        Oppdrag utføres innen avtalt tidsrom. Mindre avvik kan forekomme ved trafikk, vær eller andre uforutsette forhold. Kunden varsles ved behov.
-      </p>
-
-      <h2>7. Ansvar og begrensninger</h2>
-      <p>
-        Tjenestene utføres med aktsomhet og etter beste evne. Eventuelle krav vurderes konkret basert på situasjonen. Hjelpeportalen er ikke ansvarlig for indirekte tap.
-      </p>
-
-      <h2>8. Personvern</h2>
-      <p>
-        Behandling av personopplysninger er beskrevet i vår <a class="legal-link" href="personvern.html">personvernerklæring</a>.
-      </p>
-    </div>
+  <div class="top">
+    <a class="btn" href="index.html">← Til forsiden</a>
+    <div class="muted">Sist oppdatert: <span id="d"></span></div>
   </div>
 
-  <footer>
-    <div class="footer">
-      © <span id="y"></span> Hjelpeportalen
-      <span class="sep">|</span>
+  <div class="card">
 
-      <a href="index.html#kontakt">Kontakt</a>
-      <span class="sep">|</span>
+    <h1>Bestillingsvilkår</h1>
 
-      <a href="personvern.html">Personvern</a>
-      <span class="sep">|</span>
+    <p class="muted">
+      Disse vilkårene gjelder for bestilling av tjenester levert gjennom Hjelpeportalen.
+    </p>
 
-      <a href="cookies.html">Cookies</a>
-      <span class="sep">|</span>
+    <h2>1. Om tjenesten</h2>
+    <p>
+      Hjelpeportalen tilbyr praktisk hjelp og sosial støtte i hverdagen. Tjenestene er ikke helsehjelp og inkluderer ikke medisinsk behandling.
+    </p>
 
-      <a href="vilkar.html">Vilkår</a>
-      <span class="sep">|</span>
+    <h2>2. Bestilling</h2>
+    <p>
+      Bestilling gjennomføres i bestillingsløsningen. Kunden velger tjeneste, varighet og tidspunkt, og kan legge ved relevant informasjon for oppdraget.
+    </p>
 
-      <a href="https://www.facebook.com/profile.php?id=61584902576820" target="_blank" rel="noopener" aria-label="Facebook">
-        <svg class="footer-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-          <path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.3.2 2.3.2v2.5h-1.3c-1.3 0-1.7.8-1.7 1.6V12h2.9l-.5 2.9h-2.4v7A10 10 0 0 0 22 12z"/>
-        </svg>
-        Facebook
-      </a>
-    </div>
-  </footer>
+    <h2>3. Pris og betaling</h2>
+    <p>
+      Pris er fast per oppdrag basert på valgt varighet og inkluderer mva og nødvendig lokal kjøring der dette er oppgitt. Betaling skjer via valgt betalingsløsning.
+    </p>
 
-  <script>
-    document.getElementById("d").textContent = new Date().toISOString().slice(0,10);
-    document.getElementById("y").textContent = new Date().getFullYear();
-  </script>
+    <h2>4. Endring og avbestilling</h2>
+
+    <p>
+      Endring eller avbestilling av bestilling må normalt skje senest 24 timer før avtalt oppstart.
+    </p>
+
+    <p>
+      Ved senere avbestilling kan inntil 50 % av oppdragsprisen bli belastet. Ved avbestilling samme dag, eller dersom kunden ikke er tilgjengelig ved oppmøte, kan full pris bli belastet.
+    </p>
+
+    <p>
+      Ved sykdom eller andre uforutsette hendelser vil vi alltid forsøke å finne en rimelig løsning.
+    </p>
+
+    <p>
+      Dersom Hjelpeportalen må avlyse oppdraget på grunn av sykdom eller andre uforutsette forhold hos oss, vil kunden ikke bli belastet.
+    </p>
+
+    <h2>5. Kundens ansvar</h2>
+
+    <ul>
+      <li>Kunden skal gi riktig informasjon om oppdraget og nødvendig tilgang (adresse, parkering osv.).</li>
+      <li>Ved ærender eller handling betaler kunden selv for varer der dette er relevant.</li>
+    </ul>
+
+    <h2>6. Gjennomføring</h2>
+
+    <p>
+      Oppdrag utføres innen avtalt tidsrom. Mindre avvik kan forekomme ved trafikk, vær eller andre uforutsette forhold. Kunden varsles ved behov.
+    </p>
+
+    <h2>7. Ansvar og begrensninger</h2>
+
+    <p>
+      Tjenestene utføres med aktsomhet og etter beste evne. Eventuelle krav vurderes konkret basert på situasjonen. Hjelpeportalen er ikke ansvarlig for indirekte tap.
+    </p>
+
+    <h2>8. Personvern</h2>
+
+    <p>
+      Behandling av personopplysninger er beskrevet i vår
+      <a href="personvern.html">personvernerklæring</a>.
+    </p>
+
+  </div>
+
+</div>
+
+<footer class="footer">
+
+  © <span id="y"></span> Hjelpeportalen
+  <span class="sep">|</span>
+
+  <a href="index.html#kontakt">Kontakt</a>
+  <span class="sep">|</span>
+
+  <a href="personvern.html">Personvern</a>
+  <span class="sep">|</span>
+
+  <a href="cookies.html">Cookies</a>
+  <span class="sep">|</span>
+
+  <a href="vilkar.html">Vilkår</a>
+  <span class="sep">|</span>
+
+  <a href="https://www.facebook.com/profile.php?id=61584902576820" target="_blank" rel="noopener">
+    Facebook
+  </a>
+
+</footer>
+
+<script>
+document.getElementById("d").textContent = new Date().toISOString().slice(0,10);
+document.getElementById("y").textContent = new Date().getFullYear();
+</script>
+
 </body>
 </html>
