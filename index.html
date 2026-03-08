@@ -715,6 +715,14 @@
       background: #eef2f7;
     }
 
+    .split-photo.contact-photo{
+      min-height: 420px;
+      object-fit: cover;
+      object-position: center 20%;
+      background:
+        linear-gradient(180deg, rgba(231,238,247,1) 0%, rgba(231,238,247,1) 100%);
+    }
+
     .image-placeholder{
       width:100%;
       min-height: 360px;
@@ -847,6 +855,10 @@
       .split-photo{
         min-height: 260px;
       }
+      .split-photo.contact-photo{
+        min-height: 380px;
+        object-position: center 18%;
+      }
       .section{
         padding: 54px 0 86px;
       }
@@ -875,6 +887,10 @@
       .split-photo{
         min-height: 220px;
         border-radius: 16px;
+      }
+      .split-photo.contact-photo{
+        min-height: 300px;
+        object-position: center 16%;
       }
       .section{
         padding: 46px 0 74px;
@@ -974,7 +990,7 @@
             <span>For alle – uten krav eller binding</span>
           </div>
           <div class="check">
-            <svg class="tick" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <svg class="tick" viewBox="0 0 0 24 24" fill="none" aria-hidden="true">
               <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
             <span>Ordrebekreftelse med tid og pris</span>
@@ -1232,10 +1248,15 @@
           <div class="panel-body">
             <div class="split-panel reverse">
               <div class="split-media">
-                <div class="image-placeholder" aria-label="Plassholder for bilde i Kontakt">
-                  Bilde kommer her<br/>
-                  <span style="font-weight:700; opacity:.8;">for eksempel telefon, møte eller trygg samtalesituasjon</span>
-                </div>
+                <img
+                  class="split-photo contact-photo"
+                  src="images/hjelpeportalen-kontakt.webp"
+                  alt="Kontakt Hjelpeportalen – daglig leder"
+                  loading="lazy"
+                  decoding="async"
+                  width="832"
+                  height="1216"
+                />
               </div>
 
               <div class="split-copy">
