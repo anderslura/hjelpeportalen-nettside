@@ -715,10 +715,33 @@
       background: #eef2f7;
     }
 
+    /* Kontaktbildet får samme kontrollerte størrelse/følelse som om oss */
+    .contact-media{
+      width: 100%;
+      display: flex;
+      align-items: stretch;
+    }
+
+    .contact-frame{
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      max-height: 520px;
+      border-radius: 18px;
+      border: 1px solid rgba(17,24,39,.10);
+      box-shadow: 0 10px 24px rgba(17,24,39,.08);
+      overflow: hidden;
+      background: linear-gradient(180deg, rgba(231,238,247,1) 0%, rgba(231,238,247,1) 100%);
+    }
+
     .split-photo.contact-photo{
-      min-height: 420px;
+      width: 100%;
+      height: 100%;
+      min-height: 0;
+      border: 0;
+      border-radius: 0;
+      box-shadow: none;
       object-fit: cover;
-      object-position: center 20%;
+      object-position: center 22%;
       background:
         linear-gradient(180deg, rgba(231,238,247,1) 0%, rgba(231,238,247,1) 100%);
     }
@@ -855,9 +878,12 @@
       .split-photo{
         min-height: 260px;
       }
+      .contact-frame{
+        aspect-ratio: 4 / 4.6;
+        max-height: 440px;
+      }
       .split-photo.contact-photo{
-        min-height: 380px;
-        object-position: center 18%;
+        object-position: center 20%;
       }
       .section{
         padding: 54px 0 86px;
@@ -888,9 +914,13 @@
         min-height: 220px;
         border-radius: 16px;
       }
+      .contact-frame{
+        aspect-ratio: 4 / 4.8;
+        max-height: 360px;
+        border-radius: 16px;
+      }
       .split-photo.contact-photo{
-        min-height: 300px;
-        object-position: center 16%;
+        object-position: center 18%;
       }
       .section{
         padding: 46px 0 74px;
@@ -990,7 +1020,7 @@
             <span>For alle – uten krav eller binding</span>
           </div>
           <div class="check">
-            <svg class="tick" viewBox="0 0 0 24 24" fill="none" aria-hidden="true">
+            <svg class="tick" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
             <span>Ordrebekreftelse med tid og pris</span>
@@ -1247,16 +1277,18 @@
           <div class="panel-head">KONTAKT</div>
           <div class="panel-body">
             <div class="split-panel reverse">
-              <div class="split-media">
-                <img
-                  class="split-photo contact-photo"
-                  src="images/hjelpeportalen-kontakt.webp"
-                  alt="Kontakt Hjelpeportalen – daglig leder"
-                  loading="lazy"
-                  decoding="async"
-                  width="832"
-                  height="1216"
-                />
+              <div class="contact-media">
+                <div class="contact-frame">
+                  <img
+                    class="split-photo contact-photo"
+                    src="images/hjelpeportalen-kontakt.webp"
+                    alt="Kontakt Hjelpeportalen – daglig leder"
+                    loading="lazy"
+                    decoding="async"
+                    width="832"
+                    height="1216"
+                  />
+                </div>
               </div>
 
               <div class="split-copy">
@@ -1272,15 +1304,15 @@
                 <div class="contact-grid">
                   <div class="contact-card">
                     <div class="contact-label">Telefon (avdeling Os)</div>
-                    <div class="contact-value">Man–Fre: 17:30–19:00</div>
+                    <div class="contact-value">56 30 12 34</div>
                     <div class="contact-copy">
-                      Telefonnummer blir synlig ved lansering. Ring oss i telefontiden for spørsmål, endringer eller planlegging.
+                      Telefontid: Man–Fre 17:30–19:00. Ring oss for spørsmål, endringer eller planlegging.
                     </div>
                   </div>
 
                   <div class="contact-card">
                     <div class="contact-label">E-post</div>
-                    <div class="contact-value">Blir synlig ved lansering</div>
+                    <div class="contact-value">kontakt@hjelpeportalen.no</div>
                     <div class="contact-copy">
                       Du kan sende e-post også utenom telefontid – vi svarer så raskt vi kan.
                     </div>
@@ -1293,7 +1325,7 @@
                 </div>
 
                 <div style="margin-top:4px;">
-                  <span class="inline-pill">Kontaktinfo blir synlig ved lansering</span>
+                  <span class="inline-pill">Telefon og e-post er klare ved lansering</span>
                 </div>
               </div>
             </div>
