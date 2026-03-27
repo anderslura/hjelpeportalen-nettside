@@ -863,6 +863,93 @@
       opacity:.6;
     }
 
+    .cookie-banner{
+      position: fixed;
+      left: 16px;
+      right: 16px;
+      bottom: 16px;
+      z-index: 120;
+      max-width: 980px;
+      margin: 0 auto;
+      background: rgba(255,255,255,.96);
+      border: 1px solid rgba(17,24,39,.12);
+      border-radius: 18px;
+      box-shadow: 0 24px 60px rgba(17,24,39,.18);
+      backdrop-filter: blur(12px);
+      padding: 18px;
+      display: none;
+    }
+
+    .cookie-banner.show{
+      display: block;
+    }
+
+    .cookie-inner{
+      display: flex;
+      gap: 16px;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+
+    .cookie-copy{
+      max-width: 700px;
+    }
+
+    .cookie-title{
+      margin: 0 0 6px;
+      font-size: 16px;
+      font-weight: 900;
+      color: rgba(11,18,32,.94);
+    }
+
+    .cookie-text{
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 650;
+      line-height: 1.55;
+    }
+
+    .cookie-text a{
+      color: var(--primary);
+      text-decoration: underline;
+      font-weight: 800;
+    }
+
+    .cookie-actions{
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      flex: 0 0 auto;
+    }
+
+    .cookie-btn{
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-weight: 900;
+      font-size: 14px;
+      border: 1px solid var(--border);
+      background: #fff;
+      cursor: pointer;
+      min-width: 118px;
+    }
+
+    .cookie-btn.accept{
+      background: var(--primary);
+      color: #fff;
+      border-color: rgba(0,0,0,.06);
+      box-shadow: 0 10px 20px rgba(11,92,173,.16);
+    }
+
+    .cookie-btn.accept:hover{
+      background: var(--primary-2);
+    }
+
+    .cookie-btn.reject:hover{
+      background: rgba(17,24,39,.04);
+    }
+
     @media (max-width: 980px){
       .grid-3{ grid-template-columns: 1fr; }
       .card.featured{ transform: none; }
@@ -887,6 +974,13 @@
       .section{
         padding: 54px 0 86px;
       }
+      .cookie-inner{
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .cookie-actions{
+        justify-content: stretch;
+      }
     }
 
     @media (max-width: 740px){
@@ -899,6 +993,9 @@
       .split-copy h3{ font-size: 30px; }
       .split-copy .lead-copy{ font-size: 18px; }
       .trust-inner{ gap: 10px; font-size: 12.5px; }
+      .cookie-btn{
+        width: 100%;
+      }
     }
 
     @media (max-width: 640px){
@@ -929,6 +1026,13 @@
       }
       .hero h1{
         margin-bottom: 16px;
+      }
+      .cookie-banner{
+        left: 12px;
+        right: 12px;
+        bottom: 12px;
+        padding: 16px;
+        border-radius: 16px;
       }
     }
   </style>
@@ -1141,7 +1245,7 @@
               <p class="plan-desc">Passer når oppgaven er avgrenset og kan gjennomføres innen én time.</p>
 
               <div class="price">
-                <div class="kr">kr 690</div>
+                <div class="kr">kr 699</div>
                 <div class="meta">per oppdrag<br/>inkl. mva og nødvendig kjøring</div>
               </div>
 
@@ -1162,7 +1266,7 @@
               <p class="plan-desc">God balanse mellom tid og kvalitet. Passer godt for de fleste behov.</p>
 
               <div class="price">
-                <div class="kr">kr 990</div>
+                <div class="kr">kr 999</div>
                 <div class="meta">per oppdrag<br/>inkl. mva og nødvendig kjøring</div>
               </div>
 
@@ -1396,6 +1500,23 @@
     </div>
   </footer>
 
+  <div class="cookie-banner" id="cookieBanner" role="dialog" aria-modal="true" aria-label="Informasjon om cookies">
+    <div class="cookie-inner">
+      <div class="cookie-copy">
+        <p class="cookie-title">Vi bruker cookies for å forbedre nettsiden</p>
+        <p class="cookie-text">
+          Vi bruker analyse-cookies for å forstå hvordan nettsiden brukes og for å forbedre opplevelsen. Du kan lese mer i
+          <a href="cookies.html">cookies</a> og <a href="personvern.html">personvern</a>.
+        </p>
+      </div>
+
+      <div class="cookie-actions">
+        <button class="cookie-btn reject" id="cookieRejectBtn" type="button">Avvis</button>
+        <button class="cookie-btn accept" id="cookieAcceptBtn" type="button">Godta</button>
+      </div>
+    </div>
+  </div>
+
   <script>
     document.getElementById("y").textContent = new Date().getFullYear();
 
@@ -1451,6 +1572,58 @@
 
       document.addEventListener("keydown", (e) => {
         if(e.key === "Escape") closeMenu();
+      });
+    })();
+
+    (function(){
+      const STORAGE_KEY = "hp_cookie_consent";
+      const banner = document.getElementById("cookieBanner");
+      const acceptBtn = document.getElementById("cookieAcceptBtn");
+      const rejectBtn = document.getElementById("cookieRejectBtn");
+      const MEASUREMENT_ID = "G-9ZJ9SXQWLZ";
+
+      function loadGoogleAnalytics(){
+        if(window.__hpAnalyticsLoaded) return;
+        window.__hpAnalyticsLoaded = true;
+
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=" + MEASUREMENT_ID;
+        document.head.appendChild(script);
+
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){ dataLayer.push(arguments); }
+        window.gtag = gtag;
+
+        gtag("js", new Date());
+        gtag("config", MEASUREMENT_ID, { anonymize_ip: true });
+      }
+
+      function hideBanner(){
+        banner?.classList.remove("show");
+      }
+
+      function showBanner(){
+        banner?.classList.add("show");
+      }
+
+      const savedChoice = localStorage.getItem(STORAGE_KEY);
+
+      if(savedChoice === "accepted"){
+        loadGoogleAnalytics();
+      } else if(savedChoice !== "rejected"){
+        showBanner();
+      }
+
+      acceptBtn?.addEventListener("click", function(){
+        localStorage.setItem(STORAGE_KEY, "accepted");
+        hideBanner();
+        loadGoogleAnalytics();
+      });
+
+      rejectBtn?.addEventListener("click", function(){
+        localStorage.setItem(STORAGE_KEY, "rejected");
+        hideBanner();
       });
     })();
   </script>
