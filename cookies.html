@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Cookies | Hjelpeportalen</title>
-  <meta name="description" content="Informasjon om cookies på Hjelpeportalen." />
+  <meta name="description" content="Informasjon om cookies og analyseverktøy på Hjelpeportalen." />
 
   <style>
     :root{
@@ -117,6 +117,33 @@
       line-height: 1.4;
     }
 
+    .text-block{
+      margin-top: 18px;
+      background: rgba(255,255,255,.78);
+      border: 1px solid rgba(17,24,39,.10);
+      border-radius: 16px;
+      padding: 18px 16px;
+      box-shadow: 0 10px 24px rgba(17,24,39,.06);
+    }
+
+    .text-block h2{
+      margin: 0 0 10px;
+      font-size: 18px;
+      color: rgba(11,18,32,.92);
+    }
+
+    .text-block p{
+      margin: 0 0 10px;
+      color: var(--muted);
+      line-height: 1.65;
+      font-weight: 650;
+      font-size: 14.5px;
+    }
+
+    .text-block p:last-child{
+      margin-bottom: 0;
+    }
+
     .btn-row{
       display:flex;
       justify-content:center;
@@ -196,8 +223,8 @@
       <div class="panel-body">
         <h1>Cookies på Hjelpeportalen</h1>
         <p class="lead">
-          Vi bruker i dag kun nødvendige cookies/teknologi for at nettsiden og bestillingsløsningen skal fungere.
-          Vi bruker ikke sporingscookies for markedsføring eller analyse uten samtykke.
+          Vi bruker nødvendige cookies og lignende teknologi for at nettsiden skal fungere trygt og stabilt.
+          I tillegg bruker vi analyseverktøy kun dersom du samtykker til dette via vårt cookie-banner.
         </p>
 
         <div class="mini-grid" aria-label="Oppsummering cookies">
@@ -206,23 +233,60 @@
             <div class="value">Aktivt (standard)</div>
             <div class="muted">
               Brukes for grunnleggende funksjonalitet, sikkerhet og stabil drift.
-              Dette kan også gjelde tilknyttede bestillings-/betalingssystemer.
+              Dette kan også gjelde tilknyttede bestillings- og betalingsløsninger.
             </div>
           </div>
 
           <div class="mini-card">
-            <div class="kicker">Analyse og sporing</div>
-            <div class="value">Ikke aktivert ved lansering</div>
+            <div class="kicker">Analyse og statistikk</div>
+            <div class="value">Kun etter samtykke</div>
             <div class="muted">
-              Dersom vi senere tar i bruk analyse for å forbedre nettsiden, vil vi innføre samtykke (cookie-banner),
-              gi mulighet til å avslå, og oppdatere denne siden.
+              Vi bruker Google Analytics 4 for å forstå hvordan nettsiden brukes og forbedre innhold,
+              struktur og brukeropplevelse. Analyse aktiveres kun dersom du godkjenner dette.
             </div>
           </div>
         </div>
 
-        <p class="lead" style="margin-top:14px;">
-          Har du spørsmål? Se også <a href="personvern.html" style="text-decoration:underline; font-weight:900;">personvernerklæringen</a>.
-        </p>
+        <div class="text-block">
+          <h2>Hva brukes analyse til?</h2>
+          <p>
+            Dersom du samtykker, kan vi samle inn anonymisert informasjon om bruk av nettsiden, som for eksempel
+            sidevisninger, klikk, omtrentlig geografisk plassering, enhetstype og nettleser.
+          </p>
+          <p>
+            Formålet er å forstå hva som fungerer godt, hvilke sider som brukes mest, og hvordan vi kan forbedre
+            nettsiden og informasjonen vi gir.
+          </p>
+        </div>
+
+        <div class="text-block">
+          <h2>Hvilket verktøy bruker vi?</h2>
+          <p>
+            Vi bruker Google Analytics 4 (GA4), levert av Google LLC, som analyseverktøy på nettsiden.
+          </p>
+          <p>
+            Analyseverktøyet lastes ikke inn før du har gitt samtykke. Dersom du avslår, blir analyse ikke aktivert.
+          </p>
+        </div>
+
+        <div class="text-block">
+          <h2>Samtykke og valg</h2>
+          <p>
+            Når du besøker nettsiden, får du mulighet til å godta eller avslå analyse-cookies.
+            Ditt valg lagres lokalt i nettleseren din, slik at vi kan huske innstillingen din ved senere besøk.
+          </p>
+          <p>
+            Du kan når som helst endre mening ved å slette lagrede data i nettleseren din og laste siden på nytt.
+          </p>
+        </div>
+
+        <div class="text-block">
+          <h2>Har du spørsmål?</h2>
+          <p>
+            Dersom du ønsker mer informasjon om hvordan vi behandler personopplysninger, kan du lese vår
+            <a href="personvern.html" style="text-decoration:underline; font-weight:900;">personvernerklæring</a>.
+          </p>
+        </div>
 
         <div class="btn-row">
           <a class="btn" href="index.html">Til forsiden</a>
