@@ -1423,7 +1423,7 @@
                 </div>
 
                 <div class="btn-row" style="margin-top:14px;">
-                  <a class="btn primary" href="#priser">Gå til bestilling</a>
+                  <a class="btn primary" href="#priser" id="contactBookBtn">Gå til bestilling</a>
                   <a class="btn ghost" href="vare-hjelpere.html">Les om våre hjelpere</a>
                 </div>
 
@@ -1520,25 +1520,53 @@
   <script>
     document.getElementById("y").textContent = new Date().getFullYear();
 
+    function trackEvent(eventName, params){
+      if(typeof window.gtag !== "function") return;
+      window.gtag("event", eventName, params || {});
+    }
+
     function openBooking(btn){
       const duration = btn?.dataset?.duration || "60";
+
+      trackEvent("bestill_klikk", {
+        source: "priser",
+        label: "pris_" + duration
+      });
+
+      trackEvent("bestill_varighet", {
+        duration_minutes: Number(duration),
+        label: "pris_" + duration
+      });
+
       alert("Booking er ikke koblet til ennå. Varighet valgt: " + duration + " minutter.");
     }
 
     function openBookingService(serviceKey){
+      trackEvent("tjeneste_klikk", {
+        service_name: serviceKey
+      });
+
+      trackEvent("bestill_klikk", {
+        source: "tjenester",
+        label: "tjeneste_" + serviceKey
+      });
+
       alert("Booking er ikke koblet til ennå. Tjeneste valgt: " + serviceKey);
     }
 
     (function(){
       const v = document.querySelector(".hero-video");
       if(!v) return;
+
       const tryPlay = () => {
         const p = v.play();
-        if(p && typeof p.catch === "function") p.catch(()=>{});
+        if(p && typeof p.catch === "function") p.catch(() => {});
       };
+
       document.addEventListener("visibilitychange", () => {
         if(!document.hidden) tryPlay();
       });
+
       tryPlay();
     })();
 
@@ -1551,14 +1579,14 @@
 
       function openMenu(){
         body.classList.add("menu-open");
-        btn.setAttribute("aria-expanded","true");
-        btn.setAttribute("aria-label","Lukk meny");
+        btn?.setAttribute("aria-expanded", "true");
+        btn?.setAttribute("aria-label", "Lukk meny");
       }
 
       function closeMenu(){
         body.classList.remove("menu-open");
-        btn.setAttribute("aria-expanded","false");
-        btn.setAttribute("aria-label","Åpne meny");
+        btn?.setAttribute("aria-expanded", "false");
+        btn?.setAttribute("aria-label", "Åpne meny");
       }
 
       btn?.addEventListener("click", () => {
@@ -1577,53 +1605,92 @@
 
     (function(){
       const STORAGE_KEY = "hp_cookie_consent";
+      const MEASUREMENT_ID = "G-9ZJ9SXQWLZ";
+
       const banner = document.getElementById("cookieBanner");
       const acceptBtn = document.getElementById("cookieAcceptBtn");
       const rejectBtn = document.getElementById("cookieRejectBtn");
-      const MEASUREMENT_ID = "G-9ZJ9SXQWLZ";
 
-      function loadGoogleAnalytics(){
-        if(window.__hpAnalyticsLoaded) return;
-        window.__hpAnalyticsLoaded = true;
-
-        const script = document.createElement("script");
-        script.async = true;
-        script.src = "https://www.googletagmanager.com/gtag/js?id=" + MEASUREMENT_ID;
-        document.head.appendChild(script);
-
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){ dataLayer.push(arguments); }
-        window.gtag = gtag;
-
-        gtag("js", new Date());
-        gtag("config", MEASUREMENT_ID, { anonymize_ip: true });
+      function getConsent(){
+        try {
+          return localStorage.getItem(STORAGE_KEY);
+        } catch (e) {
+          return null;
+        }
       }
 
-      function hideBanner(){
-        banner?.classList.remove("show");
+      function setConsent(value){
+        try {
+          localStorage.setItem(STORAGE_KEY, value);
+          return true;
+        } catch (e) {
+          return false;
+        }
       }
 
       function showBanner(){
         banner?.classList.add("show");
       }
 
-      const savedChoice = localStorage.getItem(STORAGE_KEY);
+      function hideBanner(){
+        banner?.classList.remove("show");
+      }
+
+      function loadGoogleAnalytics(){
+        if(window.__hpAnalyticsLoaded) return;
+        window.__hpAnalyticsLoaded = true;
+
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function(){ window.dataLayer.push(arguments); };
+
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = "https://www.googletagmanager.com/gtag/js?id=" + encodeURIComponent(MEASUREMENT_ID);
+        document.head.appendChild(script);
+
+        window.gtag("js", new Date());
+        window.gtag("config", MEASUREMENT_ID);
+      }
+
+      const savedChoice = getConsent();
 
       if(savedChoice === "accepted"){
+        hideBanner();
         loadGoogleAnalytics();
-      } else if(savedChoice !== "rejected"){
+      } else if(savedChoice === "rejected"){
+        hideBanner();
+      } else {
         showBanner();
       }
 
       acceptBtn?.addEventListener("click", function(){
-        localStorage.setItem(STORAGE_KEY, "accepted");
+        setConsent("accepted");
         hideBanner();
         loadGoogleAnalytics();
       });
 
       rejectBtn?.addEventListener("click", function(){
-        localStorage.setItem(STORAGE_KEY, "rejected");
+        setConsent("rejected");
         hideBanner();
+      });
+    })();
+
+    (function(){
+      const heroBtn = document.getElementById("bookBtn");
+      const contactBookBtn = document.getElementById("contactBookBtn");
+
+      heroBtn?.addEventListener("click", function(){
+        trackEvent("bestill_klikk", {
+          source: "hero",
+          label: "hero_bestill"
+        });
+      });
+
+      contactBookBtn?.addEventListener("click", function(){
+        trackEvent("bestill_klikk", {
+          source: "kontakt",
+          label: "kontakt_bestilling"
+        });
       });
     })();
   </script>
